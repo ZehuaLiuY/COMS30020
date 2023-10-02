@@ -48,13 +48,33 @@ void draw(DrawingWindow &window) {
     // create a vector of floats from 255 to 0 left to right
     std::vector<float> interpolationValues = interpolateSingleFloats(255.f, 0.0f, window.width);
 
+    // create 4 corner values
+    glm::vec3 topLeft(255, 0, 0);        // red
+    glm::vec3 topRight(0, 0, 255);       // blue
+    glm::vec3 bottomRight(0, 255, 0);    // green
+    glm::vec3 bottomLeft(255, 255, 0);   // yellow
+
+    // Create vectors
+    std::vector<glm::vec3> interpolationValuesLeft = interpolateThreeElementValues(topLeft, bottomLeft, window.height);
+    std::vector<glm::vec3> interpolationValuesRight = interpolateThreeElementValues(topRight, bottomRight, window.height);
+
     for (size_t y = 0; y < window.height; y++) {
-		for (size_t x = 0; x < window.width; x++) {
-            float grayscaleValue = interpolationValues[x];
-            uint32_t colour = (255 << 24) + ((int)grayscaleValue << 16) + ((int)grayscaleValue << 8) + (int)grayscaleValue;
-            window.setPixelColour(x, y, colour);
-		}
-	}
+        // Create a vector of interpolated RGB colors for the current row
+        std::vector<glm::vec3> interpolationValuesRow = interpolateThreeElementValues(interpolationValuesLeft[y], interpolationValuesRight[y], window.width);
+
+        for (size_t x = 0; x < window.width; x++) {
+            glm::vec3 color = interpolationValuesRow[x];
+
+            // Convert RGB color to uint32_t
+            uint32_t red = static_cast<uint32_t>(color.r);
+            uint32_t green = static_cast<uint32_t>(color.g);
+            uint32_t blue = static_cast<uint32_t>(color.b);
+            uint32_t alpha = 255;
+            uint32_t pixelColor = (alpha << 24) + (red << 16) + (green << 8) + blue;
+
+            window.setPixelColour(x, y, pixelColor);
+        }
+    }
 }
 
 void handleEvent(SDL_Event event, DrawingWindow &window) {
