@@ -1,7 +1,5 @@
 #include <CanvasTriangle.h>
 #include <DrawingWindow.h>
-#include <Utils.h>
-#include <fstream>
 #include <vector>
 #include "glm/vec3.hpp"
 #include <CanvasPoint.h>
@@ -10,6 +8,7 @@
 #define WIDTH 320
 #define HEIGHT 240
 
+// Task 2
 void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour) {
     float xDiff = to.x - from.x;
     float yDiff = to.y - from.y;
@@ -23,13 +22,13 @@ void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour co
         window.setPixelColour(round(x), round(y), BLACK);
     }
 }
-
+// Task 3
 void drawStrokedTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour colour) {
     drawLine(window, triangle[0], triangle[1], colour);
     drawLine(window, triangle[1], triangle[2], colour);
     drawLine(window, triangle[2], triangle[0], colour);
 }
-
+// Task 4
 void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, const Colour &fillColour) {
     // Sort vertices by y-coordinate
     CanvasTriangle sortedTriangle = triangle;
@@ -38,7 +37,6 @@ void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, c
                   return a.y < b.y;
               });
 
-    // Get the top, middle and bottom vertices
     CanvasPoint top = sortedTriangle[0];
     CanvasPoint middle = sortedTriangle[1];
     CanvasPoint bottom = sortedTriangle[2];
@@ -49,7 +47,6 @@ void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, c
     float x1 = top.x;
     float x2 = top.x;
 
-    // Loop through scan lines
     for (int y = top.y; y <= middle.y; y++) {
         for (int x = std::round(x1); x <= std::round(x2); x++) {
             // Create a uint32_t color value
@@ -65,7 +62,6 @@ void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, c
     x1 = middle.x;
     slope1 = (bottom.x - middle.x) / (bottom.y - middle.y);
 
-    // Loop through scan lines for the second part of the triangle
     for (int y = middle.y + 1; y <= bottom.y; y++) {
         for (int x = std::round(x1); x <= std::round(x2); x++) {
             // Create a uint32_t color value
@@ -76,26 +72,6 @@ void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, c
         x1 += slope1;
         x2 += slope2;
     }
-}
-
-
-void draw(DrawingWindow &window) {
-
-//    // Draw lines with different colors
-//    Colour WHITE(255, 255, 255);
-//    // A line from the top-left corner to the center
-//    drawLine(window, CanvasPoint(0, 0), CanvasPoint(WIDTH / 2, HEIGHT / 2), WHITE);
-//    // A line from the top-right corner to the center
-//    drawLine(window, CanvasPoint(WIDTH, 0), CanvasPoint(WIDTH / 2, HEIGHT / 2), WHITE);
-//    // A vertical line down the middle of the screen
-//    drawLine(window, CanvasPoint(WIDTH / 2, 0), CanvasPoint(WIDTH / 2, HEIGHT), WHITE);
-//
-//    // A horizontal line centered both horizontally and vertically
-//    int centerX = WIDTH / 2;
-//    int centerY = HEIGHT / 2;
-//    int lineLength = WIDTH / 3;
-//    drawLine(window, CanvasPoint(centerX - lineLength / 2, centerY),
-//             CanvasPoint(centerX + lineLength / 2, centerY), WHITE);
 }
 
 void handleEvent(SDL_Event event, DrawingWindow &window) {
@@ -151,7 +127,6 @@ int main(int argc, char *argv[]) {
 	while (true) {
 		// We MUST poll for events - otherwise the window will freeze !
 		if (window.pollForInputEvents(event)) handleEvent(event, window);
-		draw(window);
 		// Need to render the frame at the end, or nothing actually gets shown on the screen !
 		window.renderFrame();
 	}
