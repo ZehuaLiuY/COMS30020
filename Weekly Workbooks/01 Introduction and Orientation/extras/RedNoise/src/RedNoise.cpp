@@ -28,51 +28,57 @@ void drawStrokedTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour 
     drawLine(window, triangle[1], triangle[2], colour);
     drawLine(window, triangle[2], triangle[0], colour);
 }
-// Task 4
-void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, const Colour &fillColour) {
-    // Sort vertices by y-coordinate
-    CanvasTriangle sortedTriangle = triangle;
-    std::sort(sortedTriangle.vertices.begin(), sortedTriangle.vertices.end(),
-              [](const CanvasPoint &a, const CanvasPoint &b) {
-                  return a.y < b.y;
-              });
-
-    CanvasPoint top = sortedTriangle[0];
-    CanvasPoint middle = sortedTriangle[1];
-    CanvasPoint bottom = sortedTriangle[2];
-
-    // Calculate slopes for the two edges
-    float slope1 = (middle.x - top.x) / (middle.y - top.y);
-    float slope2 = (bottom.x - top.x) / (bottom.y - top.y);
-    float x1 = top.x;
-    float x2 = top.x;
-
-    for (int y = top.y; y <= middle.y; y++) {
-        for (int x = std::round(x1); x <= std::round(x2); x++) {
-            // Create a uint32_t color value
-            uint32_t pixelColor = fillColour.red << 16 | fillColour.green << 8 | fillColour.blue;
-            window.setPixelColour(x, y, pixelColor);
-        }
-
-        x1 += slope1;
-        x2 += slope2;
-    }
-
-    // Reset x values and slopes for the second part of the triangle
-    x1 = middle.x;
-    slope1 = (bottom.x - middle.x) / (bottom.y - middle.y);
-
-    for (int y = middle.y + 1; y <= bottom.y; y++) {
-        for (int x = std::round(x1); x <= std::round(x2); x++) {
-            // Create a uint32_t color value
-            uint32_t pixelColor = fillColour.red << 16 | fillColour.green << 8 | fillColour.blue;
-            window.setPixelColour(x, y, pixelColor);
-        }
-
-        x1 += slope1;
-        x2 += slope2;
-    }
+// Task 4 Draw a filled triangle with stroked triangle
+void swap(CanvasPoint &a, CanvasPoint &b) {
+    CanvasPoint temp = a;
+    a = b;
+    b = temp;
 }
+
+// Task 5: Helper function to sort CanvasPoints by their y-coordinates
+void sortPointsByY(CanvasPoint &a, CanvasPoint &b, CanvasPoint &c) {
+    if (a.y > b.y) swap(a, b);
+    if (a.y > c.y) swap(a, c);
+    if (b.y > c.y) swap(b, c);
+}
+
+void drawFilledTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour fillColour) {
+    // Sort vertices by their y-coordinates
+    sortPointsByY(triangle[0], triangle[1], triangle[2]);
+
+    // Check if the middle point is on the left or right of the line between v0 and v2
+    bool middleIsLeft = ((triangle[1].x - triangle[0].x) * (triangle[2].y - triangle[0].y) -
+                         (triangle[2].x - triangle[0].x) * (triangle[1].y - triangle[0].y)) > 0;
+
+    for (int y = triangle[0].y; y <= triangle[1].y; y++) {
+        float alpha = static_cast<float>(y - triangle[0].y) / (triangle[1].y - triangle[0].y);
+        float beta = static_cast<float>(y - triangle[0].y) / (triangle[2].y - triangle[0].y);
+
+        CanvasPoint left, right;
+
+        if (middleIsLeft) {
+            left.x = triangle[0].x + (triangle[1].x - triangle[0].x) * alpha;
+            left.y = y;
+            right.x = triangle[0].x + (triangle[2].x - triangle[0].x) * beta;
+            right.y = y;
+        } else {
+            left.x = triangle[0].x + (triangle[2].x - triangle[0].x) * beta;
+            left.y = y;
+            right.x = triangle[0].x + (triangle[1].x - triangle[0].x) * alpha;
+            right.y = y;
+        }
+
+        if (left.x > right.x) swap(left, right);
+
+        for (int x = static_cast<int>(left.x); x <= static_cast<int>(right.x); x++) {
+            window.setPixelColour(x, y, fillColour.red << 16 | fillColour.green << 8 | fillColour.blue);
+        }
+    }
+
+    // Draw the white stroked triangle over it
+    drawStrokedTriangle(window, triangle, Colour(255, 255, 255));
+}
+
 
 void handleEvent(SDL_Event event, DrawingWindow &window) {
     if (event.type == SDL_KEYDOWN) {
@@ -101,14 +107,15 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
             CanvasPoint v2(rand() % window.width, rand() % window.height);
             CanvasTriangle triangle(v0, v1, v2);
 
-            // Generate a random color for filling
-            Colour fillColor(rand() % 256, rand() % 256, rand() % 256);
-
-            // Draw the filled triangle
-            drawFilledTriangle(window, triangle, fillColor);
             // Draw a stroked triangle over the filled triangle
             Colour strokeColor(255, 255, 255); // white frame
             drawStrokedTriangle(window, triangle, strokeColor);
+
+            // Generate a random color for filling
+            Colour fillColor(rand() % 256, rand() % 256, rand() % 256);
+            // Draw the filled triangle
+            drawFilledTriangle(window, triangle, fillColor);
+
 
             window.renderFrame();
         }
