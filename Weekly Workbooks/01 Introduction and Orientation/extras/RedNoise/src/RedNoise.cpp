@@ -28,6 +28,7 @@ void drawStrokedTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour 
     drawLine(window, triangle[1], triangle[2], colour);
     drawLine(window, triangle[2], triangle[0], colour);
 }
+
 // Task 4 Draw a filled triangle with stroked triangle
 void swap(CanvasPoint &a, CanvasPoint &b) {
     CanvasPoint temp = a;
@@ -43,17 +44,15 @@ void sortPointsByY(CanvasPoint &a, CanvasPoint &b, CanvasPoint &c) {
 }
 
 void drawFilledTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour fillColour) {
-    // Sort vertices by their y-coordinates
     sortPointsByY(triangle[0], triangle[1], triangle[2]);
 
-    // Check if the middle point is on the left or right of the line between v0 and v2
     bool middleIsLeft = ((triangle[1].x - triangle[0].x) * (triangle[2].y - triangle[0].y) -
                          (triangle[2].x - triangle[0].x) * (triangle[1].y - triangle[0].y)) > 0;
 
+    // Filling top part of the triangle (triangle[0] to triangle[1])
     for (int y = triangle[0].y; y <= triangle[1].y; y++) {
         float alpha = static_cast<float>(y - triangle[0].y) / (triangle[1].y - triangle[0].y);
         float beta = static_cast<float>(y - triangle[0].y) / (triangle[2].y - triangle[0].y);
-
         CanvasPoint left, right;
 
         if (middleIsLeft) {
@@ -75,10 +74,31 @@ void drawFilledTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour f
         }
     }
 
-    // Draw the white stroked triangle over it
+    // Filling the bottom part of the triangle (triangle[1] to triangle[2])
+    for (int y = triangle[1].y + 1; y <= triangle[2].y; y++) {
+        float alpha = static_cast<float>(y - triangle[0].y) / (triangle[2].y - triangle[0].y);
+        float beta = static_cast<float>(y - triangle[1].y) / (triangle[2].y - triangle[1].y);
+        CanvasPoint left, right;
+
+        if (middleIsLeft) {
+            left.x = triangle[0].x + (triangle[2].x - triangle[0].x) * beta;
+            right.x = triangle[1].x + (triangle[2].x - triangle[1].x) * alpha;
+        } else {
+            left.x = triangle[1].x + (triangle[2].x - triangle[1].x) * beta;
+            right.x = triangle[0].x + (triangle[2].x - triangle[0].x) * alpha;
+        }
+
+        if (left.x > right.x) swap(left, right);
+
+        for (int x = static_cast<int>(left.x); x <= static_cast<int>(right.x); x++) {
+            window.setPixelColour(x, y, fillColour.red << 16 | fillColour.green << 8 | fillColour.blue);
+        }
+    }
+
+
+
     drawStrokedTriangle(window, triangle, Colour(255, 255, 255));
 }
-
 
 void handleEvent(SDL_Event event, DrawingWindow &window) {
     if (event.type == SDL_KEYDOWN) {
