@@ -19,6 +19,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o.d"
   "CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o"
   "CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d"
+  "CMakeFiles/RedNoise.dir/src/week2.cpp.o"
+  "CMakeFiles/RedNoise.dir/src/week2.cpp.o.d"
+  "CMakeFiles/RedNoise.dir/src/week3.cpp.o"
+  "CMakeFiles/RedNoise.dir/src/week3.cpp.o.d"
   "RedNoise"
   "RedNoise.pdb"
 )
