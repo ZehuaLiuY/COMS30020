@@ -1,0 +1,7 @@
+Now that we have a function that can map/project a 3D vertex onto a 2D canvas point, it becomes possible to actually display a render of a 3D model !
+
+We start with the simplest render possible - a "pointcloud".
+
+Using your `getCanvasIntersectionPoint` function, calculate the image plane positions of each vertex of the previously loaded Cornell Box. Due to the size of the model (vertex positions in the range -1.0 to 1.0) the positions of the calculated points on the image plane will all be very close to the centre of the screen. To solve this problem, you should apply an "image plane scaling" to resize the coordinates so that they fit nicely onto the drawing window. A mulitplier of 240 (i.e. the height of the drawing window) is a good value to try for this scaling factor. Make sure you scale x and y by the same amount (in order to maintain the aspect ratio of the point cloud).
+
+If you draw a single white pixel at each projected image plane position, you should end up with a pointcloud render that looks like the image shown below. Although very minimalistic, with a bit of imagination you can see the room corners and boxes from the sample model.

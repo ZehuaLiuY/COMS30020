@@ -1,0 +1,3 @@
+/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/build/CMakeFiles/RedNoise.dir
+/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/build/CMakeFiles/edit_cache.dir
+/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/build/CMakeFiles/rebuild_cache.dir
