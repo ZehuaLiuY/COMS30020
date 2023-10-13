@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise Select CMakeLists.txt
