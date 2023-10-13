@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="RedNoise"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\opt\;CMake Files\..\..\..\..\..\..\opt\homebrew\;CMake Files\..\..\..\..\..\..\opt\homebrew\lib\;CMake Files\..\..\..\..\..\..\opt\homebrew\lib\cmake\;CMake Files\..\..\..\..\..\..\opt\homebrew\lib\cmake\SDL2\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RedNoise">
+				<Option output="/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/RedNoise" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/opt/homebrew/Cellar/sdl2/2.28.3/include"/>
+					<Add directory="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/glm-0.9.7.2"/>
+					<Add directory="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw"/>
+					<Add directory="/opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 RedNoise"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RedNoise/fast">
+				<Option output="/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/RedNoise" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/opt/homebrew/Cellar/sdl2/2.28.3/include"/>
+					<Add directory="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/glm-0.9.7.2"/>
+					<Add directory="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw"/>
+					<Add directory="/opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 RedNoise/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/CanvasPoint.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/CanvasPoint.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/CanvasTriangle.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/CanvasTriangle.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/Colour.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/Colour.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/DrawingWindow.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/DrawingWindow.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/ModelTriangle.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/ModelTriangle.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/RayTriangleIntersection.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/RayTriangleIntersection.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/TextureMap.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/TextureMap.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/TexturePoint.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/TexturePoint.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/Utils.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/libs/sdw/Utils.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/src/RedNoise.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/src/week2.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/src/week2.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/src/week3.cpp">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/src/week3.h">
+			<Option target="RedNoise"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/../../../../../../opt/homebrew/lib/cmake/SDL2/sdl2-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\homebrew\lib\cmake\SDL2\"/>
+		</Unit>
+		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/RedNoise/../../../../../../opt/homebrew/lib/cmake/SDL2/sdl2-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\homebrew\lib\cmake\SDL2\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

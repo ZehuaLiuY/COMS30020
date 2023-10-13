@@ -1,3 +1,3 @@
-/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles/RedNoise.dir
-/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/CMakeFiles/RedNoise.dir
+/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/CMakeFiles/rebuild_cache.dir

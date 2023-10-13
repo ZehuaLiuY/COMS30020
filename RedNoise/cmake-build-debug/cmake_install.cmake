@@ -1,4 +1,4 @@
-# Install script for directory: /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise
+# Install script for directory: /Users/liuzehua/Documents/GitHub/CG/RedNoise
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/liuzehua/Documents/GitHub/CG/RedNoise/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

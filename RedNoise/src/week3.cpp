@@ -28,22 +28,16 @@ void drawStrokedTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour 
     drawLine(window, triangle[2], triangle[0], colour);
 }
 
-void drawFilledTriangle(DrawingWindow &window, const CanvasPoint top, const CanvasPoint left, const CanvasPoint right, const CanvasPoint bottom, const Colour &fillColour){
+void drawFilledTriangle(DrawingWindow &window, const CanvasPoint top, const CanvasPoint left, const CanvasPoint right, const Colour &fillColour) {
+    // Calculate the slope of the left and right edges
+    float slope_left = (left.x - top.x) / (left.y - top.y);
+    float slope_right = (right.x - top.x) / (right.y - top.y);
 
-    std::vector<float> rightSide = interpolateSingleFloats(top.x, right.x, int(right.y) - int(top.y));
-    std::vector<float> leftSide = interpolateSingleFloats(top.x, left.x, int(left.y) - int(top.y));
-    for (int i = top.y; i < int(right.y); i++) {
-        CanvasPoint f = CanvasPoint(leftSide.at(i - top.y), i);
-        CanvasPoint t = CanvasPoint(rightSide.at(i - top.y), i);
-        drawLine(window, f, t, fillColour);
-    }
-    // color bottom triangle
-    rightSide = interpolateSingleFloats(right.x, bottom.x, int(bottom.y) - int(right.y));
-    leftSide = interpolateSingleFloats(left.x, bottom.x, int(bottom.y) - int(left.y));
-    for (int i = left.y; i < int(bottom.y); i++) {
-        CanvasPoint f = CanvasPoint(leftSide.at(i - left.y), i);
-        CanvasPoint t = CanvasPoint(rightSide.at(i - left.y), i);
-        drawLine(window, f, t, fillColour);
+    // Fill the top half of the triangle
+    for (int y = top.y; y <= left.y; y++) {
+        int x1 = top.x + (y - top.y) * slope_left;
+        int x2 = top.x + (y - top.y) * slope_right;
+        drawLine(window, CanvasPoint(x1, y), CanvasPoint(x2, y), fillColour);
     }
 }
 
@@ -70,6 +64,6 @@ void calculateExtraPoint(DrawingWindow &window, const CanvasTriangle &triangle, 
     }
 
     CanvasPoint extraPoint(extraPointX, middle.y);
-    drawFilledTriangle(window, top, middle, extraPoint, bottom, fillColour);
-
+    drawFilledTriangle(window, top, middle, extraPoint, fillColour);
+    drawFilledTriangle(window, bottom, middle,extraPoint, fillColour);
 }
