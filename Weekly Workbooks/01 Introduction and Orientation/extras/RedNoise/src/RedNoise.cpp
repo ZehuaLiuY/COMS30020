@@ -25,10 +25,8 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         else if (event.key.keysym.sym == SDLK_u) {
 
             // Generate random vertices for the triangle
-            CanvasPoint v0(rand() % window.width, rand() % window.height);
-            CanvasPoint v1(rand() % window.width, rand() % window.height);
-            CanvasPoint v2(rand() % window.width, rand() % window.height);
-            CanvasTriangle triangle(v0, v1, v2);
+            CanvasTriangle triangle = generateRandomTriangle(window);
+
 
             Colour color(rand() % 256, rand() % 256, rand() % 256);
 
@@ -38,18 +36,19 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         }
         else if (event.key.keysym.sym == SDLK_f) {
             // Generate random vertices for the filled triangle
-            CanvasPoint v0(rand() % window.width, rand() % window.height);
-            CanvasPoint v1(rand() % window.width, rand() % window.height);
-            CanvasPoint v2(rand() % window.width, rand() % window.height);
-            CanvasTriangle triangle(v0, v1, v2);
+            CanvasTriangle triangle = generateRandomTriangle(window);
+
+            // Generate a random color for filling
+            Colour fillColor(rand() % 256, rand() % 256, rand() % 256);
+            drawFilledTriangle(window, triangle, fillColor);
 
             // Draw a stroked triangle over the filled triangle
             Colour strokeColor(255, 255, 255); // white frame
             drawStrokedTriangle(window, triangle, strokeColor);
 
-            // Generate a random color for filling
-            Colour fillColor(rand() % 256, rand() % 256, rand() % 256);
-            calculateExtraPoint(window, triangle, fillColor);
+            window.renderFrame();
+        }
+        else if (event.key.keysym.sym == SDLK_t) {
 
             window.renderFrame();
         }

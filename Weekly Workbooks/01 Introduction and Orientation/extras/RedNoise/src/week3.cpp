@@ -1,11 +1,11 @@
-#include "week2.h"
 #include "week3.h"
 
-// Week3
 
-uint32_t colourConverter(Colour colour) {
-    return (255 << 24) + (colour.red << 16) + (colour.green << 8) + colour.blue;
-}
+// Week3
+//// convert a Colour object to a uint32_t value
+//uint32_t colourConverter(Colour colour) {
+//    return (255 << 24) + (colour.red << 16) + (colour.green << 8) + colour.blue;
+//}
 
 // Task 2
 void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour) {
@@ -21,27 +21,25 @@ void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour co
         window.setPixelColour(round(x), round(y), BLACK);
     }
 }
+
 // Task 3
+
+CanvasTriangle generateRandomTriangle(DrawingWindow &window) {
+    CanvasPoint v0(rand() % window.width, rand() % window.height);
+    CanvasPoint v1(rand() % window.width, rand() % window.height);
+    CanvasPoint v2(rand() % window.width, rand() % window.height);
+    return CanvasTriangle(v0, v1, v2);
+}
+
 void drawStrokedTriangle(DrawingWindow &window, CanvasTriangle triangle, Colour colour) {
     drawLine(window, triangle[0], triangle[1], colour);
     drawLine(window, triangle[1], triangle[2], colour);
     drawLine(window, triangle[2], triangle[0], colour);
 }
 
-void drawFilledTriangle(DrawingWindow &window, const CanvasPoint top, const CanvasPoint left, const CanvasPoint right, const Colour &fillColour) {
-    // Calculate the slope of the left and right edges
-    float slope_left = (left.x - top.x) / (left.y - top.y);
-    float slope_right = (right.x - top.x) / (right.y - top.y);
+// Task 4
 
-    // Fill the top half of the triangle
-    for (int y = top.y; y <= left.y; y++) {
-        int x1 = top.x + (y - top.y) * slope_left;
-        int x2 = top.x + (y - top.y) * slope_right;
-        drawLine(window, CanvasPoint(x1, y), CanvasPoint(x2, y), fillColour);
-    }
-}
-
-void calculateExtraPoint(DrawingWindow &window, const CanvasTriangle &triangle, const Colour &fillColour) {
+std::array<CanvasPoint, 4> calculateExtraPoint(const CanvasTriangle &triangle) {
     // Sort vertices by y-coordinate
     CanvasTriangle sortedTriangle = triangle;
     std::sort(sortedTriangle.vertices.begin(), sortedTriangle.vertices.end(),
@@ -55,7 +53,7 @@ void calculateExtraPoint(DrawingWindow &window, const CanvasTriangle &triangle, 
 
     // calculate the extra point on the edge extraPoint.y = middle.y
     float ratio = (bottom.x - top.x)/(bottom.y - top.y);
-    float extraPointX= 0;
+    float extraPointX;
 
     if (ratio < 0 ){
         extraPointX = top.x - (middle.y - top.y) * (abs(ratio));
@@ -64,6 +62,7 @@ void calculateExtraPoint(DrawingWindow &window, const CanvasTriangle &triangle, 
     }
 
     CanvasPoint extraPoint(extraPointX, middle.y);
-    drawFilledTriangle(window, top, middle, extraPoint, fillColour);
-    drawFilledTriangle(window, bottom, middle,extraPoint, fillColour);
+    std::array<CanvasPoint, 4> sortedPoints = {top, middle, extraPoint, bottom};
+    return sortedPoints;
+
 }
