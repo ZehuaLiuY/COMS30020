@@ -30,5 +30,7 @@ std::array<CanvasPoint, 4> calculateExtraPoint(const CanvasTriangle &triangle);
 void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, const Colour &fillColour);
 
 // Task 5: Function to draw a filled triangle using three CanvasPoints and a fill Colour
-
+void drawTexturedLine(DrawingWindow &window, CanvasPoint start, CanvasPoint end, TextureMap &texture);
+void drawTexturedTriangle(DrawingWindow &window, const CanvasTriangle &triangle, TextureMap &texture);
+void testTexturedTriangle(DrawingWindow &window);
 #endif // WEEK3_H

@@ -49,7 +49,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
             window.renderFrame();
         }
         else if (event.key.keysym.sym == SDLK_t) {
-
+            testTexturedTriangle(window);
             window.renderFrame();
         }
     } else if (event.type == SDL_MOUSEBUTTONDOWN) {
