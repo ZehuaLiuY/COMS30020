@@ -21,7 +21,9 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         if (event.key.keysym.sym == SDLK_LEFT) std::cout << "LEFT" << std::endl;
         else if (event.key.keysym.sym == SDLK_RIGHT) std::cout << "RIGHT" << std::endl;
         else if (event.key.keysym.sym == SDLK_UP) std::cout << "UP" << std::endl;
-        else if (event.key.keysym.sym == SDLK_DOWN) std::cout << "DOWN" << std::endl;
+        else if (event.key.keysym.sym == SDLK_DOWN){
+
+        }
         else if (event.key.keysym.sym == SDLK_u) {
 
             // Generate random vertices for the triangle

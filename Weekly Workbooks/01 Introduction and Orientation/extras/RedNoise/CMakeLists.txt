@@ -37,7 +37,8 @@ add_executable(RedNoise
         libs/sdw/Utils.cpp
         src/RedNoise.cpp
         src/week3.cpp
-        src/week2.cpp)
+        src/week2.cpp
+        )
 
 if (MSVC)
     target_compile_options(RedNoise

@@ -191,7 +191,7 @@ void drawTexturedTriangle(DrawingWindow &window, const CanvasTriangle &triangle,
 
 // Visual Verification
 void testTexturedTriangle(DrawingWindow &window) {
-    TextureMap tm = TextureMap("texture.ppm");
+    TextureMap tm = TextureMap("../src/files/texture.ppm");
     CanvasPoint top = CanvasPoint(160, 10);
     top.texturePoint = TexturePoint(195, 5);
     CanvasPoint mid = CanvasPoint(10, 150);
