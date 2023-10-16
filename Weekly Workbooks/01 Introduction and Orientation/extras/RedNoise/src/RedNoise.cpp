@@ -6,6 +6,7 @@
 #include <Colour.h>
 #include "week2.h"
 #include "week3.h"
+#include "week4.h"
 
 #define WIDTH 320
 #define HEIGHT 240
@@ -21,8 +22,12 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         if (event.key.keysym.sym == SDLK_LEFT) std::cout << "LEFT" << std::endl;
         else if (event.key.keysym.sym == SDLK_RIGHT) std::cout << "RIGHT" << std::endl;
         else if (event.key.keysym.sym == SDLK_UP) std::cout << "UP" << std::endl;
-        else if (event.key.keysym.sym == SDLK_DOWN){
+        else if (event.key.keysym.sym == SDLK_DOWN) {
+            std::vector<ModelTriangle> triangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
 
+            for (const ModelTriangle& triangle : triangles) {
+                std::cout << triangle << std::endl;
+            }
         }
         else if (event.key.keysym.sym == SDLK_u) {
 

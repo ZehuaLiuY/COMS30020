@@ -811,13 +811,75 @@ CMakeFiles/RedNoise.dir/src/week4.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/u8path.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/sstream \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/glm.hpp \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/_fixes.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cfloat \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/CanvasTriangle.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/CanvasPoint.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/DrawingWindow.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_main.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_stdinc.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_config.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_platform.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/AvailabilityMacros.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/TargetConditionals.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/close_code.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/inttypes.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/xlocale/_inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/float.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/float.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/float.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_audio.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_error.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_endian.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_mutex.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_thread.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_rwops.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_clipboard.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_cpuinfo.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/arm_neon.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/arm_bf16.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_events.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_video.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_pixels.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_rect.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_surface.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_blendmode.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_keyboard.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_keycode.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_scancode.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_mouse.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_joystick.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_guid.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_gamecontroller.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_sensor.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_quit.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_gesture.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_touch.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_filesystem.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_haptic.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_hidapi.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_hints.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_loadso.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_log.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_messagebox.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_metal.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_power.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_render.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_shape.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_system.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_timer.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h \
+  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/glm.hpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/_fixes.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cfloat \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cassert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/assert.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/fwd.hpp \
@@ -909,6 +971,8 @@ CMakeFiles/RedNoise.dir/src/week4.cpp.o: \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/integer.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/func_integer.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/func_integer.inl \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/ModelTriangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Colour.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TextureMap.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/ModelTriangle.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/map \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__tree
