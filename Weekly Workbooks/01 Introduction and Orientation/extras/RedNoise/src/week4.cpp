@@ -1,4 +1,5 @@
 #include "week4.h"
+#include "week3.h"
 
 // Task 2: read obj file
 std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, Colour> palette, float scale) {
@@ -10,25 +11,29 @@ std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, C
 
     std::string line;
     std::vector<glm::vec3> vertices;
-    std::vector<ModelTriangle> triangles;
-    std::string name;
+    std::vector<ModelTriangle> modelTriangles;
+    std::string index;
+
     // get each line of the file
     while (std::getline(objFile, line)) {
         std::vector<std::string> values = split(line, ' ');
+        // if the line is a new vertex, add it to the vertices, if it's a new triangle, add it to the modelTriangles
         if (values[0] == "usemtl") {
-            name = values[1];
+            index = values[1];
         } else if (values[0] == "v") {
             vertices.push_back(scale * glm::vec3 (std::stof(values[1]), std::stof(values[2]), std::stof(values[3])));
         } else if (values[0] == "f") {
-            glm::vec3 vertex1 = vertices[values[1][0] - '0' - 1]; // - '0' is how you convert char to int
-            glm::vec3 vertex2 = vertices[values[2][0] - '0' - 1];
-            glm::vec3 vertex3 = vertices[values[3][0] - '0' - 1];
-            triangles.push_back(ModelTriangle(vertex1, vertex2, vertex3, palette[name]));
+            glm::vec3 vertex1 = vertices[std::stoi(values[1].substr(0, values[1].find('/'))) - 1];
+            glm::vec3 vertex2 = vertices[std::stoi(values[2].substr(0, values[2].find('/'))) - 1];
+            glm::vec3 vertex3 = vertices[std::stoi(values[3].substr(0, values[3].find('/'))) - 1];
+            modelTriangles.push_back(ModelTriangle(vertex1, vertex2, vertex3, palette[index]));
+            // std::cout << "Assigned color for triangle: " << palette[index] << std::endl;
+
         }
     }
 
     objFile.close();
-    return triangles;
+    return modelTriangles;
 }
 
 // Task 3: read mtl file
@@ -41,21 +46,25 @@ std::map<std::string, Colour> loadMTL(std::string filename) {
 
     std::string line;
     std::map<std::string, Colour> palette;
-    std::vector<std::string> names;
+    std::vector<std::string> index;
     std::vector<Colour> colours;
 
+    // get each line of the file
     while (std::getline(mtlFile, line)) {
         std::vector<std::string> values = split(line, ' ');
+        // if the line is a new colour, add it to the palette
         if (values[0] == "newmtl") {
-            names.push_back(values[1]);
+            index.push_back(values[1]);
         } else if (values[0] == "Kd") {
             Colour tempColour = Colour(std::stof(values[1]) * 255, std::stof(values[2]) * 255, std::stof(values[3]) * 255);
             colours.push_back(tempColour);
         }
     }
-    for (unsigned int i = 0; i < names.size(); i++) {
-        palette[names[i]] = colours[i];
+    // add the colours to the palette
+    for (unsigned int i = 0; i < index.size(); i++) {
+        palette[index[i]] = colours[i];
     }
+
     mtlFile.close();
     return palette;
 }
@@ -63,7 +72,10 @@ std::map<std::string, Colour> loadMTL(std::string filename) {
 // files reader wrapper
 std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::string& mtlFilename, float scalingFactor) {
     std::map<std::string, Colour> palette = loadMTL(mtlFilename);
-    std::vector<ModelTriangle> triangles = loadOBJ(objFilename, palette, scalingFactor);
+    std::vector<ModelTriangle> modelTriangles = loadOBJ(objFilename, palette, scalingFactor);
 
-    return triangles;
+    return modelTriangles;
 }
+
+// Task 4: render a graphical representation of the sample mode
+

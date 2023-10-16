@@ -11218,6 +11218,7 @@ CMakeFiles/RedNoise.dir/src/week4.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TextureMap.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week3.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \

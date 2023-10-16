@@ -23,11 +23,11 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         else if (event.key.keysym.sym == SDLK_RIGHT) std::cout << "RIGHT" << std::endl;
         else if (event.key.keysym.sym == SDLK_UP) std::cout << "UP" << std::endl;
         else if (event.key.keysym.sym == SDLK_DOWN) {
-            std::vector<ModelTriangle> triangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
-
-            for (const ModelTriangle& triangle : triangles) {
-                std::cout << triangle << std::endl;
+            std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
+            for (const ModelTriangle& modelTriangle : modelTriangles) {
+                std::cout << modelTriangle << std::endl;
             }
+
         }
         else if (event.key.keysym.sym == SDLK_u) {
 

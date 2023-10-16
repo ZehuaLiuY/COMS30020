@@ -2,10 +2,10 @@
 
 
 // Week3
-//// convert a Colour object to a uint32_t value
-//uint32_t colourConverter(Colour colour) {
-//    return (255 << 24) + (colour.red << 16) + (colour.green << 8) + colour.blue;
-//}
+// convert a Colour object to a uint32_t value
+uint32_t colourConverter(Colour colour) {
+    return (255 << 24) + (colour.red << 16) + (colour.green << 8) + colour.blue;
+}
 
 // Task 2
 void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour) {
@@ -14,11 +14,11 @@ void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour co
     float numberOfSteps = std::max(abs(xDiff), abs(yDiff));
     float xStepSize = xDiff / numberOfSteps;
     float yStepSize = yDiff / numberOfSteps;
-    uint32_t BLACK = colour.red << 16 | colour.green << 8 | colour.blue;
+    uint32_t uIntColour = colourConverter(colour);
     for (float i = 0.0; i < numberOfSteps; i++) {
         float x = from.x + (xStepSize * i);
         float y = from.y + (yStepSize * i);
-        window.setPixelColour(round(x), round(y), BLACK);
+        window.setPixelColour(round(x), round(y), uIntColour);
     }
 }
 
