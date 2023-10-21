@@ -19,11 +19,14 @@
 #include <TextureMap.h>
 #include <ModelTriangle.h>
 #include <map>
+
 // Task 2 & 3 read obj and mtl files
 std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, Colour> palette, float scale);
 std::map<std::string, Colour> loadMTL(std::string filename);
 std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::string& mtlFilename, float scalingFactor);
-// Task 4:
-
+// Task 4 & 5: Projection
+CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vertexPosition, float focalLength);
+// Task 6: pointcloud render
+void drawPoints(DrawingWindow &window, std::vector<ModelTriangle> modelTriangles, uint32_t colour);
 
 #endif // WEEK4_H

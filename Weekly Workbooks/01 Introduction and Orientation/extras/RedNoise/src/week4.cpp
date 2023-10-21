@@ -77,5 +77,28 @@ std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::
     return modelTriangles;
 }
 
-// Task 4: render a graphical representation of the sample mode
+// Task 4 & 5 : render a graphical representation of the sample mode
 
+// New function for return the 2D CanvasPoint position
+CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vertexPosition, float focalLength) {
+    glm::vec3 cameraCoordinate = vertexPosition - cameraPosition;
+    // position on the image plane (ui, vi)
+    // multiplier fot 160 looks good, if set to 240, many points will be out of scope
+    float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 160 + (WIDTH / 2);
+    float vi = focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 160 + (HEIGHT / 2);
+    CanvasPoint intersectionPoint = CanvasPoint(ui, vi);
+    return intersectionPoint;
+}
+
+// Task 6
+void drawPoints(DrawingWindow &window, std::vector<ModelTriangle> modelTriangles, uint32_t colour) {
+    glm::vec3 camaraPosition = glm::vec3 (0.0, 0.0, 4.0);
+    float focalLength = 2.0;
+    for (ModelTriangle modelTriangle : modelTriangles) {
+        for (glm::vec3 points3d : modelTriangle.vertices) {
+            CanvasPoint point = getCanvasIntersectionPoint(camaraPosition, points3d, focalLength);
+            window.setPixelColour(round(point.x), round(point.y), colour);
+        }
+    }
+
+}

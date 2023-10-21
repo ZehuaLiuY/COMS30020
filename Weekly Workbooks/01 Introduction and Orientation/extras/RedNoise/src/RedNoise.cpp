@@ -23,10 +23,17 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         else if (event.key.keysym.sym == SDLK_RIGHT) std::cout << "RIGHT" << std::endl;
         else if (event.key.keysym.sym == SDLK_UP) std::cout << "UP" << std::endl;
         else if (event.key.keysym.sym == SDLK_DOWN) {
+            // set colour
+            Colour pointsColour = Colour(255,255,255);
+            uint32_t colour = colourConverter(pointsColour);
+
+
             std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
             for (const ModelTriangle& modelTriangle : modelTriangles) {
                 std::cout << modelTriangle << std::endl;
             }
+
+            drawPoints(window, modelTriangles, colour);
 
         }
         else if (event.key.keysym.sym == SDLK_u) {
