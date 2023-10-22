@@ -23,10 +23,9 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         else if (event.key.keysym.sym == SDLK_RIGHT) std::cout << "RIGHT" << std::endl;
         else if (event.key.keysym.sym == SDLK_UP) std::cout << "UP" << std::endl;
         else if (event.key.keysym.sym == SDLK_DOWN) {
-            // set colour
+            // Week4 Task 6:
             Colour pointsColour = Colour(255,255,255);
             uint32_t colour = colourConverter(pointsColour);
-
 
             std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
             for (const ModelTriangle& modelTriangle : modelTriangles) {
@@ -34,13 +33,22 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
             }
 
             drawPoints(window, modelTriangles, colour);
+            // Week 4 Task 7:
+            std::vector<std::pair<CanvasTriangle, Colour>>  canvasTriangles = triangleTransformer(modelTriangles);
+
+            for (const auto &triangleWithColour : canvasTriangles) {
+                const CanvasTriangle &triangle = triangleWithColour.first;
+                const Colour &colour = triangleWithColour.second;
+                drawFilledTriangle(window, triangle, colour);
+            }
+
+
 
         }
         else if (event.key.keysym.sym == SDLK_u) {
 
             // Generate random vertices for the triangle
             CanvasTriangle triangle = generateRandomTriangle(window);
-
 
             Colour color(rand() % 256, rand() % 256, rand() % 256);
 
@@ -53,12 +61,12 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
             CanvasTriangle triangle = generateRandomTriangle(window);
 
             // Generate a random color for filling
-            Colour fillColor(rand() % 256, rand() % 256, rand() % 256);
-            drawFilledTriangle(window, triangle, fillColor);
+            Colour fillColour(rand() % 256, rand() % 256, rand() % 256);
+            drawFilledTriangle(window, triangle, fillColour);
 
             // Draw a stroked triangle over the filled triangle
-            Colour strokeColor(255, 255, 255); // white frame
-            drawStrokedTriangle(window, triangle, strokeColor);
+            Colour strokeColour(255, 255, 255); // white frame
+            drawStrokedTriangle(window, triangle, strokeColour);
 
             window.renderFrame();
         }

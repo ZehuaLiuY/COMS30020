@@ -28,5 +28,7 @@ std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::
 CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vertexPosition, float focalLength);
 // Task 6: pointcloud render
 void drawPoints(DrawingWindow &window, std::vector<ModelTriangle> modelTriangles, uint32_t colour);
+// Task 7: Wireframe Render
+std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles);
 
 #endif // WEEK4_H

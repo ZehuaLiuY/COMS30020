@@ -85,20 +85,46 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vert
     // position on the image plane (ui, vi)
     // multiplier fot 160 looks good, if set to 240, many points will be out of scope
     float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 160 + (WIDTH / 2);
-    float vi = focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 160 + (HEIGHT / 2);
+    // top left corner is (0,0) to bottom right corner is (WIDTH, HEIGHT)
+    float vi = HEIGHT - (focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 160 + (HEIGHT / 2));
     CanvasPoint intersectionPoint = CanvasPoint(ui, vi);
     return intersectionPoint;
 }
 
 // Task 6
-void drawPoints(DrawingWindow &window, std::vector<ModelTriangle> modelTriangles, uint32_t colour) {
-    glm::vec3 camaraPosition = glm::vec3 (0.0, 0.0, 4.0);
+void drawPoints(DrawingWindow &window, const std::vector<ModelTriangle> modelTriangles, uint32_t colour) {
+    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
     float focalLength = 2.0;
     for (ModelTriangle modelTriangle : modelTriangles) {
         for (glm::vec3 points3d : modelTriangle.vertices) {
-            CanvasPoint point = getCanvasIntersectionPoint(camaraPosition, points3d, focalLength);
+            CanvasPoint point = getCanvasIntersectionPoint(cameraPosition, points3d, focalLength);
             window.setPixelColour(round(point.x), round(point.y), colour);
         }
     }
 
+}
+
+// Task 7: Wireframe Render
+// function for transform 3D ModelTriangle to 2D CanvasTriangle
+// add new attribute "colour" to each triangle
+std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles) {
+    std::vector<std::pair<CanvasTriangle, Colour>> canvasTriangles;
+    // add assigned colour
+    std::vector<Colour> colour;
+
+    float focalLength = 2.0;
+    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
+
+    for (ModelTriangle modelTriangle : modelTriangles) {
+        std::vector<CanvasPoint> canvasPoint;
+        Colour colour = modelTriangle.colour;
+        for (glm::vec3 points3d : modelTriangle.vertices) {
+            CanvasPoint point = getCanvasIntersectionPoint(cameraPosition, points3d, focalLength);
+            canvasPoint.push_back(point);
+        }
+        CanvasTriangle triangle = CanvasTriangle(canvasPoint[0], canvasPoint[1], canvasPoint[2]);
+        canvasTriangles.push_back({triangle, colour});
+    }
+
+    return canvasTriangles;
 }
