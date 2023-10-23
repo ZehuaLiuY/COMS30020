@@ -237,19 +237,19 @@ CMakeFiles/RedNoise.dir/src/week2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/week2.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week2.cpp" -o CMakeFiles/RedNoise.dir/src/week2.cpp.s
 
-CMakeFiles/RedNoise.dir/src/week4.cpp.o: CMakeFiles/RedNoise.dir/flags.make
-CMakeFiles/RedNoise.dir/src/week4.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4.cpp
-CMakeFiles/RedNoise.dir/src/week4.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/RedNoise.dir/src/week4.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/week4.cpp.o -MF CMakeFiles/RedNoise.dir/src/week4.cpp.o.d -o CMakeFiles/RedNoise.dir/src/week4.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4.cpp"
+CMakeFiles/RedNoise.dir/src/week4And5.cpp.o: CMakeFiles/RedNoise.dir/flags.make
+CMakeFiles/RedNoise.dir/src/week4And5.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4And5.cpp
+CMakeFiles/RedNoise.dir/src/week4And5.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/RedNoise.dir/src/week4And5.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/week4And5.cpp.o -MF CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d -o CMakeFiles/RedNoise.dir/src/week4And5.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4And5.cpp"
 
-CMakeFiles/RedNoise.dir/src/week4.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/week4.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4.cpp" > CMakeFiles/RedNoise.dir/src/week4.cpp.i
+CMakeFiles/RedNoise.dir/src/week4And5.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/week4And5.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4And5.cpp" > CMakeFiles/RedNoise.dir/src/week4And5.cpp.i
 
-CMakeFiles/RedNoise.dir/src/week4.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/week4.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4.cpp" -o CMakeFiles/RedNoise.dir/src/week4.cpp.s
+CMakeFiles/RedNoise.dir/src/week4And5.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/week4And5.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4And5.cpp" -o CMakeFiles/RedNoise.dir/src/week4And5.cpp.s
 
 # Object files for target RedNoise
 RedNoise_OBJECTS = \
@@ -265,7 +265,7 @@ RedNoise_OBJECTS = \
 "CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" \
 "CMakeFiles/RedNoise.dir/src/week3.cpp.o" \
 "CMakeFiles/RedNoise.dir/src/week2.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/week4.cpp.o"
+"CMakeFiles/RedNoise.dir/src/week4And5.cpp.o"
 
 # External object files for target RedNoise
 RedNoise_EXTERNAL_OBJECTS =
@@ -282,7 +282,7 @@ RedNoise: CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/src/week3.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/src/week2.cpp.o
-RedNoise: CMakeFiles/RedNoise.dir/src/week4.cpp.o
+RedNoise: CMakeFiles/RedNoise.dir/src/week4And5.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/build.make
 RedNoise: /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
 RedNoise: CMakeFiles/RedNoise.dir/link.txt

@@ -417,29 +417,29 @@ src/week3.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week3.cpp.s
 .PHONY : src/week3.cpp.s
 
-src/week4.o: src/week4.cpp.o
-.PHONY : src/week4.o
+src/week4And5.o: src/week4And5.cpp.o
+.PHONY : src/week4And5.o
 
 # target to build an object file
-src/week4.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4.cpp.o
-.PHONY : src/week4.cpp.o
+src/week4And5.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4And5.cpp.o
+.PHONY : src/week4And5.cpp.o
 
-src/week4.i: src/week4.cpp.i
-.PHONY : src/week4.i
+src/week4And5.i: src/week4And5.cpp.i
+.PHONY : src/week4And5.i
 
 # target to preprocess a source file
-src/week4.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4.cpp.i
-.PHONY : src/week4.cpp.i
+src/week4And5.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4And5.cpp.i
+.PHONY : src/week4And5.cpp.i
 
-src/week4.s: src/week4.cpp.s
-.PHONY : src/week4.s
+src/week4And5.s: src/week4And5.cpp.s
+.PHONY : src/week4And5.s
 
 # target to generate assembly for a file
-src/week4.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4.cpp.s
-.PHONY : src/week4.cpp.s
+src/week4And5.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4And5.cpp.s
+.PHONY : src/week4And5.cpp.s
 
 # Help Target
 help:
@@ -486,9 +486,9 @@ help:
 	@echo "... src/week3.o"
 	@echo "... src/week3.i"
 	@echo "... src/week3.s"
-	@echo "... src/week4.o"
-	@echo "... src/week4.i"
-	@echo "... src/week4.s"
+	@echo "... src/week4And5.o"
+	@echo "... src/week4And5.i"
+	@echo "... src/week4And5.s"
 .PHONY : help
 
 

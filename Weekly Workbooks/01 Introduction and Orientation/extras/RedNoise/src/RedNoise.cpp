@@ -6,7 +6,7 @@
 #include <Colour.h>
 #include "week2.h"
 #include "week3.h"
-#include "week4.h"
+#include "week4And5.h"
 
 #define WIDTH 320
 #define HEIGHT 240
@@ -23,27 +23,8 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         else if (event.key.keysym.sym == SDLK_RIGHT) std::cout << "RIGHT" << std::endl;
         else if (event.key.keysym.sym == SDLK_UP) std::cout << "UP" << std::endl;
         else if (event.key.keysym.sym == SDLK_DOWN) {
-            // Week4 Task 6:
-            Colour pointsColour = Colour(255,255,255);
-            uint32_t colour = colourConverter(pointsColour);
-
-            std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
-            for (const ModelTriangle& modelTriangle : modelTriangles) {
-                std::cout << modelTriangle << std::endl;
-            }
-
-            drawPoints(window, modelTriangles, colour);
-            // Week 4 Task 7:
-            std::vector<std::pair<CanvasTriangle, Colour>>  canvasTriangles = triangleTransformer(modelTriangles);
-
-            for (const auto &triangleWithColour : canvasTriangles) {
-                const CanvasTriangle &triangle = triangleWithColour.first;
-                const Colour &colour = triangleWithColour.second;
-                drawFilledTriangle(window, triangle, colour);
-            }
-
-
-
+            renderWireframe(window);
+            std::cout << "DOWN" << std::endl;
         }
         else if (event.key.keysym.sym == SDLK_u) {
 

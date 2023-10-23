@@ -8377,7 +8377,7 @@ CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o: /Users/liuzehua/Documents/GitHub/CG/
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week2.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week3.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4And5.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
@@ -9774,6 +9774,7 @@ CMakeFiles/RedNoise.dir/src/week3.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__thread/poll_with_backoff.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__thread/timed_backoff_policy.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__threading_support \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__tree \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__tuple_dir/apply_cv.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__tuple_dir/make_tuple_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__tuple_dir/pair_like.h \
@@ -9977,6 +9978,7 @@ CMakeFiles/RedNoise.dir/src/week3.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/limits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/locale.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/memory \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/mutex \
@@ -10237,10 +10239,12 @@ CMakeFiles/RedNoise.dir/src/week3.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/CanvasTriangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Colour.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/DrawingWindow.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/ModelTriangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TextureMap.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week3.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4And5.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
@@ -10292,7 +10296,7 @@ CMakeFiles/RedNoise.dir/src/week3.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/close_code.h
 
-CMakeFiles/RedNoise.dir/src/week4.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4.cpp \
+CMakeFiles/RedNoise.dir/src/week4And5.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4And5.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/AvailabilityInternalLegacy.h \
@@ -11219,7 +11223,7 @@ CMakeFiles/RedNoise.dir/src/week4.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week3.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4And5.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h \
@@ -11272,9 +11276,7 @@ CMakeFiles/RedNoise.dir/src/week4.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/close_code.h
 
 
-/Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4.cpp:
-
-/Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4.h:
+/Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4And5.cpp:
 
 /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/RedNoise.cpp:
 
@@ -12223,6 +12225,8 @@ CMakeFiles/RedNoise.dir/src/week4.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Wee
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__iterator/next.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__iterator/erase_if_container.h:
+
+/Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week4And5.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__random/log2.h:
 

@@ -30,5 +30,10 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vert
 void drawPoints(DrawingWindow &window, std::vector<ModelTriangle> modelTriangles, uint32_t colour);
 // Task 7: Wireframe Render
 std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles);
+void drawTriangles(DrawingWindow &window, std::vector<std::tuple<Colour, CanvasTriangle>> triangles);
+// render function for this week
+void renderWireframe(DrawingWindow &window);
 
+//Task 9
+float findWeights(float x, float y, CanvasTriangle connection);
 #endif // WEEK4_H

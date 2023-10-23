@@ -1,4 +1,4 @@
-#include "week4.h"
+#include "week4And5.h"
 #include "week3.h"
 
 // Task 2: read obj file
@@ -101,7 +101,6 @@ void drawPoints(DrawingWindow &window, const std::vector<ModelTriangle> modelTri
             window.setPixelColour(round(point.x), round(point.y), colour);
         }
     }
-
 }
 
 // Task 7: Wireframe Render
@@ -127,4 +126,27 @@ std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::ve
     }
 
     return canvasTriangles;
+}
+
+// render the wireframe
+void renderWireframe(DrawingWindow &window) {
+
+    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
+    for (const ModelTriangle& modelTriangle : modelTriangles) {
+        std::cout << modelTriangle << std::endl;
+    }
+    // Task 6:
+//    Colour pointsColour = Colour(255,255,255);
+//    uint32_t colour = colourConverter(pointsColour);
+//
+//     drawPoints(window, modelTriangles, colour);
+    // Task 7:
+    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles);
+    for (const auto& trianglePair : triangles) {
+        CanvasTriangle triangle = trianglePair.first;
+        Colour colour = trianglePair.second;
+        // drawStrokedTriangle(window, triangle, colour);
+        drawFilledTriangle(window, triangle, colour);
+    }
+
 }
