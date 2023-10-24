@@ -1,5 +1,6 @@
 #include "week4And5.h"
 #include "week3.h"
+#include "week2.h"
 
 // Task 2: read obj file
 std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, Colour> palette, float scale) {
@@ -128,25 +129,64 @@ std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::ve
     return canvasTriangles;
 }
 
+// Task 8 new function for drawing filled triangle, not the same as the one in week3.cpp
+// using interpolation instead of slope
+// new function for drawing filled triangle by interpolation
+void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, Colour color) {
+    std::array<CanvasPoint, 4> sortedPoints = calculateExtraPoint(triangle);
+
+    CanvasPoint top = sortedPoints[0];
+    CanvasPoint left = sortedPoints[1];
+    CanvasPoint right = sortedPoints[2];
+    CanvasPoint bottom = sortedPoints[3];
+
+    if (left.x > right.x) {
+        std::swap(left, right);
+    }
+
+    // Calculate the interpolation step for left and right edges of the top part of the triangle
+    float topToMidY = abs(top.y - left.y);
+    float xStepRT = (right.x - top.x) / topToMidY;
+    float xStepLT = (left.x - top.x) / topToMidY;
+    // Calculate the interpolation step for left and right edges of the bottom part of the triangle
+    float midToBottomY = abs((bottom.y - left.y));
+    float xStepBR = (bottom.x - right.x) / midToBottomY;
+    float xStepBL = (bottom.x - left.x) / midToBottomY;
+
+    // Draw the top part of the triangle
+    for (float i = 0; i < topToMidY; i++) {
+        CanvasPoint start = CanvasPoint(round(top.x + xStepRT * i), top.y + i);
+        CanvasPoint end = CanvasPoint(round(top.x + xStepLT * i), top.y + i);
+        drawLine(window, start, end, color);
+    }
+    // Draw the bottom part of the triangle
+    for (float i = 0; i < midToBottomY; i++) {
+        CanvasPoint start = CanvasPoint(round(right.x + xStepBR * i), right.y + i);
+        CanvasPoint end = CanvasPoint(round(left.x + xStepBL * i), left.y + i);
+        drawLine(window, start, end, color);
+    }
+}
 // render the wireframe
 void renderWireframe(DrawingWindow &window) {
 
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
-    for (const ModelTriangle& modelTriangle : modelTriangles) {
-        std::cout << modelTriangle << std::endl;
-    }
+//    for (const ModelTriangle& modelTriangle : modelTriangles) {
+//        std::cout << modelTriangle << std::endl;
+//    }
     // Task 6:
 //    Colour pointsColour = Colour(255,255,255);
 //    uint32_t colour = colourConverter(pointsColour);
 //
-//     drawPoints(window, modelTriangles, colour);
+//    drawPoints(window, modelTriangles, colour);
     // Task 7:
     std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles);
+
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;
         Colour colour = trianglePair.second;
+        // works good for draw stroked triangle with colour
         // drawStrokedTriangle(window, triangle, colour);
-        drawFilledTriangle(window, triangle, colour);
+        drawFilledTriangles(window, triangle, colour);
     }
 
 }

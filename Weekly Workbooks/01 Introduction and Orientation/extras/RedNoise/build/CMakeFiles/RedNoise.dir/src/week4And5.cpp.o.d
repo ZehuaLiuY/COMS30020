@@ -976,4 +976,5 @@ CMakeFiles/RedNoise.dir/src/week4And5.cpp.o: \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/ModelTriangle.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__tree \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week3.h
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week3.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/week2.h

@@ -21,29 +21,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/cmake_clean.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week3.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week3.cpp.o.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/build/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/output.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.bmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/output.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.ppm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/week3.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week4.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/week4And5.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week4.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/week4And5.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/week4And5.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/week4And5.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +121,7 @@
       <workItem from="1697469820898" duration="17000" />
       <workItem from="1697469891693" duration="17443000" />
       <workItem from="1697649560683" duration="7299000" />
-      <workItem from="1698008631711" duration="8316000" />
+      <workItem from="1698008631711" duration="15464000" />
     </task>
     <servers />
   </component>
