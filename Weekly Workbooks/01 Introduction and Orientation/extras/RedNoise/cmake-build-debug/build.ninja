@@ -133,8 +133,8 @@ build CMakeFiles/RedNoise.dir/src/week2.cpp.o: CXX_COMPILER__RedNoise_unscanned_
   OBJECT_DIR = CMakeFiles/RedNoise.dir
   OBJECT_FILE_DIR = CMakeFiles/RedNoise.dir/src
 
-build CMakeFiles/RedNoise.dir/src/week4.cpp.o: CXX_COMPILER__RedNoise_unscanned_Debug /Users/liuzehua/Documents/GitHub/CG/Weekly$ Workbooks/01$ Introduction$ and$ Orientation/extras/RedNoise/src/week4.cpp || cmake_object_order_depends_target_RedNoise
-  DEP_FILE = CMakeFiles/RedNoise.dir/src/week4.cpp.o.d
+build CMakeFiles/RedNoise.dir/src/week4And5.cpp.o: CXX_COMPILER__RedNoise_unscanned_Debug /Users/liuzehua/Documents/GitHub/CG/Weekly$ Workbooks/01$ Introduction$ and$ Orientation/extras/RedNoise/src/week4And5.cpp || cmake_object_order_depends_target_RedNoise
+  DEP_FILE = CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d
   FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -Wall -Wextra -Wcast-align -Wfatal-errors -Werror=return-type -Wno-unused-parameter -Wno-unused-variable -Wno-ignored-attributes -O2 -fno-omit-frame-pointer -g
   INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.28.3/include -I"/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/glm-0.9.7.2" -I"/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw" -isystem /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2
   OBJECT_DIR = CMakeFiles/RedNoise.dir
@@ -148,7 +148,7 @@ build CMakeFiles/RedNoise.dir/src/week4.cpp.o: CXX_COMPILER__RedNoise_unscanned_
 #############################################
 # Link the executable RedNoise
 
-build RedNoise: CXX_EXECUTABLE_LINKER__RedNoise_Debug CMakeFiles/RedNoise.dir/libs/sdw/CanvasPoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/CanvasTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Colour.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/DrawingWindow.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/RayTriangleIntersection.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o CMakeFiles/RedNoise.dir/src/week3.cpp.o CMakeFiles/RedNoise.dir/src/week2.cpp.o CMakeFiles/RedNoise.dir/src/week4.cpp.o | /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
+build RedNoise: CXX_EXECUTABLE_LINKER__RedNoise_Debug CMakeFiles/RedNoise.dir/libs/sdw/CanvasPoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/CanvasTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Colour.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/DrawingWindow.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/RayTriangleIntersection.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o CMakeFiles/RedNoise.dir/src/week3.cpp.o CMakeFiles/RedNoise.dir/src/week2.cpp.o CMakeFiles/RedNoise.dir/src/week4And5.cpp.o | /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.5
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.28.3/lib  -Wl,-lasan  /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
   LINK_PATH = -L/opt/homebrew/Cellar/sdl2/2.28.3/lib

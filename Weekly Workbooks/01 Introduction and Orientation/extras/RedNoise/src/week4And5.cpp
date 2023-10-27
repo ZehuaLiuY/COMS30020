@@ -88,9 +88,11 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vert
     float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 160 + (WIDTH / 2);
     // top left corner is (0,0) to bottom right corner is (WIDTH, HEIGHT)
     float vi = HEIGHT - (focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 160 + (HEIGHT / 2));
-    CanvasPoint intersectionPoint = CanvasPoint(ui, vi);
+    float depthValue = cameraCoordinate.z; // Set the depth value
+    CanvasPoint intersectionPoint = CanvasPoint(ui, vi, depthValue); // Pass the depth value to the CanvasPoint constructor
     return intersectionPoint;
 }
+
 
 // Task 6
 void drawPoints(DrawingWindow &window, const std::vector<ModelTriangle> modelTriangles, uint32_t colour) {
@@ -129,10 +131,48 @@ std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::ve
     return canvasTriangles;
 }
 
+// Task 9: find the weights of the point
+std::vector<std::vector<float>> depthBuffer(HEIGHT, std::vector<float> (WIDTH, 0));
+
+float findDepth(float x, float y, CanvasTriangle triangle) {
+    CanvasPoint top = triangle.vertices[0];
+    CanvasPoint middle = triangle.vertices[1];
+    CanvasPoint bottom = triangle.vertices[2];
+
+    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
+    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
+    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
+    float c = 1.0f - a - b;
+    float z = abs(a * top.depth + b * middle.depth + c * bottom.depth);
+//    std::cout << "z: " << z << std::endl;
+//    std::cout << "depthBuffer: " << depthBuffer[round(x)][round(y)] << std::endl;
+//    std::cout << "1/z: " << 1/z << std::endl;
+
+    return 1/z;
+}
+
+void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour, CanvasTriangle triangle) {
+    float xDiff = to.x - from.x;
+    float yDiff = to.y - from.y;
+    float numberOfSteps = std::max(abs(xDiff), abs(yDiff));
+    float xStepSize = xDiff / numberOfSteps;
+    float yStepSize = yDiff / numberOfSteps;
+    uint32_t uIntColour = colourConverter(colour);
+    for (float i = 0.0; i < numberOfSteps; i++) {
+        float x = from.x + (xStepSize * i);
+        float y = from.y + (yStepSize * i);
+        float z = findDepth(x, y, triangle);
+        if (depthBuffer[round(y)][round(x)] < z) {
+            depthBuffer[round(y)][round(x)] = z;
+            window.setPixelColour(round(x), round(y), uIntColour);
+        }
+    }
+}
+
 // Task 8 new function for drawing filled triangle, not the same as the one in week3.cpp
 // using interpolation instead of slope
 // new function for drawing filled triangle by interpolation
-void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, Colour color) {
+void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, Colour &fillColour) {
     std::array<CanvasPoint, 4> sortedPoints = calculateExtraPoint(triangle);
 
     CanvasPoint top = sortedPoints[0];
@@ -157,13 +197,13 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
     for (float i = 0; i < topToMidY; i++) {
         CanvasPoint start = CanvasPoint(round(top.x + xStepRT * i), top.y + i);
         CanvasPoint end = CanvasPoint(round(top.x + xStepLT * i), top.y + i);
-        drawLine(window, start, end, color);
+        drawLineWithDepth(window, start, end, fillColour, triangle);
     }
     // Draw the bottom part of the triangle
     for (float i = 0; i < midToBottomY; i++) {
         CanvasPoint start = CanvasPoint(round(right.x + xStepBR * i), right.y + i);
         CanvasPoint end = CanvasPoint(round(left.x + xStepBL * i), left.y + i);
-        drawLine(window, start, end, color);
+        drawLineWithDepth(window, start, end, fillColour, triangle);
     }
 }
 // render the wireframe
@@ -183,10 +223,10 @@ void renderWireframe(DrawingWindow &window) {
 
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;
-        Colour colour = trianglePair.second;
+        Colour fillColour = trianglePair.second;
         // works good for draw stroked triangle with colour
         // drawStrokedTriangle(window, triangle, colour);
-        drawFilledTriangles(window, triangle, colour);
+        drawFilledTriangles(window, triangle, fillColour);
     }
 
 }

@@ -22,11 +22,9 @@
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/week4And5.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/week4And5.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,6 +90,11 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RedNoise" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RedNoise" TARGET_NAME="RedNoise" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RedNoise" RUN_TARGET_NAME="RedNoise">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
