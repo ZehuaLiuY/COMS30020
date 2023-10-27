@@ -6,7 +6,7 @@
 #include <Colour.h>
 #include "week2.h"
 #include "week3.h"
-#include "week4And5.h"
+#include "week4.h"
 
 #define WIDTH 320
 #define HEIGHT 240

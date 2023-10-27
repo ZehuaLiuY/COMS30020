@@ -10308,8 +10308,8 @@ CMakeFiles/RedNoise.dir/src/week3.cpp.o
  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/begin_code.h
  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/close_code.h
 
-CMakeFiles/RedNoise.dir/src/week4And5.cpp.o
- /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4And5.cpp
+CMakeFiles/RedNoise.dir/src/week4.cpp.o
+ /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4.cpp
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/Availability.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/AvailabilityInternal.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/AvailabilityInternalLegacy.h
@@ -11235,9 +11235,8 @@ CMakeFiles/RedNoise.dir/src/week4And5.cpp.o
  /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw/TextureMap.h
  /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw/TexturePoint.h
  /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw/Utils.h
- /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week2.h
  /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week3.h
- /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4And5.h
+ /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4.h
  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h
  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_assert.h
  /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_atomic.h

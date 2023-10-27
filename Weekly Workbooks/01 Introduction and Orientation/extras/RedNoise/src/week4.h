@@ -28,12 +28,13 @@ std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::
 CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vertexPosition, float focalLength);
 // Task 6: pointcloud render
 void drawPoints(DrawingWindow &window, std::vector<ModelTriangle> modelTriangles, uint32_t colour);
-// Task 7: Wireframe Render
+// Task 7 & 8: Wireframe Render
 std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles);
-void drawTriangles(DrawingWindow &window, std::vector<std::tuple<Colour, CanvasTriangle>> triangles);
-// render function for this week
-void renderWireframe(DrawingWindow &window);
 
 //Task 9
-float findWeights(float x, float y, CanvasTriangle connection);
+float findDepth(float x, float y, CanvasTriangle triangle);
+void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour, CanvasTriangle triangle);
+void drawFilledTriangleWithDepth(DrawingWindow &window, CanvasTriangle triangle, Colour colour);
+// render function for this week
+void renderWireframe(DrawingWindow &window);
 #endif // WEEK4_H
