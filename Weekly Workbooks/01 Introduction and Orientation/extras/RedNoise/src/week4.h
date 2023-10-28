@@ -29,12 +29,13 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vert
 // Task 6: pointcloud render
 void drawPoints(DrawingWindow &window, std::vector<ModelTriangle> modelTriangles, uint32_t colour);
 // Task 7 & 8: Wireframe Render
-std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles);
+std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles, glm::vec3 &cameraPosition);
 
 //Task 9
 float findDepth(float x, float y, CanvasTriangle triangle);
+void resetDepthBuffer ();
 void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour, CanvasTriangle triangle);
-void drawFilledTriangleWithDepth(DrawingWindow &window, CanvasTriangle triangle, Colour colour);
+void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, Colour &fillColour);
 // render function for this week
-void renderWireframe(DrawingWindow &window);
+void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition);
 #endif // WEEK4_H

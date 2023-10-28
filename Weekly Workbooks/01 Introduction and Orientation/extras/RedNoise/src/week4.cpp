@@ -109,13 +109,12 @@ void drawPoints(DrawingWindow &window, const std::vector<ModelTriangle> modelTri
 // Task 7: Wireframe Render
 // function for transform 3D ModelTriangle to 2D CanvasTriangle
 // add new attribute "colour" to each triangle
-std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles) {
+std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles, glm::vec3 &cameraPosition) {
     std::vector<std::pair<CanvasTriangle, Colour>> canvasTriangles;
     // add assigned colour
     std::vector<Colour> colour;
 
     float focalLength = 2.0;
-    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
     for (ModelTriangle modelTriangle : modelTriangles) {
         std::vector<CanvasPoint> canvasPoint;
@@ -133,6 +132,13 @@ std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::ve
 
 // Task 9: find the weights of the point
 std::vector<std::vector<float>> depthBuffer(HEIGHT, std::vector<float> (WIDTH, 0));
+
+// week 5
+// function for reset the depth buffer to 0
+void resetDepthBuffer () {
+    std::vector<std::vector<float>> init (HEIGHT, std::vector<float>(WIDTH, 0));
+    depthBuffer = init;
+}
 
 float findDepth(float x, float y, CanvasTriangle triangle) {
     CanvasPoint top = triangle.vertices[0];
@@ -207,7 +213,9 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
     }
 }
 // render the wireframe
-void renderWireframe(DrawingWindow &window) {
+void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition ) {
+
+
 
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
 //    for (const ModelTriangle& modelTriangle : modelTriangles) {
@@ -219,7 +227,7 @@ void renderWireframe(DrawingWindow &window) {
 //
 //    drawPoints(window, modelTriangles, colour);
     // Task 7:
-    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles);
+    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition);
 
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;

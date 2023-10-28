@@ -7,6 +7,7 @@
 #include "week2.h"
 #include "week3.h"
 #include "week4.h"
+#include "week5.h"
 
 #define WIDTH 320
 #define HEIGHT 240
@@ -17,14 +18,37 @@ void draw(DrawingWindow &window) {
     // drawRGBColour(window);
 }
 
-void handleEvent(SDL_Event event, DrawingWindow &window) {
+void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition) {
     if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == SDLK_LEFT) std::cout << "LEFT" << std::endl;
-        else if (event.key.keysym.sym == SDLK_RIGHT) std::cout << "RIGHT" << std::endl;
-        else if (event.key.keysym.sym == SDLK_UP) std::cout << "UP" << std::endl;
+        if (event.key.keysym.sym == SDLK_LEFT) {
+            // make the camera move left
+            std::cout << "Camera moving LEFT" << std::endl;
+            window.clearPixels();
+            resetDepthBuffer();
+            translateCamera(cameraPosition, -0.1, 0, 0);
+            // std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_RIGHT) {
+            // make the camera move right
+            std::cout << "Camera moving RIGHT" << std::endl;
+            window.clearPixels();
+            resetDepthBuffer();
+            translateCamera(cameraPosition, 0.1, 0, 0);
+        }
+        else if (event.key.keysym.sym == SDLK_UP) {
+            // make the camera move up
+            std::cout << "Camera moving UP" << std::endl;
+            window.clearPixels();
+            resetDepthBuffer();
+            translateCamera(cameraPosition, 0, 0.1, 0);
+        }
         else if (event.key.keysym.sym == SDLK_DOWN) {
-            renderWireframe(window);
-            std::cout << "DOWN" << std::endl;
+            // make the camera move down
+            std::cout << "Camera moving DOWN" << std::endl;
+            window.clearPixels();
+            resetDepthBuffer();
+            translateCamera(cameraPosition, 0, -0.1, 0);
+
         }
         else if (event.key.keysym.sym == SDLK_u) {
 
@@ -65,6 +89,7 @@ int main(int argc, char *argv[]) {
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
 
+    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 //    // test for interpolateSingleFloats
 //    std::vector<float> result;
 //    result = interpolateSingleFloats(2.2, 8.5, 7);
@@ -85,7 +110,10 @@ int main(int argc, char *argv[]) {
 
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
-        if (window.pollForInputEvents(event)) handleEvent(event, window);
+        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition);
+        // initial camera position
+
+        renderWireframe(window, cameraPosition);
         draw(window);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
