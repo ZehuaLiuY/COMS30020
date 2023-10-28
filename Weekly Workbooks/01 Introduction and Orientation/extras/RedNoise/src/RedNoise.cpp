@@ -79,6 +79,21 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             testTexturedTriangle(window);
             window.renderFrame();
         }
+
+        else if (event.key.keysym.sym == SDLK_x) {
+            std::cout << "Camera rotate by X axis" << std::endl;
+            window.clearPixels();
+            resetDepthBuffer();
+            // rotate the camera by 1 degree
+            rotateCameraByX(cameraPosition, deg2Rad(1) );
+            std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_y) {
+            std::cout << "Camera rotate by Y axis" << std::endl;
+            window.clearPixels();
+            resetDepthBuffer();
+            rotateCameraByY(cameraPosition, deg2Rad(1));
+        }
     } else if (event.type == SDL_MOUSEBUTTONDOWN) {
         window.savePPM("output.ppm");
         window.saveBMP("output.bmp");
@@ -89,7 +104,14 @@ int main(int argc, char *argv[]) {
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
 
+    glm::mat3 cameraOrientation = glm::mat3(
+            glm::vec3(1, 0, 0),  // right
+            glm::vec3(0, 1, 0),  // up
+            glm::vec3(0, 0, -1)  // forward
+    );
+
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
+
 //    // test for interpolateSingleFloats
 //    std::vector<float> result;
 //    result = interpolateSingleFloats(2.2, 8.5, 7);
@@ -111,7 +133,6 @@ int main(int argc, char *argv[]) {
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
         if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition);
-        // initial camera position
 
         renderWireframe(window, cameraPosition);
         draw(window);

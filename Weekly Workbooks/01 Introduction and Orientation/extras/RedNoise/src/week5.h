@@ -22,9 +22,9 @@
 
 void translateCamera(glm::vec3 &cameraPosition, float x, float y, float z);
 // rotate matrix
-void rotateCameraByX(glm::vec3 cameraPosition, float angle);
-void rotateCameraByY(glm::vec3 cameraPosition, float angle);
-void rotateCameraByZ(glm::vec3 cameraPosition, float angle);
+double deg2Rad(float degrees);
+void rotateCameraByX(glm::vec3 &cameraPosition, float angle);
+void rotateCameraByY(glm::vec3 &cameraPosition, float angle);
 
 
 #endif //WEEK5_H
