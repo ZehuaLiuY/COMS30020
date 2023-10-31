@@ -12,21 +12,18 @@
 #define WIDTH 320
 #define HEIGHT 240
 
-glm::mat3 cameraOrientation = glm::mat3(
-        glm::vec3(1, 0, 0),  // right
-        glm::vec3(0, 1, 0),  // up
-        glm::vec3(0, 0, 1)  // forward
-);
+bool orbitActivated = false;
 
-glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
-
-
-void draw(DrawingWindow &window) {
-    //window.clearPixels();
+void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+    // window.clearPixels();
     // drawRGBColour(window);
+    if(orbitActivated){
+        orbit(window,cameraPosition, cameraOrientation);
+    }
+    renderWireframe(window, cameraPosition, cameraOrientation);
 }
 
-void handleEvent(SDL_Event event, DrawingWindow &window) {
+void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_LEFT) {
             // make the camera move left
@@ -92,24 +89,49 @@ void handleEvent(SDL_Event event, DrawingWindow &window) {
         else if (event.key.keysym.sym == SDLK_q) {
             window.clearPixels();
             resetDepthBuffer();
-            rotateCameraByX(window,cameraPosition);
+            rotateCameraByX(cameraPosition);
         }
         else if (event.key.keysym.sym == SDLK_w) {
             window.clearPixels();
             resetDepthBuffer();
-            rotateUp(window,cameraPosition, cameraOrientation);
+            rotateUp(cameraPosition, cameraOrientation);
         }
         // rotation matrix y
         else if (event.key.keysym.sym == SDLK_a) {
             window.clearPixels();
             resetDepthBuffer();
-            rotateCameraByY(window,cameraPosition);
+            rotateCameraByY(cameraPosition);
         }
         else if (event.key.keysym.sym == SDLK_s) {
             window.clearPixels();
             resetDepthBuffer();
-            rotateClock(window,cameraPosition, cameraOrientation);
+            rotateClock(cameraPosition, cameraOrientation);
 
+        } else if (event.key.keysym.sym == SDLK_l) {
+            std::cout << "Before: \n" << std::endl;
+            for (size_t i = 0; i < 3; i++){
+                for (size_t j = 0; j < 3; j++)
+                {
+                    std::cout << cameraOrientation[i][j] << " , ";
+                }
+                std::cout << "\n";
+            }
+            std::cout << "\n";
+
+            lookAt(cameraPosition,cameraOrientation);
+
+            std::cout << "After: \n" << std::endl;
+            for (size_t i = 0; i < 3; i++){
+                for (size_t j = 0; j < 3; j++)
+                {
+                    std::cout << cameraOrientation[i][j] << " , ";
+                }
+                std::cout << "\n";
+            }
+        }
+        else if (event.key.keysym.sym == SDLK_o) {
+            window.clearPixels();
+            orbitActivated = !orbitActivated;
         }
 
     } else if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -122,6 +144,13 @@ int main(int argc, char *argv[]) {
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
 
+    glm::mat3 cameraOrientation = glm::mat3(
+            glm::vec3(1, 0, 0),  // right
+            glm::vec3(0, 1, 0),  // up
+            glm::vec3(0, 0, 1)  // forward
+    );
+
+    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
 
 //    // test for interpolateSingleFloats
@@ -144,9 +173,9 @@ int main(int argc, char *argv[]) {
 
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
-        if (window.pollForInputEvents(event)) handleEvent(event, window);
-        renderWireframe(window, cameraPosition, cameraOrientation);
-        draw(window);
+        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation);
+        draw(window, cameraPosition, cameraOrientation);
+
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
     }

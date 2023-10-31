@@ -31,11 +31,13 @@ void translateCamera(glm::vec3 &cameraPosition, float x, float y, float z);
 //rotation
 glm::vec3 initialCameraPosition();
 glm::mat3 initialCameraOrientation();
-void rotateCameraByX(DrawingWindow &window, glm::vec3 &cameraPosition);
-void rotateCameraByY(DrawingWindow &window, glm::vec3 &cameraPosition);
+void rotateCameraByX(glm::vec3 &cameraPosition);
+void rotateCameraByY(glm::vec3 &cameraPosition);
 void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
-void rotateUp(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
-void rotateClock(DrawingWindow& window, glm::vec3& cameraPos, glm::mat3& cameraOrMat);
+void rotateUp(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
+void rotateClock(glm::vec3& cameraPos, glm::mat3& cameraOrMat);
+
+void orbit(DrawingWindow &window,glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
 
 
 #endif //WEEK5_H

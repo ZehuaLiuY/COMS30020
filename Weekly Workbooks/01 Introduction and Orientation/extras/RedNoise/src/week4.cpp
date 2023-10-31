@@ -157,8 +157,67 @@ float findDepth(float x, float y, CanvasTriangle triangle) {
 
     return 1/z;
 }
+// avoid some point out of the window
+std::pair<CanvasPoint, CanvasPoint> clipLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to) {
+    int xMin = 0;
+    int xMax = WIDTH - 1;
+    int yMin = 0;
+    int yMax = HEIGHT - 1;
+
+    bool fromInside = (from.x >= xMin && from.x <= xMax && from.y >= yMin && from.y <= yMax);
+    bool toInside = (to.x >= xMin && to.x <= xMax && to.y >= yMin && to.y <= yMax);
+
+    if (fromInside && toInside) {
+        return {from, to};
+    }
+
+    float m = (to.y - from.y) / (to.x - from.x);
+
+    if (!fromInside) {
+        if (from.x < xMin) {
+            from.y += m * (xMin - from.x);
+            from.x = xMin;
+        } else if (from.x > xMax) {
+            from.y += m * (xMax - from.x);
+            from.x = xMax;
+        }
+
+        if (from.y < yMin) {
+            from.x += (yMin - from.y) / m;
+            from.y = yMin;
+        } else if (from.y > yMax) {
+            from.x += (yMax - from.y) / m;
+            from.y = yMax;
+        }
+    }
+
+    if (!toInside) {
+        if (to.x < xMin) {
+            to.y += m * (xMin - to.x);
+            to.x = xMin;
+        } else if (to.x > xMax) {
+            to.y += m * (xMax - to.x);
+            to.x = xMax;
+        }
+
+        if (to.y < yMin) {
+            to.x += (yMin - to.y) / m;
+            to.y = yMin;
+        } else if (to.y > yMax) {
+            to.x += (yMax - to.y) / m;
+            to.y = yMax;
+        }
+    }
+
+    return {from, to};
+}
+
 
 void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour, CanvasTriangle triangle) {
+    auto clipped = clipLine(window, from, to);
+    from = clipped.first;
+    to = clipped.second;
+
     float xDiff = to.x - from.x;
     float yDiff = to.y - from.y;
     float numberOfSteps = std::max(abs(xDiff), abs(yDiff));
