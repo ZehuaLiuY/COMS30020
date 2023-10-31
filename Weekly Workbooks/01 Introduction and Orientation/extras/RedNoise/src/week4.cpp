@@ -81,8 +81,9 @@ std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::
 // Task 4 & 5 : render a graphical representation of the sample mode
 
 // New function for return the 2D CanvasPoint position
-CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vertexPosition, float focalLength) {
+CanvasPoint getCanvasIntersectionPoint (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 vertexPosition, float focalLength) {
     glm::vec3 cameraCoordinate = vertexPosition - cameraPosition;
+    cameraCoordinate = cameraOrientation * cameraCoordinate;
     // position on the image plane (ui, vi)
     // multiplier fot 160 looks good, if set to 240, many points will be out of scope
     float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 160 + (WIDTH / 2);
@@ -95,12 +96,12 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 cameraPosition, glm::vec3 vert
 
 
 // Task 6
-void drawPoints(DrawingWindow &window, const std::vector<ModelTriangle> modelTriangles, uint32_t colour) {
-    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
+void drawPoints(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, const std::vector<ModelTriangle> modelTriangles, uint32_t colour) {
+//    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
     float focalLength = 2.0;
     for (ModelTriangle modelTriangle : modelTriangles) {
         for (glm::vec3 points3d : modelTriangle.vertices) {
-            CanvasPoint point = getCanvasIntersectionPoint(cameraPosition, points3d, focalLength);
+            CanvasPoint point = getCanvasIntersectionPoint(cameraPosition, cameraOrientation, points3d, focalLength);
             window.setPixelColour(round(point.x), round(point.y), colour);
         }
     }
@@ -109,7 +110,7 @@ void drawPoints(DrawingWindow &window, const std::vector<ModelTriangle> modelTri
 // Task 7: Wireframe Render
 // function for transform 3D ModelTriangle to 2D CanvasTriangle
 // add new attribute "colour" to each triangle
-std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles, glm::vec3 &cameraPosition) {
+std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     std::vector<std::pair<CanvasTriangle, Colour>> canvasTriangles;
     // add assigned colour
     std::vector<Colour> colour;
@@ -120,7 +121,7 @@ std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::ve
         std::vector<CanvasPoint> canvasPoint;
         Colour colour = modelTriangle.colour;
         for (glm::vec3 points3d : modelTriangle.vertices) {
-            CanvasPoint point = getCanvasIntersectionPoint(cameraPosition, points3d, focalLength);
+            CanvasPoint point = getCanvasIntersectionPoint(cameraPosition,cameraOrientation, points3d, focalLength);
             canvasPoint.push_back(point);
         }
         CanvasTriangle triangle = CanvasTriangle(canvasPoint[0], canvasPoint[1], canvasPoint[2]);
@@ -213,10 +214,7 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
     }
 }
 // render the wireframe
-void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition ) {
-
-
-
+void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
 //    for (const ModelTriangle& modelTriangle : modelTriangles) {
 //        std::cout << modelTriangle << std::endl;
@@ -227,7 +225,7 @@ void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition ) {
 //
 //    drawPoints(window, modelTriangles, colour);
     // Task 7:
-    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition);
+    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;

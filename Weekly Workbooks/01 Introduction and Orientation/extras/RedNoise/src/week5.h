@@ -19,12 +19,23 @@
 #include <TextureMap.h>
 #include <ModelTriangle.h>
 #include <map>
-
+#include "glm/vec3.hpp"
+#include "glm/mat3x3.hpp"
+#include "DrawingWindow.h"
+//draw
+CanvasPoint getCanvasIntersectionPointByOrientation(glm::vec3 cameraPosition , glm::mat3 cameraOrientation, glm::vec3 vertexPosition, float focalLength);
+std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformerWithOri(const std::vector<ModelTriangle> modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
+void renderWireframeWithORi(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation );
+//translate
 void translateCamera(glm::vec3 &cameraPosition, float x, float y, float z);
-// rotate matrix
-double deg2Rad(float degrees);
-void rotateCameraByX(glm::vec3 &cameraPosition, float angle);
-void rotateCameraByY(glm::vec3 &cameraPosition, float angle);
+//rotation
+glm::vec3 initialCameraPosition();
+glm::mat3 initialCameraOrientation();
+void rotateCameraByX(DrawingWindow &window, glm::vec3 &cameraPosition);
+void rotateCameraByY(DrawingWindow &window, glm::vec3 &cameraPosition);
+void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
+void rotateUp(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
+void rotateClock(DrawingWindow& window, glm::vec3& cameraPos, glm::mat3& cameraOrMat);
 
 
 #endif //WEEK5_H

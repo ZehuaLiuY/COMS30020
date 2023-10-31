@@ -12,13 +12,21 @@
 #define WIDTH 320
 #define HEIGHT 240
 
+glm::mat3 cameraOrientation = glm::mat3(
+        glm::vec3(1, 0, 0),  // right
+        glm::vec3(0, 1, 0),  // up
+        glm::vec3(0, 0, 1)  // forward
+);
+
+glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
+
 
 void draw(DrawingWindow &window) {
     //window.clearPixels();
     // drawRGBColour(window);
 }
 
-void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition) {
+void handleEvent(SDL_Event event, DrawingWindow &window) {
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_LEFT) {
             // make the camera move left
@@ -80,20 +88,30 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.renderFrame();
         }
 
-        else if (event.key.keysym.sym == SDLK_x) {
-            std::cout << "Camera rotate by X axis" << std::endl;
+        // rotation matrix x
+        else if (event.key.keysym.sym == SDLK_q) {
             window.clearPixels();
             resetDepthBuffer();
-            // rotate the camera by 1 degree
-            rotateCameraByX(cameraPosition, deg2Rad(1) );
-            std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
+            rotateCameraByX(window,cameraPosition);
         }
-        else if (event.key.keysym.sym == SDLK_y) {
-            std::cout << "Camera rotate by Y axis" << std::endl;
+        else if (event.key.keysym.sym == SDLK_w) {
             window.clearPixels();
             resetDepthBuffer();
-            rotateCameraByY(cameraPosition, deg2Rad(1));
+            rotateUp(window,cameraPosition, cameraOrientation);
         }
+        // rotation matrix y
+        else if (event.key.keysym.sym == SDLK_a) {
+            window.clearPixels();
+            resetDepthBuffer();
+            rotateCameraByY(window,cameraPosition);
+        }
+        else if (event.key.keysym.sym == SDLK_s) {
+            window.clearPixels();
+            resetDepthBuffer();
+            rotateClock(window,cameraPosition, cameraOrientation);
+
+        }
+
     } else if (event.type == SDL_MOUSEBUTTONDOWN) {
         window.savePPM("output.ppm");
         window.saveBMP("output.bmp");
@@ -104,13 +122,7 @@ int main(int argc, char *argv[]) {
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
 
-    glm::mat3 cameraOrientation = glm::mat3(
-            glm::vec3(1, 0, 0),  // right
-            glm::vec3(0, 1, 0),  // up
-            glm::vec3(0, 0, -1)  // forward
-    );
 
-    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
 //    // test for interpolateSingleFloats
 //    std::vector<float> result;
@@ -132,9 +144,8 @@ int main(int argc, char *argv[]) {
 
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
-        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition);
-
-        renderWireframe(window, cameraPosition);
+        if (window.pollForInputEvents(event)) handleEvent(event, window);
+        renderWireframe(window, cameraPosition, cameraOrientation);
         draw(window);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
