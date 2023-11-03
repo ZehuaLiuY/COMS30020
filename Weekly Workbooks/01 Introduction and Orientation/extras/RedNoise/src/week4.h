@@ -39,6 +39,16 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
 // render function for this week
 void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
 
+void translateCamera(glm::vec3 &cameraPosition, float x, float y, float z);
+//rotation
+glm::vec3 initialCameraPosition();
+glm::mat3 initialCameraOrientation();
+void rotateCameraByX(glm::vec3 &cameraPosition);
+void rotateCameraByY(glm::vec3 &cameraPosition);
+void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
+void rotateUp(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle);
+void rotateClock(glm::vec3& cameraPos, glm::mat3& cameraOrMat, float angle);
 
+void orbitClockwise(DrawingWindow &window,glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step);
 
 #endif // WEEK4_H

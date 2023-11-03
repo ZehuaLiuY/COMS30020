@@ -16,7 +16,7 @@ void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour co
     float xStepSize = xDiff / numberOfSteps;
     float yStepSize = yDiff / numberOfSteps;
     uint32_t uIntColour = colourConverter(colour);
-    for (float i = 0.0; i < numberOfSteps; i++) {
+    for (float i = 0.0; i <= numberOfSteps; i++) {
         float x = from.x + (xStepSize * i);
         float y = from.y + (yStepSize * i);
         window.setPixelColour(round(x), round(y), uIntColour);

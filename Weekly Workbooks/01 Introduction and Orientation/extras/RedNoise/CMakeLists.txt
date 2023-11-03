@@ -40,8 +40,6 @@ add_executable(RedNoise
         src/week2.cpp
         src/week4.h
         src/week4.cpp
-        src/week5.cpp
-        src/week5.h
 )
 
 if (MSVC)

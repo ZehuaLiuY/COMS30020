@@ -33,25 +33,25 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 81,
+				"line" : 79,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 72,
+				"line" : 70,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 59,
+				"line" : 57,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 79,
+				"line" : 77,
 				"parent" : 0
 			},
 			{
@@ -164,8 +164,7 @@
 				9,
 				10,
 				11,
-				13,
-				14
+				13
 			]
 		}
 	],
@@ -229,16 +228,14 @@
 				9,
 				10,
 				11,
-				13,
-				14
+				13
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				12,
-				15
+				12
 			]
 		}
 	],
@@ -326,17 +323,6 @@
 			"compileGroupIndex" : 0,
 			"path" : "src/week4.cpp",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/week5.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "src/week5.h",
-			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"

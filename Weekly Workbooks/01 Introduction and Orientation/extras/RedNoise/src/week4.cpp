@@ -83,7 +83,7 @@ std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::
 // New function for return the 2D CanvasPoint position
 CanvasPoint getCanvasIntersectionPoint (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 vertexPosition, float focalLength) {
     glm::vec3 cameraCoordinate = vertexPosition - cameraPosition;
-    cameraCoordinate = cameraOrientation * cameraCoordinate;
+    cameraCoordinate =  cameraCoordinate * cameraOrientation;
     // position on the image plane (ui, vi)
     // multiplier fot 160 looks good, if set to 240, many points will be out of scope
     float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 160 + (WIDTH / 2);
@@ -139,6 +139,8 @@ std::vector<std::vector<float>> depthBuffer(HEIGHT, std::vector<float> (WIDTH, 0
 void resetDepthBuffer () {
     std::vector<std::vector<float>> init (HEIGHT, std::vector<float>(WIDTH, 0));
     depthBuffer = init;
+
+    // 2 for loop, set all the value to INT32_MIN smaller than 0
 }
 
 float findDepth(float x, float y, CanvasTriangle triangle) {
@@ -214,9 +216,9 @@ std::pair<CanvasPoint, CanvasPoint> clipLine(DrawingWindow &window, CanvasPoint 
 
 
 void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour, CanvasTriangle triangle) {
-    auto clipped = clipLine(window, from, to);
-    from = clipped.first;
-    to = clipped.second;
+//    auto clipped = clipLine(window, from, to);
+//    from = clipped.first;
+//    to = clipped.second;
 
     float xDiff = to.x - from.x;
     float yDiff = to.y - from.y;
@@ -224,13 +226,13 @@ void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, 
     float xStepSize = xDiff / numberOfSteps;
     float yStepSize = yDiff / numberOfSteps;
     uint32_t uIntColour = colourConverter(colour);
-    for (float i = 0.0; i < numberOfSteps; i++) {
+    for (float i = 0.0; i <= numberOfSteps; i++) {
         float x = from.x + (xStepSize * i);
         float y = from.y + (yStepSize * i);
         float z = findDepth(x, y, triangle);
-        if (depthBuffer[round(y)][round(x)] < z) {
-            depthBuffer[round(y)][round(x)] = z;
-            window.setPixelColour(round(x), round(y), uIntColour);
+        if (depthBuffer[int(round(y))][int(round(x))] < z) {
+            depthBuffer[int(round(y))][int(round(x))] = z;
+            window.setPixelColour(int(round(x)), int(round(y)), uIntColour);
         }
     }
 }
@@ -261,14 +263,14 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
 
     // Draw the top part of the triangle
     for (float i = 0; i < topToMidY; i++) {
-        CanvasPoint start = CanvasPoint(round(top.x + xStepRT * i), top.y + i);
-        CanvasPoint end = CanvasPoint(round(top.x + xStepLT * i), top.y + i);
+        CanvasPoint start = CanvasPoint(int(round(top.x + xStepRT * i)), top.y + i);
+        CanvasPoint end = CanvasPoint(int(round(top.x + xStepLT * i)), top.y + i);
         drawLineWithDepth(window, start, end, fillColour, triangle);
     }
     // Draw the bottom part of the triangle
     for (float i = 0; i < midToBottomY; i++) {
-        CanvasPoint start = CanvasPoint(round(right.x + xStepBR * i), right.y + i);
-        CanvasPoint end = CanvasPoint(round(left.x + xStepBL * i), left.y + i);
+        CanvasPoint start = CanvasPoint(int(round(right.x + xStepBR * i)), right.y + i);
+        CanvasPoint end = CanvasPoint(int(round(left.x + xStepBL * i)), left.y + i);
         drawLineWithDepth(window, start, end, fillColour, triangle);
     }
 }
@@ -290,8 +292,71 @@ void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3
         CanvasTriangle triangle = trianglePair.first;
         Colour fillColour = trianglePair.second;
         // works good for draw stroked triangle with colour
-        // drawStrokedTriangle(window, triangle, colour);
+        // drawStrokedTriangle(window, triangle, fillColour);
         drawFilledTriangles(window, triangle, fillColour);
     }
 
+}
+
+// week 5 tasks:
+// camera position and orientation
+// translate the camera position in 3 dimensions (up/down, left/right, forwards/backwards)
+void translateCamera(glm::vec3 &cameraPosition, float x, float y, float z) {
+    cameraPosition.x += x;
+    cameraPosition.y += y;
+    cameraPosition.z += z;
+}
+
+// rotate the camera position about the centre of the scene
+void rotateCameraByX(glm::vec3 &cameraPosition) {
+    float angle = 0.01;
+    glm::mat3 rotationMatrix(
+            1, 0, 0,
+            0, std::cos(angle), -1 * std::sin(angle),
+            0, std::sin(angle), std::cos(angle));
+    cameraPosition = rotationMatrix * cameraPosition;
+}
+
+void rotateCameraByY(glm::vec3 &cameraPosition) {
+    float angle = 0.01;
+    glm::mat3 rotationMatrix(
+            std::cos(angle), 0, std::sin(angle),
+            0,  1, 0,
+            -1 * std::sin(angle), 0, std::cos(angle));
+    cameraPosition = rotationMatrix * cameraPosition;
+}
+
+void rotateUp(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
+    glm::mat3 rotationMatrix(
+            1, 0, 0,
+            0, std::cos(angle), -1 * std::sin(angle),
+            0, std::sin(angle), std::cos(angle));
+    cameraPosition = rotationMatrix * cameraPosition;
+    lookAt(cameraPosition, cameraOrientation);
+}
+
+void rotateClock(glm::vec3& cameraPosition, glm::mat3& cameraOrientation, float angle) {
+    glm::mat3 rotationMatrix(
+            std::cos(angle), 0, std::sin(angle),
+            0,  1, 0,
+            -1 * std::sin(angle), 0, std::cos(angle));
+    cameraPosition = rotationMatrix * cameraPosition;
+    lookAt(cameraPosition, cameraOrientation);
+}
+
+void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+    // (0,0,0) is the centre of the scene
+    glm::vec3 forward = glm::normalize(cameraPosition - glm::vec3(0, 0, 0));
+    glm::vec3 right = glm::normalize(glm::cross(glm::vec3(0, 1, 0), forward));
+    glm::vec3 up = glm::normalize(glm::cross(forward, right));
+
+    cameraOrientation[0] = right;
+    cameraOrientation[1] = up;
+    cameraOrientation[2] = forward;
+}
+
+void orbitClockwise(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
+    window.clearPixels();
+    resetDepthBuffer();
+    rotateClock(cameraPosition, cameraOrientation, step);
 }

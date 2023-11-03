@@ -7,7 +7,6 @@
 #include "week2.h"
 #include "week3.h"
 #include "week4.h"
-#include "week5.h"
 
 #define WIDTH 320
 #define HEIGHT 240
@@ -18,7 +17,8 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     // window.clearPixels();
     // drawRGBColour(window);
     if(orbitActivated){
-        orbit(window,cameraPosition, cameraOrientation);
+        resetDepthBuffer();
+        orbitClockwise(window,cameraPosition, cameraOrientation, 0.005);
     }
     renderWireframe(window, cameraPosition, cameraOrientation);
 }
@@ -94,7 +94,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
         else if (event.key.keysym.sym == SDLK_w) {
             window.clearPixels();
             resetDepthBuffer();
-            rotateUp(cameraPosition, cameraOrientation);
+            rotateUp(cameraPosition, cameraOrientation, 0.01);
         }
         // rotation matrix y
         else if (event.key.keysym.sym == SDLK_a) {
@@ -105,7 +105,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
         else if (event.key.keysym.sym == SDLK_s) {
             window.clearPixels();
             resetDepthBuffer();
-            rotateClock(cameraPosition, cameraOrientation);
+            rotateClock(cameraPosition, cameraOrientation, 0.01);
 
         } else if (event.key.keysym.sym == SDLK_l) {
             std::cout << "Before: \n" << std::endl;

@@ -441,30 +441,6 @@ src/week4.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4.cpp.s
 .PHONY : src/week4.cpp.s
 
-src/week5.o: src/week5.cpp.o
-.PHONY : src/week5.o
-
-# target to build an object file
-src/week5.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week5.cpp.o
-.PHONY : src/week5.cpp.o
-
-src/week5.i: src/week5.cpp.i
-.PHONY : src/week5.i
-
-# target to preprocess a source file
-src/week5.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week5.cpp.i
-.PHONY : src/week5.cpp.i
-
-src/week5.s: src/week5.cpp.s
-.PHONY : src/week5.s
-
-# target to generate assembly for a file
-src/week5.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week5.cpp.s
-.PHONY : src/week5.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -513,9 +489,6 @@ help:
 	@echo "... src/week4.o"
 	@echo "... src/week4.i"
 	@echo "... src/week4.s"
-	@echo "... src/week5.o"
-	@echo "... src/week5.i"
-	@echo "... src/week5.s"
 .PHONY : help
 
 
