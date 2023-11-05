@@ -18,9 +18,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw/TexturePoint.cpp" "CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o.d"
   "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw/Utils.cpp" "CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o.d"
   "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/RedNoise.cpp" "CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d"
-  "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week2.cpp" "CMakeFiles/RedNoise.dir/src/week2.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/src/week2.cpp.o.d"
-  "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week3.cpp" "CMakeFiles/RedNoise.dir/src/week3.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/src/week3.cpp.o.d"
-  "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/week4.cpp" "CMakeFiles/RedNoise.dir/src/week4.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/src/week4.cpp.o.d"
+  "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/interpolation.cpp" "CMakeFiles/RedNoise.dir/src/interpolation.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/src/interpolation.cpp.o.d"
+  "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/triangle.cpp" "CMakeFiles/RedNoise.dir/src/triangle.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/src/triangle.cpp.o.d"
+  "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/wireframes.cpp" "CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" "gcc" "CMakeFiles/RedNoise.dir/src/wireframes.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

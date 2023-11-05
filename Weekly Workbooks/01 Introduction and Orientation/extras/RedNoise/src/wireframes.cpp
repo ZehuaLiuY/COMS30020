@@ -1,6 +1,6 @@
-#include "week4.h"
-#include "week3.h"
-#include "week2.h"
+#include "wireframes.h"
+#include "triangle.h"
+#include "interpolation.h"
 
 // Task 2: read obj file
 std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, Colour> palette, float scale) {
@@ -83,6 +83,7 @@ std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::
 // New function for return the 2D CanvasPoint position
 CanvasPoint getCanvasIntersectionPoint (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 vertexPosition, float focalLength) {
     glm::vec3 cameraCoordinate = vertexPosition - cameraPosition;
+    // update the cameraCoordinate by multiplying the cameraOrientation
     cameraCoordinate =  cameraCoordinate * cameraOrientation;
     // position on the image plane (ui, vi)
     // multiplier fot 160 looks good, if set to 240, many points will be out of scope
@@ -308,6 +309,7 @@ void translateCamera(glm::vec3 &cameraPosition, float x, float y, float z) {
 }
 
 // rotate the camera position about the centre of the scene
+// rotate by x-axis (UP/DOWN)
 void rotateCameraByX(glm::vec3 &cameraPosition) {
     float angle = 0.01;
     glm::mat3 rotationMatrix(
@@ -317,6 +319,7 @@ void rotateCameraByX(glm::vec3 &cameraPosition) {
     cameraPosition = rotationMatrix * cameraPosition;
 }
 
+// rotate by y-axis (LEFT/RIGHT)
 void rotateCameraByY(glm::vec3 &cameraPosition) {
     float angle = 0.01;
     glm::mat3 rotationMatrix(
@@ -356,7 +359,5 @@ void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
 }
 
 void orbitClockwise(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
-    window.clearPixels();
-    resetDepthBuffer();
     rotateClock(cameraPosition, cameraOrientation, step);
 }

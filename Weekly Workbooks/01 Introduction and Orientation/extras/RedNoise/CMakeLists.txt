@@ -36,10 +36,10 @@ add_executable(RedNoise
         libs/sdw/TexturePoint.cpp
         libs/sdw/Utils.cpp
         src/RedNoise.cpp
-        src/week3.cpp
-        src/week2.cpp
-        src/week4.h
-        src/week4.cpp
+        src/triangle.cpp
+        src/interpolation.cpp
+        src/wireframes.h
+        src/wireframes.cpp
 )
 
 if (MSVC)

@@ -1,5 +1,5 @@
-#ifndef WEEK2_H
-#define WEEK2_H
+#ifndef interpolation_h
+#define interpolation_h
 
 #include <CanvasTriangle.h>
 #include <DrawingWindow.h>
@@ -17,5 +17,5 @@ std::vector<float> interpolateSingleFloats(float from, float to, int numberOfVal
 // Function to draw on a DrawingWindow
 void drawRGBColour(DrawingWindow &window);
 
-#endif // WEEK2_H
+#endif // interpolation_h
 

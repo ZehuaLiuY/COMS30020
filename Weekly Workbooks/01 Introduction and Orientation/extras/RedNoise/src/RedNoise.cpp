@@ -4,9 +4,9 @@
 #include "glm/vec3.hpp"
 #include <CanvasPoint.h>
 #include <Colour.h>
-#include "week2.h"
-#include "week3.h"
-#include "week4.h"
+#include "interpolation.h"
+#include "triangle.h"
+#include "wireframes.h"
 
 #define WIDTH 320
 #define HEIGHT 240
@@ -17,7 +17,6 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     // window.clearPixels();
     // drawRGBColour(window);
     if(orbitActivated){
-        resetDepthBuffer();
         orbitClockwise(window,cameraPosition, cameraOrientation, 0.005);
     }
     renderWireframe(window, cameraPosition, cameraOrientation);
@@ -174,6 +173,9 @@ int main(int argc, char *argv[]) {
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
         if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation);
+        // for orbit pause and resume
+        window.clearPixels();
+        resetDepthBuffer();
         draw(window, cameraPosition, cameraOrientation);
 
         // Need to render the frame at the end, or nothing actually gets shown on the screen !

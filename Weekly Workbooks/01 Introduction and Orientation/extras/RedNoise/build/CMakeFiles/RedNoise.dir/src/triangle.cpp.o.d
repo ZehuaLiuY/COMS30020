@@ -1,5 +1,6 @@
-CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o: \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/RedNoise.cpp \
+CMakeFiles/RedNoise.dir/src/triangle.cpp.o: \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.cpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/CanvasTriangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/CanvasPoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
@@ -875,28 +876,25 @@ CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o: \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_version.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_locale.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL_misc.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/vec3.hpp \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec3.hpp \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec.hpp \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/precision.hpp \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_int.hpp \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/setup.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cassert \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/assert.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec3.inl \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Colour.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/interpolation.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/glm.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/_fixes.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cfloat \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cassert \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/assert.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/fwd.hpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_int.hpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/setup.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_float.hpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec.hpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/precision.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_mat.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/vec2.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec2.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec2.inl \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/vec3.hpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec3.hpp \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec3.inl \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/vec4.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec4.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/type_vec4.inl \
@@ -973,6 +971,7 @@ CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o: \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/integer.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/func_integer.hpp \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/detail/func_integer.inl \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Colour.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TextureMap.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/wireframes.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/ModelTriangle.h \

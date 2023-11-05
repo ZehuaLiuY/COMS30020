@@ -21,33 +21,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/interpolation.cpp.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/interpolation.cpp.o.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/DependInfo.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/cmake_clean.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week3.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week3.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week5.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week5.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/build/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/output.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.bmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/output.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.ppm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/week3.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week4.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/week4.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week4.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/week4.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week5.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/week5.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/week2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/interpolation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/week2.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/interpolation.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/week3.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/triangle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/week3.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/triangle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/week4.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/week4.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,17 +107,12 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.ApplicationConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RedNoise" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RedNoise" TARGET_NAME="RedNoise" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RedNoise" RUN_TARGET_NAME="RedNoise">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -152,6 +148,9 @@
       <workItem from="1698494869557" duration="18261000" />
       <workItem from="1698679797855" duration="30299000" />
       <workItem from="1698785815756" duration="8182000" />
+      <workItem from="1699147136462" duration="166000" />
+      <workItem from="1699147310753" duration="98000" />
+      <workItem from="1699147415472" duration="750000" />
     </task>
     <servers />
   </component>

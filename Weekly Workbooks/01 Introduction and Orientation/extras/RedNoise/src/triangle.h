@@ -1,5 +1,5 @@
-#ifndef WEEK3_H
-#define WEEK3_H
+#ifndef triangle_h
+#define triangle_h
 
 #include <CanvasTriangle.h>
 #include <DrawingWindow.h>
@@ -33,4 +33,4 @@ void drawFilledTriangle(DrawingWindow &window, const CanvasTriangle &triangle, c
 void drawTexturedLine(DrawingWindow &window, CanvasPoint start, CanvasPoint end, TextureMap &texture);
 void drawTexturedTriangle(DrawingWindow &window, const CanvasTriangle &triangle, TextureMap &texture);
 void testTexturedTriangle(DrawingWindow &window);
-#endif // WEEK3_H
+#endif // triangle_h

@@ -1,5 +1,5 @@
-#include "week3.h"
-#include "week4.h"
+#include "triangle.h"
+#include "wireframes.h"
 
 
 // Week3

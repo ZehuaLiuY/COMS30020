@@ -369,77 +369,77 @@ src/RedNoise.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/RedNoise.cpp.s
 .PHONY : src/RedNoise.cpp.s
 
-src/week2.o: src/week2.cpp.o
-.PHONY : src/week2.o
+src/interpolation.o: src/interpolation.cpp.o
+.PHONY : src/interpolation.o
 
 # target to build an object file
-src/week2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week2.cpp.o
-.PHONY : src/week2.cpp.o
+src/interpolation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/interpolation.cpp.o
+.PHONY : src/interpolation.cpp.o
 
-src/week2.i: src/week2.cpp.i
-.PHONY : src/week2.i
+src/interpolation.i: src/interpolation.cpp.i
+.PHONY : src/interpolation.i
 
 # target to preprocess a source file
-src/week2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week2.cpp.i
-.PHONY : src/week2.cpp.i
+src/interpolation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/interpolation.cpp.i
+.PHONY : src/interpolation.cpp.i
 
-src/week2.s: src/week2.cpp.s
-.PHONY : src/week2.s
+src/interpolation.s: src/interpolation.cpp.s
+.PHONY : src/interpolation.s
 
 # target to generate assembly for a file
-src/week2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week2.cpp.s
-.PHONY : src/week2.cpp.s
+src/interpolation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/interpolation.cpp.s
+.PHONY : src/interpolation.cpp.s
 
-src/week3.o: src/week3.cpp.o
-.PHONY : src/week3.o
+src/triangle.o: src/triangle.cpp.o
+.PHONY : src/triangle.o
 
 # target to build an object file
-src/week3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week3.cpp.o
-.PHONY : src/week3.cpp.o
+src/triangle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/triangle.cpp.o
+.PHONY : src/triangle.cpp.o
 
-src/week3.i: src/week3.cpp.i
-.PHONY : src/week3.i
+src/triangle.i: src/triangle.cpp.i
+.PHONY : src/triangle.i
 
 # target to preprocess a source file
-src/week3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week3.cpp.i
-.PHONY : src/week3.cpp.i
+src/triangle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/triangle.cpp.i
+.PHONY : src/triangle.cpp.i
 
-src/week3.s: src/week3.cpp.s
-.PHONY : src/week3.s
+src/triangle.s: src/triangle.cpp.s
+.PHONY : src/triangle.s
 
 # target to generate assembly for a file
-src/week3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week3.cpp.s
-.PHONY : src/week3.cpp.s
+src/triangle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/triangle.cpp.s
+.PHONY : src/triangle.cpp.s
 
-src/week4.o: src/week4.cpp.o
-.PHONY : src/week4.o
+src/wireframes.o: src/wireframes.cpp.o
+.PHONY : src/wireframes.o
 
 # target to build an object file
-src/week4.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4.cpp.o
-.PHONY : src/week4.cpp.o
+src/wireframes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/wireframes.cpp.o
+.PHONY : src/wireframes.cpp.o
 
-src/week4.i: src/week4.cpp.i
-.PHONY : src/week4.i
+src/wireframes.i: src/wireframes.cpp.i
+.PHONY : src/wireframes.i
 
 # target to preprocess a source file
-src/week4.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4.cpp.i
-.PHONY : src/week4.cpp.i
+src/wireframes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/wireframes.cpp.i
+.PHONY : src/wireframes.cpp.i
 
-src/week4.s: src/week4.cpp.s
-.PHONY : src/week4.s
+src/wireframes.s: src/wireframes.cpp.s
+.PHONY : src/wireframes.s
 
 # target to generate assembly for a file
-src/week4.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/week4.cpp.s
-.PHONY : src/week4.cpp.s
+src/wireframes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/wireframes.cpp.s
+.PHONY : src/wireframes.cpp.s
 
 # Help Target
 help:
@@ -480,15 +480,15 @@ help:
 	@echo "... src/RedNoise.o"
 	@echo "... src/RedNoise.i"
 	@echo "... src/RedNoise.s"
-	@echo "... src/week2.o"
-	@echo "... src/week2.i"
-	@echo "... src/week2.s"
-	@echo "... src/week3.o"
-	@echo "... src/week3.i"
-	@echo "... src/week3.s"
-	@echo "... src/week4.o"
-	@echo "... src/week4.i"
-	@echo "... src/week4.s"
+	@echo "... src/interpolation.o"
+	@echo "... src/interpolation.i"
+	@echo "... src/interpolation.s"
+	@echo "... src/triangle.o"
+	@echo "... src/triangle.i"
+	@echo "... src/triangle.s"
+	@echo "... src/wireframes.o"
+	@echo "... src/wireframes.i"
+	@echo "... src/wireframes.s"
 .PHONY : help
 
 
