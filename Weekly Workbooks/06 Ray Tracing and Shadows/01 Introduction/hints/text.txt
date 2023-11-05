@@ -1,0 +1,3 @@
+The code that you will write for this workbook will be VERY resource intensive. If you find that your renderer is running too slowly to allow you to navigate the camera around the scene effectively, then you might like to try using the optimised `make speedy` build rule.
+
+Ray tracing is a challenging activity that will exercise all your abilities as a programmer. Due to the nature of a lot of the tasks in this workbook, traditional approaches to debugging will typically prove ineffective. To aid you in your work, we have provided a <a href="../../Debugging" target="_blank">debugging guide</a> - the techniques outlined in this document will allow you to more effectively detect and isolate errors in your code.

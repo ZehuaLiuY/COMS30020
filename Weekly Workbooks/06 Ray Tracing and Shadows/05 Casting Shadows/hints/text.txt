@@ -1,0 +1,1 @@
+You are going to need a new `vec3` variable to hold the position of a single-point light source. A location in the middle of the room, above the origin, somewhere near the ceiling (but still inside the room) would seem a sensible place for it.
