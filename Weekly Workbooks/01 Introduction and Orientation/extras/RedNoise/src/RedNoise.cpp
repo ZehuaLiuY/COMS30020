@@ -7,11 +7,13 @@
 #include "interpolation.h"
 #include "triangle.h"
 #include "wireframes.h"
+#include "ray.h"
 
 #define WIDTH 320
 #define HEIGHT 240
 
 bool orbitActivated = false;
+bool rayTracingActivated = false;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     // window.clearPixels();
@@ -132,6 +134,10 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.clearPixels();
             orbitActivated = !orbitActivated;
         }
+        else if (event.key.keysym.sym == SDLK_r){
+            window.clearPixels();
+            rayTracingActivated = !rayTracingActivated;
+        }
 
     } else if (event.type == SDL_MOUSEBUTTONDOWN) {
         window.savePPM("output.ppm");
@@ -151,7 +157,7 @@ int main(int argc, char *argv[]) {
 
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
-
+    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
 //    // test for interpolateSingleFloats
 //    std::vector<float> result;
 //    result = interpolateSingleFloats(2.2, 8.5, 7);
@@ -170,13 +176,20 @@ int main(int argc, char *argv[]) {
 //    }
 //    std::cout << std::endl;
 
+    // test for ray tracing
+
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
         if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation);
         // for orbit pause and resume
         window.clearPixels();
         resetDepthBuffer();
-        draw(window, cameraPosition, cameraOrientation);
+        if (rayTracingActivated) {
+            drawRayTracedScene(window, cameraPosition, 2.0, modelTriangles);
+        }
+        else{
+            draw(window, cameraPosition, cameraOrientation);
+        }
 
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();

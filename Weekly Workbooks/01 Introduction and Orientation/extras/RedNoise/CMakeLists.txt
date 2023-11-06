@@ -40,6 +40,8 @@ add_executable(RedNoise
         src/interpolation.cpp
         src/wireframes.h
         src/wireframes.cpp
+        src/ray.cpp
+        src/ray.h
 )
 
 if (MSVC)

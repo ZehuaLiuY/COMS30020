@@ -86,7 +86,7 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 &cameraPosition, glm::mat3 &ca
     // update the cameraCoordinate by multiplying the cameraOrientation
     cameraCoordinate =  cameraCoordinate * cameraOrientation;
     // position on the image plane (ui, vi)
-    // multiplier fot 160 looks good, if set to 240, many points will be out of scope
+    // multiplier fot 160 looks good, if set to 240, many points will be out of scope 180 for bigger image to ob the ray tracing
     float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 160 + (WIDTH / 2);
     // top left corner is (0,0) to bottom right corner is (WIDTH, HEIGHT)
     float vi = HEIGHT - (focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 160 + (HEIGHT / 2));
