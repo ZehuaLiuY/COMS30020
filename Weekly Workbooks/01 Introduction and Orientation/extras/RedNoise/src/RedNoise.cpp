@@ -13,7 +13,7 @@
 #define HEIGHT 240
 
 bool orbitActivated = false;
-bool rayTracingActivated = false;
+bool rayTracingActivated = true;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     // window.clearPixels();
@@ -157,6 +157,8 @@ int main(int argc, char *argv[]) {
 
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
+    glm::vec3 lightSource = glm::vec3(0.0, 0.6, 0.0);
+
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
 //    // test for interpolateSingleFloats
 //    std::vector<float> result;
@@ -185,7 +187,7 @@ int main(int argc, char *argv[]) {
         window.clearPixels();
         resetDepthBuffer();
         if (rayTracingActivated) {
-            drawRayTracedScene(window, cameraPosition, 2.0, modelTriangles);
+            drawRayTracedScene(window, cameraPosition, 2.0, modelTriangles, lightSource);
         }
         else{
             draw(window, cameraPosition, cameraOrientation);

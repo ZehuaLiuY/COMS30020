@@ -16,6 +16,7 @@ RayTriangleIntersection getClosestValidIntersection(const glm::vec3 &cameraPosit
                                                     const std::vector<ModelTriangle> &modelTriangles) {
     RayTriangleIntersection closestIntersection;
     closestIntersection.distanceFromCamera = std::numeric_limits<float>::infinity();
+    // for each triangle
     int index = 0;
     for (const ModelTriangle &modelTriangle : modelTriangles) {
         std::array<glm::vec3, 3> vertices = modelTriangle.vertices;
@@ -29,23 +30,25 @@ RayTriangleIntersection getClosestValidIntersection(const glm::vec3 &cameraPosit
             glm::vec3 r = vertices[0] + possibleSolution[1] * (vertices[1] - vertices[0]) + possibleSolution[2] * (vertices[2] - vertices[0]);
             closestIntersection = RayTriangleIntersection(r, possibleSolution[0], modelTriangle, index);
         }
+        // determine the index of the triangle
+        index++;
     }
     return closestIntersection;
 }
 
 glm::vec3 getDirection(glm::vec3 cameraPosition, float x, float y, float focalLength) {
 
-    float scale_u =(x - WIDTH / 2) / 180;
-    float scale_v =(y - HEIGHT / 2) / 180;
+    float scale_u =(x - WIDTH / 2) / (160*focalLength);
+    float scale_v =(y - HEIGHT / 2) / (160*focalLength);
     // Assuming the image plane is one unit away from the camera, i.e., at z = -1 in camera space
-    glm::vec3 rayDirection = glm::vec3(scale_u, -scale_v, -focalLength); // z is negative because the camera looks along -z in right-handed coordinate system
+    glm::vec3 rayDirection = glm::vec3(scale_u, -scale_v, -1); // z is negative because the camera looks along -z in right-handed coordinate system
     rayDirection = glm::normalize(rayDirection); // Normalize the direction vector
     return rayDirection;
 }
 
 // Task 4: draw the ray tracing
 void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition,
-                          float focalLength, const std::vector<ModelTriangle> modelTriangles){
+                          float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource) {
     // from top to bottom
     for (float y = 0; y < HEIGHT; y++) {
         // from left to right
@@ -53,10 +56,17 @@ void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition,
             // calculate the ray direction
             glm::vec3 rayDirection = getDirection(cameraPosition, x, y, focalLength);
             RayTriangleIntersection ray = getClosestValidIntersection(cameraPosition, rayDirection, modelTriangles);
-            if (ray.distanceFromCamera != -1) {
+
+            glm::vec3 lightDistance = -lightSource + ray.intersectionPoint;
+            RayTriangleIntersection shadow = getClosestValidIntersection(lightSource, lightDistance, modelTriangles);
+            if (shadow.triangleIndex == ray.triangleIndex){
+                // set colour
                 uint32_t colour = colourConverter(ray.intersectedTriangle.colour);
-                // draw the pixel
                 window.setPixelColour(x, y, colour);
+            }else{
+                // set shadow
+                uint32_t black = colourConverter(Colour(0, 0, 0));
+                window.setPixelColour(x, y, black);
             }
         }
     }
