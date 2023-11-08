@@ -276,7 +276,7 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
     }
 }
 // render the wireframe
-void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
 //    for (const ModelTriangle& modelTriangle : modelTriangles) {
 //        std::cout << modelTriangle << std::endl;
@@ -287,7 +287,20 @@ void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3
 //
 //    drawPoints(window, modelTriangles, colour);
     // Task 7:
-    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
+//    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
+
+    for (const auto& trianglePair : triangles) {
+        CanvasTriangle triangle = trianglePair.first;
+        Colour fillColour = trianglePair.second;
+        // works good for draw stroked triangle with colour
+        drawStrokedTriangle(window, triangle, fillColour);
+    }
+
+}
+
+void renderRasterised(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
+//    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
+//    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;

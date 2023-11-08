@@ -38,7 +38,8 @@ void resetDepthBuffer ();
 void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour colour, CanvasTriangle triangle);
 void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, Colour &fillColour);
 // render function for this week
-void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
+void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<std::pair<CanvasTriangle, Colour>> &triangles);
+void renderRasterised(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<std::pair<CanvasTriangle, Colour>> &triangles);
 
 
 // Week 5 functions
