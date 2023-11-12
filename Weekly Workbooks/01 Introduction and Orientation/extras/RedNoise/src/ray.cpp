@@ -49,17 +49,17 @@ glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, fl
 
 
 void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation, float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightSource) {
+    // calculate the ray direction
     glm::vec3 rayDirection = getDirection(cameraPosition, cameraOrientation, x, y, focalLength);
     RayTriangleIntersection ray = getClosestValidIntersection(cameraPosition, rayDirection, modelTriangles);
 
     glm::vec3 lightDistance = -lightSource + ray.intersectionPoint;
     RayTriangleIntersection shadow = getClosestValidIntersection(lightSource, lightDistance, modelTriangles);
-
-    if (shadow.triangleIndex == ray.triangleIndex) {
+    if (shadow.triangleIndex == ray.triangleIndex){
         // set colour
         uint32_t colour = colourConverter(ray.intersectedTriangle.colour);
         window.setPixelColour(x, y, colour);
-    } else {
+    }else{
         // set shadow
         uint32_t black = colourConverter(Colour(0, 0, 0));
         window.setPixelColour(x, y, black);
@@ -77,4 +77,5 @@ void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::
         }
     }
 }
+
 
