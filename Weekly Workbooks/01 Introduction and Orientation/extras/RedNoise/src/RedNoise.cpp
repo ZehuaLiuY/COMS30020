@@ -3,33 +3,37 @@
 #include "wireframes.h"
 #include "ray.h"
 
-#define WIDTH 320
-#define HEIGHT 240
+#define WIDTH 640
+#define HEIGHT 480
 
 bool orbitActivated = false;
 
 enum class RenderingMode { Wireframe, Rasterised, RayTraced };
 RenderingMode currentMode = RenderingMode::Wireframe;
 
-void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<ModelTriangle> &modelTriangles, glm::vec3 &lightSource, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
+void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<ModelTriangle> &modelTriangles,
+          glm::vec3 &lightSource, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
+    resetDepthBuffer();
     if(orbitActivated){
-        orbitClockwise(window, cameraPosition, cameraOrientation, 0.005);
+        orbitClockwise(window, cameraPosition, cameraOrientation, 0.05);
         // Update the triangles after orbiting for wireframe and rasterised rendering
         triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
     }
 
     window.clearPixels();
-    resetDepthBuffer();
 
     switch (currentMode) {
         case RenderingMode::Wireframe:
-            renderWireframe(window, cameraPosition, cameraOrientation, triangles);
+            resetDepthBuffer();
+            renderWireframe(window, triangles);
             break;
         case RenderingMode::Rasterised:
-            renderRasterised(window, cameraPosition, cameraOrientation, triangles);
+            resetDepthBuffer();
+            renderRasterised(window,  triangles);
             break;
         case RenderingMode::RayTraced:
-            drawRayTracedScene(window, cameraPosition, 2.0, modelTriangles, lightSource);
+            resetDepthBuffer();
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightSource);
             break;
     }
 }

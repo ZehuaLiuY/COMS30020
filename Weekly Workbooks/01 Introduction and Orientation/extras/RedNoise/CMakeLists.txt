@@ -57,15 +57,16 @@ if (MSVC)
     endif()
 else ()
     target_compile_options(RedNoise
-        PUBLIC
-        -Wall
-        -Wextra
-        -Wcast-align
-        -Wfatal-errors
-        -Werror=return-type
-        -Wno-unused-parameter
-        -Wno-unused-variable
-        -Wno-ignored-attributes)
+            PUBLIC
+            -Wall
+            -Wextra
+            -Wcast-align
+            -Wfatal-errors
+            -Werror=return-type
+            -Wno-unused-parameter
+            -Wno-unused-variable
+            -Wno-ignored-attributes
+            -Ofast -funsafe-math-optimizations)
 
     set(DEBUG_OPTIONS -O2 -fno-omit-frame-pointer -g)
     set(RELEASE_OPTIONS -O3 -march=native -mtune=native)

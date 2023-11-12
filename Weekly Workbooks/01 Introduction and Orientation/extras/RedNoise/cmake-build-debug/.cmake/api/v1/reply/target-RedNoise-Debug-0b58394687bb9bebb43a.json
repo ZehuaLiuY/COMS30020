@@ -33,13 +33,13 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 81,
+				"line" : 82,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 72,
+				"line" : 73,
 				"parent" : 0
 			},
 			{
@@ -51,7 +51,7 @@
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 79,
+				"line" : 80,
 				"parent" : 0
 			},
 			{
@@ -107,6 +107,14 @@
 				{
 					"backtrace" : 4,
 					"fragment" : "-Wno-ignored-attributes"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-Ofast"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-funsafe-math-optimizations"
 				},
 				{
 					"backtrace" : 5,
