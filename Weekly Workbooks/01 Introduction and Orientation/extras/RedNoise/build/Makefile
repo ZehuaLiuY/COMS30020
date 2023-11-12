@@ -393,6 +393,30 @@ src/interpolation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/interpolation.cpp.s
 .PHONY : src/interpolation.cpp.s
 
+src/ray.o: src/ray.cpp.o
+.PHONY : src/ray.o
+
+# target to build an object file
+src/ray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/ray.cpp.o
+.PHONY : src/ray.cpp.o
+
+src/ray.i: src/ray.cpp.i
+.PHONY : src/ray.i
+
+# target to preprocess a source file
+src/ray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/ray.cpp.i
+.PHONY : src/ray.cpp.i
+
+src/ray.s: src/ray.cpp.s
+.PHONY : src/ray.s
+
+# target to generate assembly for a file
+src/ray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/ray.cpp.s
+.PHONY : src/ray.cpp.s
+
 src/triangle.o: src/triangle.cpp.o
 .PHONY : src/triangle.o
 
@@ -483,6 +507,9 @@ help:
 	@echo "... src/interpolation.o"
 	@echo "... src/interpolation.i"
 	@echo "... src/interpolation.s"
+	@echo "... src/ray.o"
+	@echo "... src/ray.i"
+	@echo "... src/ray.s"
 	@echo "... src/triangle.o"
 	@echo "... src/triangle.i"
 	@echo "... src/triangle.s"

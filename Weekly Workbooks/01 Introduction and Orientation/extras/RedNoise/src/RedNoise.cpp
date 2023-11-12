@@ -1,28 +1,46 @@
-#include <CanvasTriangle.h>
-#include <DrawingWindow.h>
-#include <vector>
-#include "glm/vec3.hpp"
-#include <CanvasPoint.h>
-#include <Colour.h>
 #include "interpolation.h"
 #include "triangle.h"
 #include "wireframes.h"
+#include "ray.h"
 
-#define WIDTH 320
-#define HEIGHT 240
+#define WIDTH 640
+#define HEIGHT 480
 
 bool orbitActivated = false;
 
-void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
-    // window.clearPixels();
-    // drawRGBColour(window);
+enum class RenderingMode { Wireframe, Rasterised, RayTraced };
+RenderingMode currentMode = RenderingMode::Wireframe;
+
+void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<ModelTriangle> &modelTriangles,
+          glm::vec3 &lightSource, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
+    resetDepthBuffer();
     if(orbitActivated){
-        orbitClockwise(window,cameraPosition, cameraOrientation, 0.005);
+        orbitClockwise(window, cameraPosition, cameraOrientation, 0.05);
+        // Update the triangles after orbiting for wireframe and rasterised rendering
+        triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
     }
-    renderWireframe(window, cameraPosition, cameraOrientation);
+
+    window.clearPixels();
+
+    switch (currentMode) {
+        case RenderingMode::Wireframe:
+            resetDepthBuffer();
+            renderWireframe(window, triangles);
+            break;
+        case RenderingMode::Rasterised:
+            resetDepthBuffer();
+            renderRasterised(window,  triangles);
+            break;
+        case RenderingMode::RayTraced:
+            resetDepthBuffer();
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightSource);
+            break;
+    }
 }
 
+
 void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_LEFT) {
             // make the camera move left
@@ -106,7 +124,8 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             resetDepthBuffer();
             rotateClock(cameraPosition, cameraOrientation, 0.01);
 
-        } else if (event.key.keysym.sym == SDLK_l) {
+        }
+        else if (event.key.keysym.sym == SDLK_l) {
             std::cout << "Before: \n" << std::endl;
             for (size_t i = 0; i < 3; i++){
                 for (size_t j = 0; j < 3; j++)
@@ -132,7 +151,15 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.clearPixels();
             orbitActivated = !orbitActivated;
         }
-
+        else if (event.key.keysym.sym == SDLK_1) {
+            currentMode = RenderingMode::Wireframe;
+        }
+        else if (event.key.keysym.sym == SDLK_2) {
+            currentMode = RenderingMode::Rasterised;
+        }
+        else if (event.key.keysym.sym == SDLK_3){
+            currentMode = RenderingMode::RayTraced;
+        }
     } else if (event.type == SDL_MOUSEBUTTONDOWN) {
         window.savePPM("output.ppm");
         window.saveBMP("output.bmp");
@@ -140,9 +167,6 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
 }
 
 int main(int argc, char *argv[]) {
-    DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
-    SDL_Event event;
-
     glm::mat3 cameraOrientation = glm::mat3(
             glm::vec3(1, 0, 0),  // right
             glm::vec3(0, 1, 0),  // up
@@ -151,7 +175,13 @@ int main(int argc, char *argv[]) {
 
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
+    glm::vec3 lightSource = glm::vec3(0.0, 0.6, 0.0);
+    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
+    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
+
+    DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
+    SDL_Event event;
 //    // test for interpolateSingleFloats
 //    std::vector<float> result;
 //    result = interpolateSingleFloats(2.2, 8.5, 7);
@@ -173,11 +203,7 @@ int main(int argc, char *argv[]) {
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
         if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation);
-        // for orbit pause and resume
-        window.clearPixels();
-        resetDepthBuffer();
-        draw(window, cameraPosition, cameraOrientation);
-
+        draw(window, cameraPosition, cameraOrientation, modelTriangles, lightSource, triangles);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
     }

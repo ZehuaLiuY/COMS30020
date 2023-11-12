@@ -86,11 +86,11 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 &cameraPosition, glm::mat3 &ca
     // update the cameraCoordinate by multiplying the cameraOrientation
     cameraCoordinate =  cameraCoordinate * cameraOrientation;
     // position on the image plane (ui, vi)
-    // multiplier fot 160 looks good, if set to 240, many points will be out of scope
-    float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 160 + (WIDTH / 2);
+    // multiplier fot 160 looks good, if set to 240, many points will be out of scope 180 for bigger image to ob the ray tracing
+    float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 320 + (WIDTH / 2);
     // top left corner is (0,0) to bottom right corner is (WIDTH, HEIGHT)
-    float vi = HEIGHT - (focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 160 + (HEIGHT / 2));
-    float depthValue = cameraCoordinate.z; // Set the depth value
+    float vi = HEIGHT - (focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 320 + (HEIGHT / 2));
+    float depthValue = abs(1 / cameraCoordinate.z); // Set the depth value
     CanvasPoint intersectionPoint = CanvasPoint(ui, vi, depthValue); // Pass the depth value to the CanvasPoint constructor
     return intersectionPoint;
 }
@@ -133,15 +133,20 @@ std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::ve
 }
 
 // Task 9: find the weights of the point
-std::vector<std::vector<float>> depthBuffer(HEIGHT, std::vector<float> (WIDTH, 0));
+std::vector<std::vector<float>> depthBuffer(HEIGHT, std::vector<float> (WIDTH, INT32_MIN));
 
 // week 5
 // function for reset the depth buffer to 0
 void resetDepthBuffer () {
-    std::vector<std::vector<float>> init (HEIGHT, std::vector<float>(WIDTH, 0));
-    depthBuffer = init;
+//    std::vector<std::vector<float>> init (HEIGHT, std::vector<float>(WIDTH, 0));
+//    depthBuffer = init;
 
-    // 2 for loop, set all the value to INT32_MIN smaller than 0
+     // 2 for loops, set all the value to INT32_MIN smaller than 0
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++){
+            depthBuffer[i][j] = INT32_MIN;
+        }
+    }
 }
 
 float findDepth(float x, float y, CanvasTriangle triangle) {
@@ -153,12 +158,12 @@ float findDepth(float x, float y, CanvasTriangle triangle) {
     float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
     float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
     float c = 1.0f - a - b;
-    float z = abs(a * top.depth + b * middle.depth + c * bottom.depth);
+    float z = a * top.depth + b * middle.depth + c * bottom.depth;
 //    std::cout << "z: " << z << std::endl;
 //    std::cout << "depthBuffer: " << depthBuffer[round(x)][round(y)] << std::endl;
 //    std::cout << "1/z: " << 1/z << std::endl;
 
-    return 1/z;
+    return z;
 }
 // avoid some point out of the window
 std::pair<CanvasPoint, CanvasPoint> clipLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to) {
@@ -275,8 +280,9 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
         drawLineWithDepth(window, start, end, fillColour, triangle);
     }
 }
+
 // render the wireframe
-void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+void renderWireframe(DrawingWindow &window, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
 //    for (const ModelTriangle& modelTriangle : modelTriangles) {
 //        std::cout << modelTriangle << std::endl;
@@ -287,7 +293,20 @@ void renderWireframe(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3
 //
 //    drawPoints(window, modelTriangles, colour);
     // Task 7:
-    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
+//    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
+
+    for (const auto& trianglePair : triangles) {
+        CanvasTriangle triangle = trianglePair.first;
+        // White Frame
+        Colour colour(255, 255, 255);
+        drawStrokedTriangle(window, triangle, colour);
+    }
+
+}
+
+void renderRasterised(DrawingWindow &window, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
+//    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
+//    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;
