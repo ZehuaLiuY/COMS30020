@@ -17,7 +17,6 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
     if(orbitActivated){
         orbitClockwise(cameraPosition, cameraOrientation, 0.001);
-        // Update the triangles after orbiting for wireframe and rasterised rendering
     }
 
     window.clearPixels();
@@ -209,7 +208,7 @@ int main(int argc, char *argv[]) {
 
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
-    glm::vec3 lightSource = glm::vec3(0.0, 0.4, 0.0);
+    glm::vec3 lightSource = glm::vec3(0.0, 0.3, 0.3);
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
     std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 

@@ -64,7 +64,7 @@ std::array<CanvasPoint, 4> calculateExtraPoint(const CanvasTriangle &triangle) {
 
     CanvasPoint extraPoint(extraPointX, middle.y);
 
-    // Calculate depth for the extra point using barycentric coordinates
+    // Calculate depth for the extra point using barycentric coordinates reference https://en.wikipedia.org/wiki/Barycentric_coordinate_system
     float ratioDepth = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
     float a = ((middle.y - bottom.y) * (extraPointX - bottom.x) + (bottom.x - middle.x) * (extraPoint.y - bottom.y)) / ratioDepth;
     float b = ((bottom.y - top.y) * (extraPointX - bottom.x) + (top.x - bottom.x) * (extraPoint.y - bottom.y)) / ratioDepth;
