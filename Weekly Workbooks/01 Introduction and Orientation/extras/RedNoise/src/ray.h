@@ -14,4 +14,7 @@ RayTriangleIntersection getClosestValidIntersection(const glm::vec3 &cameraPosit
 void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
                          float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource);
 
+// Week 7
+glm::vec3 getTriangleNormal (const ModelTriangle &modelTriangle);
+
 #endif //RAY_H

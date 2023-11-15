@@ -1,9 +1,10 @@
 #include "wireframes.h"
 #include "triangle.h"
 #include "interpolation.h"
+#include "ray.h"
 
 // Task 2: read obj file
-std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, Colour> palette, float scale) {
+std::vector<ModelTriangle> loadOBJ(const std::string &filename, std::map<std::string, Colour> palette, float scale) {
     std::ifstream objFile(filename);
     if (!objFile.is_open()) {
         std::cerr << "Failed to open the OBJ file: " << filename << std::endl;
@@ -27,7 +28,9 @@ std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, C
             glm::vec3 vertex1 = vertices[std::stoi(values[1].substr(0, values[1].find('/'))) - 1];
             glm::vec3 vertex2 = vertices[std::stoi(values[2].substr(0, values[2].find('/'))) - 1];
             glm::vec3 vertex3 = vertices[std::stoi(values[3].substr(0, values[3].find('/'))) - 1];
-            modelTriangles.push_back(ModelTriangle(vertex1, vertex2, vertex3, palette[index]));
+            ModelTriangle currentTriangle = ModelTriangle(vertex1, vertex2, vertex3, palette[index]);
+            currentTriangle.normal = getTriangleNormal(currentTriangle);
+            modelTriangles.push_back(currentTriangle);
             // std::cout << "Assigned color for triangle: " << palette[index] << std::endl;
 
         }
@@ -38,7 +41,7 @@ std::vector<ModelTriangle> loadOBJ(std::string filename, std::map<std::string, C
 }
 
 // Task 3: read mtl file
-std::map<std::string, Colour> loadMTL(std::string filename) {
+std::map<std::string, Colour> loadMTL(const std::string &filename) {
     std::ifstream mtlFile(filename);
     if (!mtlFile.is_open()) {
         std::cerr << "Failed to open the OBJ file: " << filename << std::endl;
@@ -74,7 +77,10 @@ std::map<std::string, Colour> loadMTL(std::string filename) {
 std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::string& mtlFilename, float scalingFactor) {
     std::map<std::string, Colour> palette = loadMTL(mtlFilename);
     std::vector<ModelTriangle> modelTriangles = loadOBJ(objFilename, palette, scalingFactor);
-
+//    for (ModelTriangle &modelTriangle :modelTriangles){
+//        glm::vec3 normal = getTriangleNormal(modelTriangle);
+//        modelTriangle.normal = normal;
+//    }
     return modelTriangles;
 }
 
@@ -86,10 +92,9 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 &cameraPosition, glm::mat3 &ca
     // update the cameraCoordinate by multiplying the cameraOrientation
     cameraCoordinate =  cameraCoordinate * cameraOrientation;
     // position on the image plane (ui, vi)
-    // multiplier fot 160 looks good, if set to 240, many points will be out of scope 180 for bigger image to ob the ray tracing
-    float ui = focalLength * ((cameraCoordinate.x) / abs(cameraCoordinate.z)) * 320 + (WIDTH / 2);
+    float ui = round(focalLength * ((cameraCoordinate.x) / cameraCoordinate.z) * -320 + (WIDTH / 2));
     // top left corner is (0,0) to bottom right corner is (WIDTH, HEIGHT)
-    float vi = HEIGHT - (focalLength * ((cameraCoordinate.y) / abs(cameraCoordinate.z)) * 320 + (HEIGHT / 2));
+    float vi = round(focalLength * ((cameraCoordinate.y) / cameraCoordinate.z) * 320 + (HEIGHT / 2));
     float depthValue = abs(1 / cameraCoordinate.z); // Set the depth value
     CanvasPoint intersectionPoint = CanvasPoint(ui, vi, depthValue); // Pass the depth value to the CanvasPoint constructor
     return intersectionPoint;
@@ -97,13 +102,13 @@ CanvasPoint getCanvasIntersectionPoint (glm::vec3 &cameraPosition, glm::mat3 &ca
 
 
 // Task 6
-void drawPoints(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, const std::vector<ModelTriangle> modelTriangles, uint32_t colour) {
+void drawPoints(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, const std::vector<ModelTriangle> &modelTriangles, uint32_t colour) {
 //    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
     float focalLength = 2.0;
-    for (ModelTriangle modelTriangle : modelTriangles) {
+    for (const ModelTriangle &modelTriangle : modelTriangles) {
         for (glm::vec3 points3d : modelTriangle.vertices) {
             CanvasPoint point = getCanvasIntersectionPoint(cameraPosition, cameraOrientation, points3d, focalLength);
-            window.setPixelColour(round(point.x), round(point.y), colour);
+            window.setPixelColour(int(round(point.x)), int(round(point.y)), colour);
         }
     }
 }
@@ -111,14 +116,14 @@ void drawPoints(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cam
 // Task 7: Wireframe Render
 // function for transform 3D ModelTriangle to 2D CanvasTriangle
 // add new attribute "colour" to each triangle
-std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> &modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     std::vector<std::pair<CanvasTriangle, Colour>> canvasTriangles;
     // add assigned colour
-    std::vector<Colour> colour;
+    // std::vector<Colour> colour;
 
     float focalLength = 2.0;
 
-    for (ModelTriangle modelTriangle : modelTriangles) {
+    for (const ModelTriangle &modelTriangle : modelTriangles) {
         std::vector<CanvasPoint> canvasPoint;
         Colour colour = modelTriangle.colour;
         for (glm::vec3 points3d : modelTriangle.vertices) {
@@ -126,7 +131,7 @@ std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::ve
             canvasPoint.push_back(point);
         }
         CanvasTriangle triangle = CanvasTriangle(canvasPoint[0], canvasPoint[1], canvasPoint[2]);
-        canvasTriangles.push_back({triangle, colour});
+        canvasTriangles.emplace_back(triangle, colour);
     }
 
     return canvasTriangles;
@@ -138,10 +143,6 @@ std::vector<std::vector<float>> depthBuffer(HEIGHT, std::vector<float> (WIDTH, I
 // week 5
 // function for reset the depth buffer to 0
 void resetDepthBuffer () {
-//    std::vector<std::vector<float>> init (HEIGHT, std::vector<float>(WIDTH, 0));
-//    depthBuffer = init;
-
-     // 2 for loops, set all the value to INT32_MIN smaller than 0
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++){
             depthBuffer[i][j] = INT32_MIN;
@@ -149,22 +150,21 @@ void resetDepthBuffer () {
     }
 }
 
-float findDepth(float x, float y, CanvasTriangle triangle) {
-    CanvasPoint top = triangle.vertices[0];
-    CanvasPoint middle = triangle.vertices[1];
-    CanvasPoint bottom = triangle.vertices[2];
-
-    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
-    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
-    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
-    float c = 1.0f - a - b;
-    float z = a * top.depth + b * middle.depth + c * bottom.depth;
-//    std::cout << "z: " << z << std::endl;
-//    std::cout << "depthBuffer: " << depthBuffer[round(x)][round(y)] << std::endl;
-//    std::cout << "1/z: " << 1/z << std::endl;
-
-    return z;
-}
+//float findDepth(float x, float y, CanvasTriangle triangle) {
+//    CanvasPoint top = triangle.vertices[0];
+//    CanvasPoint middle = triangle.vertices[1];
+//    CanvasPoint bottom = triangle.vertices[2];
+//// float alpha = (-(extraPointX-triangle.v1().x)(triangle.v2().y-triangle.v1().y)+(extraPointY-triangle.v1().y)(triangle.v2().x-triangle.v1().x))/(-(triangle.v0().x-triangle.v1().x)(triangle.v2().y-triangle.v1().y)+(triangle.v0().y-triangle.v1().y)(triangle.v2().x-triangle.v1().x));
+////    float beta = (-(extraPointX-triangle.v2().x)(triangle.v0().y-triangle.v2().y)+(extraPointY-triangle.v2().y)(triangle.v0().x-triangle.v2().x))/(-(triangle.v1().x-triangle.v2().x)(triangle.v0().y-triangle.v2().y)+(triangle.v1().y-triangle.v2().y)(triangle.v0().x-triangle.v2().x));
+////    float gamma = 1 - alpha - beta;
+////    extraPointDepth = alpha * triangle.v0().depth + beta * triangle.v1().depth + gamma * triangle.v2().depth;
+//    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
+//    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
+//    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
+//    float c = 1.0f - a - b;
+//    float z = a * top.depth + b * middle.depth + c * bottom.depth;
+//    return z;
+//}
 // avoid some point out of the window
 std::pair<CanvasPoint, CanvasPoint> clipLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to) {
     int xMin = 0;
@@ -231,15 +231,21 @@ void drawLineWithDepth(DrawingWindow &window, CanvasPoint from, CanvasPoint to, 
     float numberOfSteps = std::max(abs(xDiff), abs(yDiff));
     float xStepSize = xDiff / numberOfSteps;
     float yStepSize = yDiff / numberOfSteps;
+    float depthStepSize = (to.depth - from.depth) / numberOfSteps;
     uint32_t uIntColour = colourConverter(colour);
     for (float i = 0.0; i <= numberOfSteps; i++) {
         float x = from.x + (xStepSize * i);
         float y = from.y + (yStepSize * i);
-        float z = findDepth(x, y, triangle);
-        if (depthBuffer[int(round(y))][int(round(x))] < z) {
-            depthBuffer[int(round(y))][int(round(x))] = z;
-            window.setPixelColour(int(round(x)), int(round(y)), uIntColour);
+        //float z = from.depth + (depthStepSize * float(i));
+//        float z = findDepth(x, y, triangle);
+        float z = from.depth + (depthStepSize * float(i));
+        if (int(round(y)) < HEIGHT && int(round(y)) >= 0 && int(round(x)) < WIDTH && int(round(x)) >= 0){
+            if (depthBuffer[int(round(y))][int(round(x))] < z) {
+                depthBuffer[int(round(y))][int(round(x))] = z;
+                window.setPixelColour(int(round(x)), int(round(y)), uIntColour);
+            }
         }
+
     }
 }
 
@@ -262,64 +268,50 @@ void drawFilledTriangles(DrawingWindow &window, const CanvasTriangle &triangle, 
     float topToMidY = abs(top.y - left.y);
     float xStepRT = (right.x - top.x) / topToMidY;
     float xStepLT = (left.x - top.x) / topToMidY;
+    float depthStepRT = (right.depth - top.depth) / topToMidY;
+    float depthStepLT = (left.depth - top.depth) / topToMidY;
+
     // Calculate the interpolation step for left and right edges of the bottom part of the triangle
     float midToBottomY = abs((bottom.y - left.y));
     float xStepBR = (bottom.x - right.x) / midToBottomY;
     float xStepBL = (bottom.x - left.x) / midToBottomY;
+    float depthStepBR = (bottom.depth - right.depth) / midToBottomY;
+    float depthStepBL = (bottom.depth - left.depth) / midToBottomY;
 
     // Draw the top part of the triangle
     for (float i = 0; i < topToMidY; i++) {
-        CanvasPoint start = CanvasPoint(int(round(top.x + xStepRT * i)), top.y + i);
-        CanvasPoint end = CanvasPoint(int(round(top.x + xStepLT * i)), top.y + i);
+        CanvasPoint start = CanvasPoint(int(top.x + xStepRT * i), top.y + i, top.depth + depthStepRT * i);
+        CanvasPoint end = CanvasPoint(int(top.x + xStepLT * i), top.y + i, top.depth + depthStepLT * i);
         drawLineWithDepth(window, start, end, fillColour, triangle);
     }
     // Draw the bottom part of the triangle
     for (float i = 0; i < midToBottomY; i++) {
-        CanvasPoint start = CanvasPoint(int(round(right.x + xStepBR * i)), right.y + i);
-        CanvasPoint end = CanvasPoint(int(round(left.x + xStepBL * i)), left.y + i);
+        CanvasPoint start = CanvasPoint(int(right.x + xStepBR * i), right.y + i, right.depth + depthStepBR * i);
+        CanvasPoint end = CanvasPoint(int(left.x + xStepBL * i), left.y + i, left.depth + depthStepBL * i);
         drawLineWithDepth(window, start, end, fillColour, triangle);
     }
 }
 
 // render the wireframe
 void renderWireframe(DrawingWindow &window, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
-    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
-//    for (const ModelTriangle& modelTriangle : modelTriangles) {
-//        std::cout << modelTriangle << std::endl;
-//    }
-    // Task 6:
-//    Colour pointsColour = Colour(255,255,255);
-//    uint32_t colour = colourConverter(pointsColour);
-//
-//    drawPoints(window, modelTriangles, colour);
-    // Task 7:
-//    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
-
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;
-        // White Frame
-        Colour colour(255, 255, 255);
+        Colour colour(255, 255, 255); // White Frame
         drawStrokedTriangle(window, triangle, colour);
     }
 
 }
 
 void renderRasterised(DrawingWindow &window, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
-//    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
-//    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
-
     for (const auto& trianglePair : triangles) {
         CanvasTriangle triangle = trianglePair.first;
         Colour fillColour = trianglePair.second;
-        // works good for draw stroked triangle with colour
-        // drawStrokedTriangle(window, triangle, fillColour);
         drawFilledTriangles(window, triangle, fillColour);
     }
 
 }
 
-// week 5 tasks:
-// camera position and orientation
+// week 5 tasks: camera position and orientation
 // translate the camera position in 3 dimensions (up/down, left/right, forwards/backwards)
 void translateCamera(glm::vec3 &cameraPosition, float x, float y, float z) {
     cameraPosition.x += x;
@@ -377,6 +369,6 @@ void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     cameraOrientation[2] = forward;
 }
 
-void orbitClockwise(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
+void orbitClockwise(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
     rotateClock(cameraPosition, cameraOrientation, step);
 }

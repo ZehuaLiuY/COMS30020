@@ -21,58 +21,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend 2.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp 2.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o 2.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp 2.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/RedNoise 2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/files/sphere.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/CanvasPoint.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/CanvasPoint.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/CanvasTriangle.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/CanvasTriangle.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/Colour.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/Colour.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/DrawingWindow.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/DrawingWindow.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/RayTriangleIntersection.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/RayTriangleIntersection.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/interpolation.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/interpolation.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week2.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week2.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week3.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week3.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week4And5.cpp.o.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week5.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/week5.cpp.o.d" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CanvasPoint.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CanvasTriangle.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Colour.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/DrawingWindow.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/ModelTriangle.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/RayTriangleIntersection.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/RedNoise.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/TextureMap.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/TexturePoint.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Utils.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/output.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.bmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/output.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.ppm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-00ceb659b328293f0c5c.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-11-05T16-16-35-0273.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-RedNoise-Debug-007a86bc3a82f2388fea.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/triangle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/triangle.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/wireframes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/wireframes.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.h" afterDir="false" />
     </list>
@@ -116,28 +85,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;week-6&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "week-7",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "structure.view.defaults.are.configured": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">

@@ -47,24 +47,52 @@ glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, fl
     return rayDirection;
 }
 
+// Week 7
+// Task 2: proximity lighting 1.0 is the maximum brightness
+float proximityLighting (float distance) {
+    float pL = 10.0f / (4.0f* M_PI *distance*distance);
+    return std::min(std::max(pL, 0.0f), 1.0f);
+}
 
-void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation, float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightSource) {
+// Task 3: Angle-of-Incidence lighting
+// get the normal of each triangle call this function on readFiles
+glm::vec3 getTriangleNormal (const ModelTriangle &modelTriangle) {
+    glm::vec3 edge1 = modelTriangle.vertices[2] - modelTriangle.vertices[0];
+    glm::vec3 edge2 = modelTriangle.vertices[1] - modelTriangle.vertices[0];
+    glm::vec3 normal = glm::normalize(glm::cross(edge1, edge2));
+    return normal;
+}
+
+float getIncidenceAngle (glm::vec3 lightDistance, glm::vec3 normal) {
+    lightDistance = glm::normalize(lightDistance);
+    float angle = glm::dot(lightDistance, normal);
+    if (angle <= 0.0f) {
+        angle = 0.0f;
+    }
+    return angle;
+}
+
+void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
+                  float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightSource) {
     // calculate the ray direction
     glm::vec3 rayDirection = getDirection(cameraPosition, cameraOrientation, x, y, focalLength);
     RayTriangleIntersection ray = getClosestValidIntersection(cameraPosition, rayDirection, modelTriangles);
 
-    glm::vec3 lightDistance = -lightSource + ray.intersectionPoint;
-    RayTriangleIntersection shadow = getClosestValidIntersection(lightSource, lightDistance, modelTriangles);
-    if (shadow.triangleIndex == ray.triangleIndex){
-        // set colour
-        uint32_t colour = colourConverter(ray.intersectedTriangle.colour);
-        window.setPixelColour(x, y, colour);
-    }else{
-        // set shadow
-        uint32_t black = colourConverter(Colour(0, 0, 0));
-        window.setPixelColour(x, y, black);
+    if (ray.distanceFromCamera != std::numeric_limits<float>::infinity()) {
+
+        glm::vec3 lightDistance = ray.intersectionPoint - lightSource;
+        float proximity = proximityLighting(glm::length(lightDistance));
+        float incidence = getIncidenceAngle(glm::normalize(lightDistance), ray.intersectedTriangle.normal);
+        float brightness = proximity * incidence;
+
+        Colour colour = ray.intersectedTriangle.colour;
+        uint32_t adjustedColour = colourConverter(Colour(colour.red * brightness, colour.green * brightness, colour.blue * brightness));
+        window.setPixelColour(x, y, adjustedColour);
+    } else {
+        window.setPixelColour(x, y, colourConverter(Colour(0, 0, 0)));
     }
 }
+
 
 // Task 4: draw the ray tracing
 void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
@@ -79,3 +107,65 @@ void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::
 }
 
 
+glm::vec3 getReflectionVector (glm::vec3 incidence, glm::vec3 normal) {
+    incidence = glm::normalize(incidence);
+    glm::vec3 reflection = incidence - 2.0f * glm::dot(incidence, normal) * normal;
+    reflection = glm::normalize(reflection);
+    return reflection;
+}
+
+// get the normal of the triangle
+glm::vec3 getTriangleNormalPoint (glm::vec3 trianglePoint1, glm::vec3 trianglePoint2, glm::vec3 trianglePoint3, glm::vec3 weight) {
+    glm::vec3 normalPoint = weight[0] * trianglePoint1 + weight[1] * trianglePoint2 + weight[2] * trianglePoint3;
+    return normalPoint;
+}
+
+glm::vec3 calculateVertexNormal (glm::vec3 vertex, const std::vector<ModelTriangle> &modelTriangles) {
+    glm::vec3 normal = glm::vec3(0.0f, 0.0f, 0.0f);
+    float i = 0.0f;
+    for (const ModelTriangle &modelTriangle : modelTriangles) {
+        std::array<glm::vec3, 3> vertices = modelTriangle.vertices;
+        if (vertices[0] == vertex || vertices[1] == vertex || vertices[2] == vertex) {
+            normal += modelTriangle.normal;
+            i += 1.0f;
+        }
+    }
+    glm::vec3 vertexNormal = normal / i;
+    return vertexNormal;
+}
+
+// use barycentric method
+// reference https://en.wikipedia.org/wiki/Barycentric_coordinate_system
+glm::vec3 getNormalWeight (float x, float y, const CanvasTriangle &triangle) {
+    CanvasPoint top = triangle.vertices[0];
+    CanvasPoint middle = triangle.vertices[1];
+    CanvasPoint bottom = triangle.vertices[2];
+
+    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
+    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
+    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
+    float c = 1.0f - a - b;
+    glm::vec3 normalWeight = glm::vec3(a, b, c);
+    return normalWeight;
+}
+
+// Task 4: Specular Lighting
+float specularLighting (float incidenceAngle, glm::vec3 reflectionVector, glm::vec3 rayDirection) {
+    float specular = incidenceAngle + pow (glm::dot(reflectionVector, rayDirection), 512);
+    specular = glm::clamp(specular, 0.0f, 1.0f);
+    return specular;
+}
+float processBrightness (glm::vec3 lightDistance, glm::vec3 normal, glm::vec3 rayDirection ){
+    // get the distance between the light source and the intersection point
+    float distance = glm::length(lightDistance);
+    // calculate the pl
+    float pL= proximityLighting(distance);
+    // calculate the angle of incidence
+    float incidenceAngle = getIncidenceAngle(lightDistance, normal);
+    // calculate the reflection vector
+    glm::vec3 reflectionVector = getReflectionVector(lightDistance, normal);
+    float sL = specularLighting(incidenceAngle, reflectionVector, rayDirection);
+    float threshold = 0.1;
+    float brightness = std::max(threshold, sL);
+    return brightness;
+}

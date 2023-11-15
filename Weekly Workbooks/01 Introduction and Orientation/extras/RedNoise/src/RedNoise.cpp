@@ -9,15 +9,15 @@
 bool orbitActivated = false;
 
 enum class RenderingMode { Wireframe, Rasterised, RayTraced };
-RenderingMode currentMode = RenderingMode::Wireframe;
+RenderingMode currentMode = RenderingMode::Rasterised;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<ModelTriangle> &modelTriangles,
           glm::vec3 &lightSource, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
-    resetDepthBuffer();
+
+    triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
     if(orbitActivated){
-        orbitClockwise(window, cameraPosition, cameraOrientation, 0.05);
+        orbitClockwise(cameraPosition, cameraOrientation, 0.001);
         // Update the triangles after orbiting for wireframe and rasterised rendering
-        triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
     }
 
     window.clearPixels();
@@ -39,7 +39,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
 }
 
 
-void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightSource) {
 
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_LEFT) {
@@ -101,27 +101,22 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             testTexturedTriangle(window);
             window.renderFrame();
         }
-
         // rotation matrix x
         else if (event.key.keysym.sym == SDLK_q) {
             window.clearPixels();
-            resetDepthBuffer();
             rotateCameraByX(cameraPosition);
         }
         else if (event.key.keysym.sym == SDLK_w) {
             window.clearPixels();
-            resetDepthBuffer();
             rotateUp(cameraPosition, cameraOrientation, 0.01);
         }
         // rotation matrix y
         else if (event.key.keysym.sym == SDLK_a) {
             window.clearPixels();
-            resetDepthBuffer();
             rotateCameraByY(cameraPosition);
         }
         else if (event.key.keysym.sym == SDLK_s) {
             window.clearPixels();
-            resetDepthBuffer();
             rotateClock(cameraPosition, cameraOrientation, 0.01);
 
         }
@@ -151,15 +146,54 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.clearPixels();
             orbitActivated = !orbitActivated;
         }
+        // model shifting
         else if (event.key.keysym.sym == SDLK_1) {
             currentMode = RenderingMode::Wireframe;
         }
         else if (event.key.keysym.sym == SDLK_2) {
             currentMode = RenderingMode::Rasterised;
         }
-        else if (event.key.keysym.sym == SDLK_3){
+        else if (event.key.keysym.sym == SDLK_3) {
             currentMode = RenderingMode::RayTraced;
         }
+        // light position shifting
+        else if (event.key.keysym.sym == SDLK_4) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource += glm::vec3(0.1, 0, 0);
+            std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_5) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource += glm::vec3(-0.1, 0, 0);
+            std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_6) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource += glm::vec3(0.0, 0.1, 0);
+            std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_7) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource += glm::vec3(0.0, -0.1, 0);
+            std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_8) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource += glm::vec3(0.0, 0, 0.1);
+            std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_9) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource += glm::vec3(0.0, 0, -0.1);
+            std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
+        }
+
     } else if (event.type == SDL_MOUSEBUTTONDOWN) {
         window.savePPM("output.ppm");
         window.saveBMP("output.bmp");
@@ -175,7 +209,7 @@ int main(int argc, char *argv[]) {
 
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
-    glm::vec3 lightSource = glm::vec3(0.0, 0.6, 0.0);
+    glm::vec3 lightSource = glm::vec3(0.0, 0.4, 0.0);
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
     std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
@@ -201,8 +235,10 @@ int main(int argc, char *argv[]) {
 //    std::cout << std::endl;
 
     while (true) {
+//        resetDepthBuffer();
+//        window.clearPixels();
         // We MUST poll for events - otherwise the window will freeze !
-        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation);
+        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightSource);
         draw(window, cameraPosition, cameraOrientation, modelTriangles, lightSource, triangles);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
