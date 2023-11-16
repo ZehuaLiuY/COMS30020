@@ -2,19 +2,24 @@
 #include "triangle.h"
 #include "wireframes.h"
 #include "ray.h"
+#include "sphere.h"
 
 #define WIDTH 640
 #define HEIGHT 480
 
 bool orbitActivated = false;
 
-enum class RenderingMode { Wireframe, Rasterised, RayTraced };
+enum class RenderingMode { Wireframe, Rasterised, RayTraced, SphereGouraud, SpherePhong };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, std::vector<ModelTriangle> &modelTriangles,
-          glm::vec3 &lightSource, std::vector<std::pair<CanvasTriangle, Colour>> &triangles) {
+void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation,
+          std::vector<ModelTriangle> &modelTriangles, std::vector<ModelTriangle> &sphereTriangles, glm::vec3 &lightSource) {
 
-    triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
+    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
+    glm::vec3 sphereCamPos = glm::vec3(0.0, 0.7, 4.0);
+    std::vector<std::pair<CanvasTriangle, Colour>> sTriangles = triangleTransformer(sphereTriangles, sphereCamPos, cameraOrientation);
+
+
     if(orbitActivated){
         orbitClockwise(cameraPosition, cameraOrientation, 0.001);
     }
@@ -32,7 +37,18 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::RayTraced:
             resetDepthBuffer();
-            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightSource);
+            drawRayTracedScene(window, sphereCamPos, cameraOrientation, 2.0, modelTriangles, lightSource);
+            break;
+        case RenderingMode::SphereGouraud:
+            // cameraPos 0.0 0.7 4.0
+            resetDepthBuffer();
+            // renderSphereRasterised(window, sTriangles);
+            // renderSphereWireframe(window, sTriangles);
+            gouraudShading(window, sphereCamPos, cameraOrientation, lightSource, 2.0, sphereTriangles);
+            break;
+        case RenderingMode::SpherePhong:
+            phongShading(window, sphereCamPos, cameraOrientation, lightSource, 2.0, sphereTriangles);
+            resetDepthBuffer();
             break;
     }
 }
@@ -47,7 +63,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.clearPixels();
             resetDepthBuffer();
             translateCamera(cameraPosition, -0.1, 0, 0);
-            // std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
+            std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
         }
         else if (event.key.keysym.sym == SDLK_RIGHT) {
             // make the camera move right
@@ -55,6 +71,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.clearPixels();
             resetDepthBuffer();
             translateCamera(cameraPosition, 0.1, 0, 0);
+            std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
         }
         else if (event.key.keysym.sym == SDLK_UP) {
             // make the camera move up
@@ -62,6 +79,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.clearPixels();
             resetDepthBuffer();
             translateCamera(cameraPosition, 0, 0.1, 0);
+            std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
         }
         else if (event.key.keysym.sym == SDLK_DOWN) {
             // make the camera move down
@@ -69,6 +87,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             window.clearPixels();
             resetDepthBuffer();
             translateCamera(cameraPosition, 0, -0.1, 0);
+            std::cout << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << std::endl;
 
         }
         else if (event.key.keysym.sym == SDLK_u) {
@@ -155,38 +174,44 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
         else if (event.key.keysym.sym == SDLK_3) {
             currentMode = RenderingMode::RayTraced;
         }
-        // light position shifting
         else if (event.key.keysym.sym == SDLK_4) {
+            currentMode = RenderingMode::SphereGouraud;
+        }
+        else if (event.key.keysym.sym == SDLK_5) {
+            currentMode = RenderingMode::SpherePhong;
+        }
+        // light position shifting
+        else if (event.key.keysym.sym == SDLK_6) {
             window.clearPixels();
             resetDepthBuffer();
             lightSource += glm::vec3(0.1, 0, 0);
             std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
         }
-        else if (event.key.keysym.sym == SDLK_5) {
+        else if (event.key.keysym.sym == SDLK_7) {
             window.clearPixels();
             resetDepthBuffer();
             lightSource += glm::vec3(-0.1, 0, 0);
             std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
         }
-        else if (event.key.keysym.sym == SDLK_6) {
+        else if (event.key.keysym.sym == SDLK_8) {
             window.clearPixels();
             resetDepthBuffer();
             lightSource += glm::vec3(0.0, 0.1, 0);
             std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
         }
-        else if (event.key.keysym.sym == SDLK_7) {
+        else if (event.key.keysym.sym == SDLK_9) {
             window.clearPixels();
             resetDepthBuffer();
             lightSource += glm::vec3(0.0, -0.1, 0);
             std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
         }
-        else if (event.key.keysym.sym == SDLK_8) {
+        else if (event.key.keysym.sym == SDLK_0) {
             window.clearPixels();
             resetDepthBuffer();
             lightSource += glm::vec3(0.0, 0, 0.1);
             std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
         }
-        else if (event.key.keysym.sym == SDLK_9) {
+        else if (event.key.keysym.sym == SDLK_p) {
             window.clearPixels();
             resetDepthBuffer();
             lightSource += glm::vec3(0.0, 0, -0.1);
@@ -210,8 +235,10 @@ int main(int argc, char *argv[]) {
 
     glm::vec3 lightSource = glm::vec3(0.0, 0.3, 0.3);
     std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
-    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
+    // std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
+    std::vector<ModelTriangle> sphereTriangles = readSphereFile("../src/files/sphere.obj",0.5);
+    // std::vector<std::pair<CanvasTriangle, Colour>> sphereCanvasTriangles = triangleTransformer(sphereTriangles, cameraPosition, cameraOrientation);
 
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
@@ -238,7 +265,7 @@ int main(int argc, char *argv[]) {
 //        window.clearPixels();
         // We MUST poll for events - otherwise the window will freeze !
         if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightSource);
-        draw(window, cameraPosition, cameraOrientation, modelTriangles, lightSource, triangles);
+        draw(window, cameraPosition, cameraOrientation, modelTriangles, sphereTriangles,lightSource);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
     }

@@ -23,6 +23,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/RedNoise.dir/src/interpolation.cpp.o.d"
   "CMakeFiles/RedNoise.dir/src/ray.cpp.o"
   "CMakeFiles/RedNoise.dir/src/ray.cpp.o.d"
+  "CMakeFiles/RedNoise.dir/src/sphere.cpp.o"
+  "CMakeFiles/RedNoise.dir/src/sphere.cpp.o.d"
   "CMakeFiles/RedNoise.dir/src/triangle.cpp.o"
   "CMakeFiles/RedNoise.dir/src/triangle.cpp.o.d"
   "CMakeFiles/RedNoise.dir/src/wireframes.cpp.o"
