@@ -50,7 +50,7 @@ glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, fl
 // Week 7
 // Task 2: proximity lighting 1.0 is the maximum brightness
 float proximityLighting (float distance) {
-    float pL = 30.0f / (4.0f * M_PI * distance * distance);
+    float pL = 15.0f / (4.0f * M_PI * distance * distance);
     return std::min(std::max(pL, 0.00001f), 1.0f);
 }
 
