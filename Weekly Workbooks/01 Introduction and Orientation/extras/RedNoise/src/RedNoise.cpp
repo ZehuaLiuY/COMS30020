@@ -37,7 +37,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::RayTraced:
             resetDepthBuffer();
-            drawRayTracedScene(window, sphereCamPos, cameraOrientation, 2.0, modelTriangles, lightSource);
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightSource);
             break;
         case RenderingMode::SphereGouraud:
             // cameraPos 0.0 0.7 4.0

@@ -28,5 +28,5 @@ float getIncidenceAngle (glm::vec3 lightDistance, glm::vec3 normal);
 
 float specularLighting (glm::vec3 lightDistance, glm::vec3 normal, glm::vec3 rayDirection);
 
-float processLighting(const glm::vec3 &lightDistance, glm::vec3 &normal, const glm::vec3 &rayDirection);
+float processLighting(const glm::vec3 &lightDistance, glm::vec3 &normal, glm::vec3 view);
 #endif //RAY_H

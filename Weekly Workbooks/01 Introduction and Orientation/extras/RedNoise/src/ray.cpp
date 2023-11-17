@@ -41,8 +41,8 @@ glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, fl
     float scale_v =(y - HEIGHT / 2) / (160*focalLength);
     float z = cameraPosition.z - focalLength;
     // Assuming the image plane is one unit away from the camera, i.e., at z = -1 in camera space
-    glm::vec3 rayDirection = glm::vec3(scale_u + cameraPosition.x, -scale_v + cameraPosition.y, z) - cameraPosition; // z is negative because the camera looks along -z in right-handed coordinate system
-    rayDirection = glm::normalize(rayDirection); // Normalize the direction vector
+    glm::vec3 pixelPosition = glm::vec3(scale_u + cameraPosition.x, -scale_v + cameraPosition.y, z) - cameraPosition; // z is negative because the camera looks along -z in right-handed coordinate system
+    glm::vec3 rayDirection = glm::normalize(pixelPosition); // Normalize the direction vector
     rayDirection = rayDirection * inverse(cameraOrientation);
     return rayDirection;
 }
@@ -50,8 +50,8 @@ glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, fl
 // Week 7
 // Task 2: proximity lighting 1.0 is the maximum brightness
 float proximityLighting (float distance) {
-    float pL = 30.0f / (4.0f* M_PI *distance*distance);
-    return std::min(std::max(pL, 0.0f), 1.0f);
+    float pL = 30.0f / (4.0f * M_PI * distance * distance);
+    return std::min(std::max(pL, 0.00001f), 1.0f);
 }
 
 // Task 3: Angle-of-Incidence lighting
@@ -63,37 +63,38 @@ glm::vec3 getTriangleNormal (const ModelTriangle &modelTriangle) {
     return normal;
 }
 
-float getIncidenceAngle (glm::vec3 lightDistance, glm::vec3 normal) {
-    lightDistance = glm::normalize(lightDistance);
-    float angle = glm::dot(lightDistance, normal);
-    if (angle <= 0.0f) {
-        angle = 0.0f;
-    }
+float getIncidenceAngle (glm::vec3 lightVector, glm::vec3 normal) {
+    normal = glm::normalize(normal);
+    float angle = glm::dot(lightVector, normal);
+    angle = std::max(angle, 0.0f);
     return angle;
 }
 
 // Task 4: Specular Lighting
 // get the reflection vector, reference https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel
-float specularLighting (glm::vec3 lightDistance, glm::vec3 normal, glm::vec3 rayDirection) {
+float specularLighting (glm::vec3 lightVector, glm::vec3 normal, glm::vec3 view) {
     // minus the incidence vector, because the incidence vector is pointing to the light source
     // R=L−2⋅(L⋅N)⋅N
-    lightDistance = - glm::normalize(lightDistance);
-    glm::vec3 reflection = lightDistance - 2.0f * glm::dot(lightDistance, normal) * normal;
-    float VR = glm::max (0.0f, glm::dot(reflection, -rayDirection));
+    // reflection vector
+    glm::vec3 reflectedLight = - glm::normalize(lightVector);
+    glm::vec3 reflection = reflectedLight - (2.0f * glm::dot(reflectedLight, normal) * normal);
+
+    float VR = glm::max (0.0f, glm::dot(reflection, view));
     float specular = pow(VR, 256);
     // get the specular lighting 1.0 is the maximum brightness
     specular = glm::clamp<float>(specular, 0.0f, 1.0f);
     return specular;
 }
 
-float processLighting(const glm::vec3 &lightDistance, glm::vec3 &normal, const glm::vec3 &rayDirection) {
-//    glm::vec3 lightDistance = intersectionPoint - lightSource;
+float processLighting(const glm::vec3 &lightDistance, glm::vec3 &normal, glm::vec3 view) {
+    glm::vec3 lightVector = glm::normalize(lightDistance);
     // Proximity lighting
     float proximity = proximityLighting(glm::length(lightDistance));
     // Angle-of-Incidence lighting
-    float incidence = getIncidenceAngle(glm::normalize(lightDistance), normal);
+
+    float incidence = getIncidenceAngle(lightVector, normal);
     // Specular Lighting
-    float specular = specularLighting(lightDistance, normal, rayDirection);
+    float specular = specularLighting(lightVector, normal, view);
 
     float brightness = proximity * incidence + specular;
 
@@ -112,27 +113,32 @@ float processLighting(const glm::vec3 &lightDistance, glm::vec3 &normal, const g
 
 void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
                   float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightSource) {
-    // calculate the ray direction
-    glm::vec3 rayDirection = getDirection(cameraPosition, cameraOrientation, x, y, focalLength);
-    // get the closest intersection with the ray
-    RayTriangleIntersection intersection = getClosestValidIntersection(cameraPosition, rayDirection, modelTriangles);
+    // from the camera to the pixel
+    glm::vec3 rayToPixelDirection = getDirection(cameraPosition, cameraOrientation, x, y, focalLength);
+    // get the closest triangle Intersection with the ray
+    RayTriangleIntersection closestIntersection = getClosestValidIntersection(cameraPosition, rayToPixelDirection, modelTriangles);
 
-    if (intersection.distanceFromCamera != std::numeric_limits<float>::infinity()) {
-        // check if the intersection point is in the shadow
-        glm::vec3 toLightDirection = glm::normalize(lightSource - intersection.intersectionPoint);
-        RayTriangleIntersection shadowRay = getClosestValidIntersection(intersection.intersectionPoint + toLightDirection * 0.001f, toLightDirection, modelTriangles);
+    if (closestIntersection.distanceFromCamera != std::numeric_limits<float>::infinity()) {
+        // from the closestIntersection point to the light source direction vector
+        glm::vec3 directionToLight = glm::normalize(lightSource - closestIntersection.intersectionPoint);
+        // view is the direction from the closestIntersection point to the camera
+        glm::vec3 view = glm::normalize(closestIntersection.intersectionPoint - cameraPosition);
+        RayTriangleIntersection shadowRay = getClosestValidIntersection(closestIntersection.intersectionPoint + directionToLight * 0.001f, directionToLight, modelTriangles);
 
         float brightness;
-        if (shadowRay.distanceFromCamera < glm::length(lightSource - intersection.intersectionPoint) && shadowRay.triangleIndex != intersection.triangleIndex) {
+        if (shadowRay.distanceFromCamera < glm::length(lightSource - closestIntersection.intersectionPoint) && shadowRay.triangleIndex != closestIntersection.triangleIndex) {
             // in the shadow
             brightness = 0.2f;
         } else {
-            glm::vec3 lightDistance = intersection.intersectionPoint - lightSource;
-            glm::vec3 normal = intersection.intersectedTriangle.normal;
-            brightness = processLighting(lightDistance, normal, rayDirection);
+            // not in the shadow
+            // lightDistance is the vector from the closestIntersection point to the light source
+            glm::vec3 lightDistance = closestIntersection.intersectionPoint - lightSource;
+            // surface normal
+            glm::vec3 normal = closestIntersection.intersectedTriangle.normal;
+            brightness = processLighting(lightDistance, normal, view);
         }
 
-        Colour colour = intersection.intersectedTriangle.colour;
+        Colour colour = closestIntersection.intersectedTriangle.colour;
         uint32_t adjustedColour = colourConverter(Colour(colour.red * brightness, colour.green * brightness, colour.blue * brightness));
         window.setPixelColour(x, y, adjustedColour);
     } else {
