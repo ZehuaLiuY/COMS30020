@@ -15,7 +15,7 @@ RayTriangleIntersection getClosestValidIntersection(const glm::vec3 &cameraPosit
 glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, float x, float y, float focalLength);
 
 void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
-                  float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightSource);
+                  float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightPosition);
 
 void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
                          float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource);
@@ -28,5 +28,5 @@ float getIncidenceAngle (glm::vec3 lightDistance, glm::vec3 normal);
 
 float specularLighting (glm::vec3 lightDistance, glm::vec3 normal, glm::vec3 rayDirection);
 
-float processLighting(const glm::vec3 &lightDistance, glm::vec3 &normal, glm::vec3 view);
+float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, glm::vec3 view);
 #endif //RAY_H
