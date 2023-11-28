@@ -49,10 +49,10 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             resetDepthBuffer();
             // renderSphereRasterised(window, sTriangles);
             // renderSphereWireframe(window, sTriangles);
-            gouraudShading(window, sphereCamPos, cameraOrientation, lightPosition, 2.0, sphereTriangles);
+            gouraudShading(window, sphereCamPos, cameraOrientation, sphereLightPos, 2.0, sphereTriangles);
             break;
         case RenderingMode::SpherePhong:
-            phongShading(window, sphereCamPos, cameraOrientation, lightPosition, 2.0, sphereTriangles);
+            phongShading(window, sphereCamPos, cameraOrientation, sphereLightPos, 2.0, sphereTriangles);
             resetDepthBuffer();
             break;
     }

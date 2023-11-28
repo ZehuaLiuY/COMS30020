@@ -2,7 +2,7 @@
 #define SPHERE_H
 
 #include "ray.h"
-
+#include <iostream>
 
 
 std::vector<ModelTriangle> readSphereFile (const std::string &filename, float scale);
