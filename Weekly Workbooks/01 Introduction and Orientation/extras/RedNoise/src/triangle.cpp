@@ -19,7 +19,9 @@ void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour co
     for (float i = 0.0; i <= numberOfSteps; i++) {
         float x = from.x + (xStepSize * i);
         float y = from.y + (yStepSize * i);
-        window.setPixelColour(round(x), round(y), uIntColour);
+        if (int(round(y)) < HEIGHT && int(round(y)) >= 0 && int(round(x)) < WIDTH && int(round(x)) >= 0) {
+            window.setPixelColour(round(x), round(y), uIntColour);
+        }
     }
 }
 
@@ -63,6 +65,14 @@ std::array<CanvasPoint, 4> calculateExtraPoint(const CanvasTriangle &triangle) {
     }
 
     CanvasPoint extraPoint(extraPointX, middle.y);
+
+    // Calculate depth for the extra point using barycentric coordinates reference https://en.wikipedia.org/wiki/Barycentric_coordinate_system
+    float ratioDepth = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
+    float a = ((middle.y - bottom.y) * (extraPointX - bottom.x) + (bottom.x - middle.x) * (extraPoint.y - bottom.y)) / ratioDepth;
+    float b = ((bottom.y - top.y) * (extraPointX - bottom.x) + (top.x - bottom.x) * (extraPoint.y - bottom.y)) / ratioDepth;
+    float c = 1.0f - a - b;
+    extraPoint.depth = a * top.depth + b * middle.depth + c * bottom.depth;
+
     std::array<CanvasPoint, 4> sortedPoints = {top, middle, extraPoint, bottom};
     return sortedPoints;
 

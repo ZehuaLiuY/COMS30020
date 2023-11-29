@@ -393,6 +393,30 @@ src/interpolation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/interpolation.cpp.s
 .PHONY : src/interpolation.cpp.s
 
+src/logo.o: src/logo.cpp.o
+.PHONY : src/logo.o
+
+# target to build an object file
+src/logo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/logo.cpp.o
+.PHONY : src/logo.cpp.o
+
+src/logo.i: src/logo.cpp.i
+.PHONY : src/logo.i
+
+# target to preprocess a source file
+src/logo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/logo.cpp.i
+.PHONY : src/logo.cpp.i
+
+src/logo.s: src/logo.cpp.s
+.PHONY : src/logo.s
+
+# target to generate assembly for a file
+src/logo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/logo.cpp.s
+.PHONY : src/logo.cpp.s
+
 src/ray.o: src/ray.cpp.o
 .PHONY : src/ray.o
 
@@ -416,6 +440,30 @@ src/ray.s: src/ray.cpp.s
 src/ray.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/ray.cpp.s
 .PHONY : src/ray.cpp.s
+
+src/sphere.o: src/sphere.cpp.o
+.PHONY : src/sphere.o
+
+# target to build an object file
+src/sphere.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/sphere.cpp.o
+.PHONY : src/sphere.cpp.o
+
+src/sphere.i: src/sphere.cpp.i
+.PHONY : src/sphere.i
+
+# target to preprocess a source file
+src/sphere.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/sphere.cpp.i
+.PHONY : src/sphere.cpp.i
+
+src/sphere.s: src/sphere.cpp.s
+.PHONY : src/sphere.s
+
+# target to generate assembly for a file
+src/sphere.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RedNoise.dir/build.make CMakeFiles/RedNoise.dir/src/sphere.cpp.s
+.PHONY : src/sphere.cpp.s
 
 src/triangle.o: src/triangle.cpp.o
 .PHONY : src/triangle.o
@@ -507,9 +555,15 @@ help:
 	@echo "... src/interpolation.o"
 	@echo "... src/interpolation.i"
 	@echo "... src/interpolation.s"
+	@echo "... src/logo.o"
+	@echo "... src/logo.i"
+	@echo "... src/logo.s"
 	@echo "... src/ray.o"
 	@echo "... src/ray.i"
 	@echo "... src/ray.s"
+	@echo "... src/sphere.o"
+	@echo "... src/sphere.i"
+	@echo "... src/sphere.s"
 	@echo "... src/triangle.o"
 	@echo "... src/triangle.i"
 	@echo "... src/triangle.s"

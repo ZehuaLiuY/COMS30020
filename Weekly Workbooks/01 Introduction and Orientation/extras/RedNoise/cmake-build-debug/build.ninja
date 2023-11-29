@@ -147,6 +147,20 @@ build CMakeFiles/RedNoise.dir/src/ray.cpp.o: CXX_COMPILER__RedNoise_unscanned_De
   OBJECT_DIR = CMakeFiles/RedNoise.dir
   OBJECT_FILE_DIR = CMakeFiles/RedNoise.dir/src
 
+build CMakeFiles/RedNoise.dir/src/sphere.cpp.o: CXX_COMPILER__RedNoise_unscanned_Debug /Users/liuzehua/Documents/GitHub/CG/Weekly$ Workbooks/01$ Introduction$ and$ Orientation/extras/RedNoise/src/sphere.cpp || cmake_object_order_depends_target_RedNoise
+  DEP_FILE = CMakeFiles/RedNoise.dir/src/sphere.cpp.o.d
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -Wall -Wextra -Wcast-align -Wfatal-errors -Werror=return-type -Wno-unused-parameter -Wno-unused-variable -Wno-ignored-attributes -Ofast -funsafe-math-optimizations -O2 -fno-omit-frame-pointer -g
+  INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.28.3/include -I"/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/glm-0.9.7.2" -I"/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw" -isystem /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2
+  OBJECT_DIR = CMakeFiles/RedNoise.dir
+  OBJECT_FILE_DIR = CMakeFiles/RedNoise.dir/src
+
+build CMakeFiles/RedNoise.dir/src/logo.cpp.o: CXX_COMPILER__RedNoise_unscanned_Debug /Users/liuzehua/Documents/GitHub/CG/Weekly$ Workbooks/01$ Introduction$ and$ Orientation/extras/RedNoise/src/logo.cpp || cmake_object_order_depends_target_RedNoise
+  DEP_FILE = CMakeFiles/RedNoise.dir/src/logo.cpp.o.d
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.5 -fcolor-diagnostics -Wall -Wextra -Wcast-align -Wfatal-errors -Werror=return-type -Wno-unused-parameter -Wno-unused-variable -Wno-ignored-attributes -Ofast -funsafe-math-optimizations -O2 -fno-omit-frame-pointer -g
+  INCLUDES = -I/opt/homebrew/Cellar/sdl2/2.28.3/include -I"/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/glm-0.9.7.2" -I"/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/libs/sdw" -isystem /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2
+  OBJECT_DIR = CMakeFiles/RedNoise.dir
+  OBJECT_FILE_DIR = CMakeFiles/RedNoise.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target RedNoise
@@ -155,7 +169,7 @@ build CMakeFiles/RedNoise.dir/src/ray.cpp.o: CXX_COMPILER__RedNoise_unscanned_De
 #############################################
 # Link the executable RedNoise
 
-build RedNoise: CXX_EXECUTABLE_LINKER__RedNoise_Debug CMakeFiles/RedNoise.dir/libs/sdw/CanvasPoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/CanvasTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Colour.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/DrawingWindow.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/RayTriangleIntersection.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o CMakeFiles/RedNoise.dir/src/triangle.cpp.o CMakeFiles/RedNoise.dir/src/interpolation.cpp.o CMakeFiles/RedNoise.dir/src/wireframes.cpp.o CMakeFiles/RedNoise.dir/src/ray.cpp.o | /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
+build RedNoise: CXX_EXECUTABLE_LINKER__RedNoise_Debug CMakeFiles/RedNoise.dir/libs/sdw/CanvasPoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/CanvasTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Colour.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/DrawingWindow.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/RayTriangleIntersection.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o CMakeFiles/RedNoise.dir/src/triangle.cpp.o CMakeFiles/RedNoise.dir/src/interpolation.cpp.o CMakeFiles/RedNoise.dir/src/wireframes.cpp.o CMakeFiles/RedNoise.dir/src/ray.cpp.o CMakeFiles/RedNoise.dir/src/sphere.cpp.o CMakeFiles/RedNoise.dir/src/logo.cpp.o | /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.5
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.28.3/lib  -Wl,-lasan  /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
   LINK_PATH = -L/opt/homebrew/Cellar/sdl2/2.28.3/lib
