@@ -89,7 +89,7 @@ float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, g
     glm::vec3 lightDirection = glm::normalize(lightDistance);
 
     // Proximity Lighting Calculation
-    float pL = 15.0f / (4.0f * M_PI * glm::length(lightDistance) * glm::length(lightDistance));
+    float pL = 12.0f / (4.0f * M_PI * glm::length(lightDistance) * glm::length(lightDistance));
     float proximity = std::min(std::max(pL, 0.00001f), 1.0f);
 
     // Angle-of-Incidence Lighting Calculation

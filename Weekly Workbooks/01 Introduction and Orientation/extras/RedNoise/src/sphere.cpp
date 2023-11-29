@@ -2,38 +2,42 @@
 #include "sphere.h"
 
 std::vector<ModelTriangle> readSphereFile (const std::string &filename, float scale) {
-    std::ifstream sphereFile(filename);
-    if (!sphereFile.is_open()) {
+    std::ifstream objFile(filename);
+    if (!objFile.is_open()) {
         std::cerr << "Failed to open the OBJ file: " << filename << std::endl;
         return {};
     }
 
     std::vector<ModelTriangle> modelTriangles;
-    std::string line;
     std::vector<glm::vec3> vertices;
-    std::string index;
+    std::string line;
 
-    // get each line of the file
-    while (std::getline(sphereFile, line)) {
+    while (std::getline(objFile, line)) {
         std::vector<std::string> values = split(line, ' ');
-        // if the line is a new vertex, add it to the vertices, if it's a new triangle, add it to the modelTriangles
-        if (values[0] == "usemtl") {
-            index = values[1];
-        } else if (values[0] == "v") {
-            vertices.push_back(scale * glm::vec3 (std::stof(values[1]), std::stof(values[2]), std::stof(values[3])));
+        if (values.empty()) continue;
+
+        if (values[0] == "v") {
+            try {
+                vertices.push_back(scale * glm::vec3(std::stof(values[1]), std::stof(values[2]), std::stof(values[3])));
+            } catch (const std::exception& e) {
+                std::cerr << "Error parsing vertex: " << line << std::endl;
+            }
         } else if (values[0] == "f") {
-            glm::vec3 vertex1 = vertices[std::stoi(values[1].substr(0, values[1].find('/'))) - 1];
-            glm::vec3 vertex2 = vertices[std::stoi(values[2].substr(0, values[2].find('/'))) - 1];
-            glm::vec3 vertex3 = vertices[std::stoi(values[3].substr(0, values[3].find('/'))) - 1];
-            Colour colour (255, 0, 0);
-            ModelTriangle currentTriangle = ModelTriangle(vertex1, vertex2, vertex3, colour);
-            currentTriangle.normal = getTriangleNormal(currentTriangle);
-            modelTriangles.push_back(currentTriangle);
-            // std::cout << "Assigned color for triangle: " << colour << std::endl;
+            try {
+                glm::vec3 vertex1 = vertices[std::stoi(values[1]) - 1];
+                glm::vec3 vertex2 = vertices[std::stoi(values[2]) - 1];
+                glm::vec3 vertex3 = vertices[std::stoi(values[3]) - 1];
+                Colour colour(255, 100, 0);
+                ModelTriangle currentTriangle(vertex1, vertex2, vertex3, colour);
+                currentTriangle.normal = getTriangleNormal(currentTriangle);
+                modelTriangles.push_back(currentTriangle);
+            } catch (const std::exception& e) {
+                std::cerr << "Error parsing face: " << line << std::endl;
+            }
         }
     }
 
-    sphereFile.close();
+    objFile.close();
     return modelTriangles;
 }
 
@@ -138,19 +142,19 @@ void gouraudShading (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3
             glm::vec3 rayToPixelDirection = getDirection(cameraPosition, cameraOrientation, w, h, focalLength);
             RayTriangleIntersection closestIntersection = getClosestValidIntersection(cameraPosition, rayToPixelDirection, sphereTriangles);
             if (closestIntersection.distanceFromCamera != std::numeric_limits<float>::infinity()) {
+                glm::vec3 point = closestIntersection.intersectionPoint;
+                // glm::vec3 lightDistance = lightPosition - closestIntersection.intersectionPoint;
 
-                glm::vec3 lightDistance = lightPosition - closestIntersection.intersectionPoint;
                 // for each vertex
                 glm::vec3 v0 = closestIntersection.intersectedTriangle.vertices[0];
                 glm::vec3 v1 = closestIntersection.intersectedTriangle.vertices[1];
                 glm::vec3 v2 = closestIntersection.intersectedTriangle.vertices[2];
+
                 //get each vertex lightDistance
                 glm::vec3 lightDistance0 = v0 - lightPosition;
                 glm::vec3 lightDistance1 = v1 - lightPosition;
                 glm::vec3 lightDistance2 = v2 - lightPosition;
-                // get light intersection
-                // RayTriangleIntersection lightIntersection = getClosestValidIntersection(lightPosition, lightDistance, sphereTriangles);
-                glm::vec3 point = closestIntersection.intersectionPoint;
+
                 // get the vertex normal
                 glm::vec3 vertex0Normal = calculateVertexNormal(v0, sphereTriangles);
                 glm::vec3 vertex1Normal = calculateVertexNormal(v1, sphereTriangles);
@@ -163,7 +167,7 @@ void gouraudShading (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3
                 float brightness0 = processLighting(lightDistance0, vertex0Normal, view0);
                 float brightness1 = processLighting(lightDistance1, vertex1Normal, view1);
                 float brightness2 = processLighting(lightDistance2, vertex2Normal, view2);
-                // find the weight of the normal
+                // find the weight of the triangle
                 glm::vec3 normalWeight = getNormalWeight(point.x, point.y, closestIntersection.intersectedTriangle);
                 // find the brightness of the pixel
                 float brightness = normalWeight.x * brightness0 + normalWeight.y * brightness1 + normalWeight.z * brightness2;
@@ -180,13 +184,13 @@ void gouraudShading (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3
 
 // Task 7: Phong Shading
 // get the normal of the triangle
-glm::vec3 interpolateNormal (glm::vec3 vertex0Normal, glm::vec3 vertex1Normal,
-                             glm::vec3 vertex2Normal, glm::vec3 weight) {
-    glm::vec3 interpolatedNormal = weight[0] * vertex0Normal + weight[1] * vertex1Normal +
-                                   weight[2] * vertex2Normal;
-    interpolatedNormal = glm::normalize(interpolatedNormal);
-    return interpolatedNormal;
-}
+//glm::vec3 interpolateNormal (glm::vec3 vertex0Normal, glm::vec3 vertex1Normal,
+//                             glm::vec3 vertex2Normal, glm::vec3 weight) {
+//    glm::vec3 interpolatedNormal = weight[0] * vertex0Normal + weight[1] * vertex1Normal +
+//                                   weight[2] * vertex2Normal;
+//    // interpolatedNormal = glm::normalize(interpolatedNormal);
+//    return interpolatedNormal;
+//}
 
 void phongShading (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation,
                    const glm::vec3 &lightPosition, float focalLength, std::vector<ModelTriangle> &sphereTriangles) {
@@ -196,33 +200,27 @@ void phongShading (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &
             glm::vec3 rayToPixelDirection = getDirection(cameraPosition, cameraOrientation, w, h, focalLength);
             RayTriangleIntersection closestIntersection = getClosestValidIntersection(cameraPosition, rayToPixelDirection, sphereTriangles);
             if (closestIntersection.distanceFromCamera != std::numeric_limits<float>::infinity()) {
-                glm::vec3 lightDirection = lightPosition - closestIntersection.intersectionPoint;
-                RayTriangleIntersection shadowRay = getClosestValidIntersection(closestIntersection.intersectionPoint + lightDirection * 0.001f, lightDirection, sphereTriangles);
-                float brightness;
-                if (shadowRay.distanceFromCamera < glm::length(lightPosition - closestIntersection.intersectionPoint) && shadowRay.triangleIndex != closestIntersection.triangleIndex) {
-                    // in the shadow
-                    brightness = 0.2f;
-                } else {
+                glm::vec3 lightDistance = closestIntersection.intersectionPoint - lightPosition;
+                glm::vec3 point = closestIntersection.intersectionPoint;
 
-                    glm::vec3 v0 = closestIntersection.intersectedTriangle.vertices[0];
-                    glm::vec3 v1 = closestIntersection.intersectedTriangle.vertices[1];
-                    glm::vec3 v2 = closestIntersection.intersectedTriangle.vertices[2];
+                // different from gouraud shading, phong shading interpolate the normal
+                // for each vertex
+                glm::vec3 v0 = closestIntersection.intersectedTriangle.vertices[0];
+                glm::vec3 v1 = closestIntersection.intersectedTriangle.vertices[1];
+                glm::vec3 v2 = closestIntersection.intersectedTriangle.vertices[2];
 
-                    glm::vec3 vertex0Normal = calculateVertexNormal(v0, sphereTriangles);
-                    glm::vec3 vertex1Normal = calculateVertexNormal(v1, sphereTriangles);
-                    glm::vec3 vertex2Normal = calculateVertexNormal(v2, sphereTriangles);
+                // get the vertex normal
+                glm::vec3 vertex0Normal = calculateVertexNormal(v0, sphereTriangles);
+                glm::vec3 vertex1Normal = calculateVertexNormal(v1, sphereTriangles);
+                glm::vec3 vertex2Normal = calculateVertexNormal(v2, sphereTriangles);
+                // find the weight of the normal
+                glm::vec3 normalWeight = getNormalWeight(point.x, point.y, closestIntersection.intersectedTriangle);
+                glm::vec3 interpolatedNormal = glm::vec3 (normalWeight.x * vertex0Normal + normalWeight.y * vertex1Normal + normalWeight.z * vertex2Normal);
 
-                    // find the weight of the normal
-                    glm::vec3 normalWeight = getNormalWeight(closestIntersection.intersectionPoint.x, closestIntersection.intersectionPoint.y, closestIntersection.intersectedTriangle);
-                    glm::vec3 normal = interpolateNormal(vertex0Normal, vertex1Normal, vertex2Normal,normalWeight);
+                glm::vec3 view = glm::normalize(point - cameraPosition);
 
-                    glm::vec3 lightDistance = lightPosition - closestIntersection.intersectionPoint;
+                float brightness = processLighting(lightDistance, interpolatedNormal, view);
 
-                    glm::vec3 view = glm::normalize(closestIntersection.intersectionPoint - cameraPosition);
-
-                    brightness = processLighting(lightDistance, normal, view);
-                }
-                // RayTriangleIntersection shadowRay = getClosestValidIntersection(closestIntersection.intersectionPoint + toLightDirection * 0.001f, toLightDirection, sphereTriangles);
                 Colour colour = closestIntersection.intersectedTriangle.colour;
                 Colour adjustedColour = Colour(colour.red * brightness, colour.green * brightness, colour.blue * brightness);
                 window.setPixelColour(w, h, colourConverter(adjustedColour));

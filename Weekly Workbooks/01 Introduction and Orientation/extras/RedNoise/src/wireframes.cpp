@@ -77,10 +77,6 @@ std::map<std::string, Colour> loadMTL(const std::string &filename) {
 std::vector<ModelTriangle> readFiles(const std::string& objFilename, const std::string& mtlFilename, float scalingFactor) {
     std::map<std::string, Colour> palette = loadMTL(mtlFilename);
     std::vector<ModelTriangle> modelTriangles = loadOBJ(objFilename, palette, scalingFactor);
-//    for (ModelTriangle &modelTriangle :modelTriangles){
-//        glm::vec3 normal = getTriangleNormal(modelTriangle);
-//        modelTriangle.normal = normal;
-//    }
     return modelTriangles;
 }
 
@@ -118,8 +114,6 @@ void drawPoints(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cam
 // add new attribute "colour" to each triangle
 std::vector<std::pair<CanvasTriangle, Colour>> triangleTransformer(const std::vector<ModelTriangle> &modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     std::vector<std::pair<CanvasTriangle, Colour>> canvasTriangles;
-    // add assigned colour
-    // std::vector<Colour> colour;
 
     float focalLength = 2.0;
 
@@ -150,21 +144,6 @@ void resetDepthBuffer () {
     }
 }
 
-//float findDepth(float x, float y, CanvasTriangle triangle) {
-//    CanvasPoint top = triangle.vertices[0];
-//    CanvasPoint middle = triangle.vertices[1];
-//    CanvasPoint bottom = triangle.vertices[2];
-//// float alpha = (-(extraPointX-triangle.v1().x)(triangle.v2().y-triangle.v1().y)+(extraPointY-triangle.v1().y)(triangle.v2().x-triangle.v1().x))/(-(triangle.v0().x-triangle.v1().x)(triangle.v2().y-triangle.v1().y)+(triangle.v0().y-triangle.v1().y)(triangle.v2().x-triangle.v1().x));
-////    float beta = (-(extraPointX-triangle.v2().x)(triangle.v0().y-triangle.v2().y)+(extraPointY-triangle.v2().y)(triangle.v0().x-triangle.v2().x))/(-(triangle.v1().x-triangle.v2().x)(triangle.v0().y-triangle.v2().y)+(triangle.v1().y-triangle.v2().y)(triangle.v0().x-triangle.v2().x));
-////    float gamma = 1 - alpha - beta;
-////    extraPointDepth = alpha * triangle.v0().depth + beta * triangle.v1().depth + gamma * triangle.v2().depth;
-//    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
-//    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
-//    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
-//    float c = 1.0f - a - b;
-//    float z = a * top.depth + b * middle.depth + c * bottom.depth;
-//    return z;
-//}
 // avoid some point out of the window
 std::pair<CanvasPoint, CanvasPoint> clipLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to) {
     int xMin = 0;

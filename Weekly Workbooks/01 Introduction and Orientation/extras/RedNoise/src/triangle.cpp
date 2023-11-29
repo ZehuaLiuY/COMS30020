@@ -19,7 +19,9 @@ void drawLine(DrawingWindow &window, CanvasPoint from, CanvasPoint to, Colour co
     for (float i = 0.0; i <= numberOfSteps; i++) {
         float x = from.x + (xStepSize * i);
         float y = from.y + (yStepSize * i);
-        window.setPixelColour(round(x), round(y), uIntColour);
+        if (int(round(y)) < HEIGHT && int(round(y)) >= 0 && int(round(x)) < WIDTH && int(round(x)) >= 0) {
+            window.setPixelColour(round(x), round(y), uIntColour);
+        }
     }
 }
 

@@ -44,6 +44,8 @@ add_executable(RedNoise
         src/ray.h
         src/sphere.cpp
         src/sphere.h
+        src/logo.cpp
+        src/logo.h
 )
 
 if (MSVC)
