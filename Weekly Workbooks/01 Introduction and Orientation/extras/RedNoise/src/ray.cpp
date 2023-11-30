@@ -11,6 +11,23 @@ bool validation (const glm::vec3 possibleSolution) {
     } else return false;
 }
 
+// multiple light sources
+std::vector <glm::vec3> multipleLightSources (glm::vec3 LightPosition) {
+    // make the lightPosition as the central light source
+    std::vector <glm::vec3> lightSources;
+    int range = 15;
+    float spread = 0.05f;
+    for (int i = -range; i <= range; i++) {
+        for (int k = -range; k <= range; k++) {
+            if (std::abs(i) + std::abs(k) < range){
+                glm::vec3 lightPoint = LightPosition + glm::vec3(i * spread, spread, k * spread);
+                lightSources.push_back(lightPoint);
+            }
+        }
+    }
+    return lightSources;
+}
+
 // Task 2: closest intersection check the ray tracing is to be able to detect
 RayTriangleIntersection getClosestValidIntersection(const glm::vec3 &cameraPosition, const glm::vec3 &rayDirection,
                                                     const std::vector<ModelTriangle> &modelTriangles) {
@@ -47,14 +64,6 @@ glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, fl
     return rayDirection;
 }
 
-// Week 7
-// Task 2: proximity lighting 1.0 is the maximum brightness
-//float proximityLighting (float distance) {
-//    float pL = 15.0f / (4.0f * M_PI * distance * distance);
-//    return std::min(std::max(pL, 0.00001f), 1.0f);
-//}
-
-// Task 3: Angle-of-Incidence lighting
 // get the normal of each triangle call this function on readFiles
 glm::vec3 getTriangleNormal (const ModelTriangle &modelTriangle) {
     glm::vec3 edge1 = modelTriangle.vertices[2] - modelTriangle.vertices[0];
@@ -62,27 +71,6 @@ glm::vec3 getTriangleNormal (const ModelTriangle &modelTriangle) {
     glm::vec3 normal = glm::normalize(glm::cross(edge1, edge2));
     return normal;
 }
-
-//float getIncidenceAngle (glm::vec3 lightVector, glm::vec3 normal) {
-//    normal = glm::normalize(normal);
-//    float angle = glm::dot(lightVector, normal);
-//    angle = std::max(angle, 0.0f);
-//    return angle;
-//}
-//
-//// Task 4: Specular Lighting
-//// get the reflection vector, reference https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel
-//float specularLighting (glm::vec3 lightVector, glm::vec3 normal, glm::vec3 view) {
-//    // minus the incidence vector, because the incidence vector is pointing to the light source
-//    // R=L−2⋅(L⋅N)⋅N
-//    glm::vec3 reflectionVector = lightVector - (2.0f * glm::dot(lightVector, normal) * normal);
-//
-//    float VR = glm::max (0.0f, glm::dot(reflectionVector, view));
-//    float specular = pow(VR, 256);
-//    // get the specular lighting 1.0 is the maximum brightness
-//    // specular = glm::clamp<float>(specular, 0.0f, 1.0f);
-//    return specular;
-//}
 
 float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, glm::vec3 view) {
     // Normalize the light position vector
@@ -97,7 +85,7 @@ float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, g
     float incidence = std::max(angle, 0.0f);
 
     // Specular Lighting Calculation
-    // minus the incidence vector, because the incidence vector is pointing to the light source
+    // get the reflection vector, reference https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel
     // R=L−2⋅(L⋅N)⋅N
     glm::vec3 reflectionVector = lightDirection - (2.0f * glm::dot(lightDirection, normal) * normal);
     float VR = glm::max (0.0f, glm::dot(reflectionVector, view));
@@ -116,7 +104,7 @@ float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, g
     // Clamping Brightness to the range [0.0, 1.0]
     return glm::clamp(brightness, 0.0f, 1.0f);
 }
-
+// process pixels with hard shadow
 void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
                   float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightPosition) {
     // from the camera to the pixel
@@ -164,4 +152,55 @@ void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::
         }
     }
 }
+// process pixels with soft shadow
+void processPixelSoft(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
+                      float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const std::vector<glm::vec3> &lightPositions) {
+    // from the camera to the pixel
+    glm::vec3 rayToPixelDirection = getDirection(cameraPosition, cameraOrientation, x, y, focalLength);
+    // get the closest triangle Intersection with the ray
+    RayTriangleIntersection closestIntersection = getClosestValidIntersection(cameraPosition, rayToPixelDirection, modelTriangles);
 
+    if (closestIntersection.distanceFromCamera != std::numeric_limits<float>::infinity()) {
+        // view is the direction from the closestIntersection point to the camera
+        glm::vec3 view = glm::normalize(closestIntersection.intersectionPoint - cameraPosition);
+        float numUnblocked = 0;
+
+        for (const glm::vec3 &light : lightPositions){
+            glm::vec3 lightDirection = glm::normalize(light - closestIntersection.intersectionPoint);
+            // Nudging the start point to avoid self-intersection
+            glm::vec3 startPoint = closestIntersection.intersectionPoint + lightDirection * 0.001f;
+            RayTriangleIntersection shadowRay = getClosestValidIntersection(startPoint, lightDirection, modelTriangles);
+
+            if (shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex) {
+                numUnblocked += 1.0f;
+            }
+        }
+        float shadowSoftness = glm::clamp<float>(numUnblocked / lightPositions.size(), 0.0f, 1.0f);
+
+        // lightDistance is the vector from the closestIntersection point to the light source
+        glm::vec3 lightDistance = closestIntersection.intersectionPoint - lightPositions[0];
+        // surface triangleNormal
+        glm::vec3 triangleNormal = getTriangleNormal(closestIntersection.intersectedTriangle);
+        float brightness = processLighting(lightDistance, triangleNormal, view) * shadowSoftness;
+
+        Colour colour = closestIntersection.intersectedTriangle.colour;
+        uint32_t adjustedColour = colourConverter(Colour(colour.red * brightness, colour.green * brightness, colour.blue * brightness));
+        window.setPixelColour(x, y, adjustedColour);
+    } else {
+        window.setPixelColour(x, y, colourConverter(Colour(0, 0, 0)));
+    }
+}
+
+
+void drawRayTracedSceneSoft (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
+                         float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource) {
+    std::vector<glm::vec3> lightPositions = multipleLightSources(lightSource);
+
+    // from top to bottom
+    for (float y = 0; y < HEIGHT; y++) {
+        // from left to right
+        for (float x = 0; x < WIDTH; x++) {
+            processPixelSoft(window, cameraPosition, cameraOrientation, x, y, focalLength, modelTriangles, lightPositions);
+        }
+    }
+}

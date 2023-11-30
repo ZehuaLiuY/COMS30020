@@ -16,10 +16,13 @@ glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, fl
 
 void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
                   float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightPosition);
+void processPixelSoft(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
+                  float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const std::vector<glm::vec3> &lightPositions);
 
 void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
                          float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource);
-
+void drawRayTracedSceneSoft (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
+                             float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource);
 // Week 7
 glm::vec3 getTriangleNormal (const ModelTriangle &modelTriangle);
 float proximityLighting (float distance);

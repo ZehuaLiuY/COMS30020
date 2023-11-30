@@ -351,3 +351,71 @@ void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
 void orbitClockwise(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
     rotateClock(cameraPosition, cameraOrientation, step);
 }
+
+
+struct CanvasTriangleData {
+    CanvasTriangle triangle;
+    Colour colour;
+    int modelTriangleIndex;  // 对应 ModelTriangle 的索引
+
+    CanvasTriangleData(const CanvasTriangle &tri, const Colour &col, int index)
+            : triangle(tri), colour(col), modelTriangleIndex(index) {}
+};
+
+std::vector<CanvasTriangleData> processTriangles(const std::vector<ModelTriangle> &modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+    std::vector<CanvasTriangleData> canvasTriangles;
+
+    float focalLength = 2.0;
+
+    for (size_t i = 0; i < modelTriangles.size(); i++) {
+        const ModelTriangle &modelTriangle = modelTriangles[i];
+        std::vector<CanvasPoint> canvasPoints;
+
+        for (const glm::vec3 &point3d : modelTriangle.vertices) {
+            CanvasPoint canvasPoint = getCanvasIntersectionPoint(cameraPosition, cameraOrientation, point3d, focalLength);
+            canvasPoints.push_back(canvasPoint);
+        }
+
+        CanvasTriangle canvasTriangle = CanvasTriangle(canvasPoints[0], canvasPoints[1], canvasPoints[2]);
+        Colour colour = modelTriangle.colour;
+        canvasTriangles.emplace_back(canvasTriangle, colour, i);  // 存储 CanvasTriangle、颜色和索引
+    }
+
+    return canvasTriangles;
+}
+
+
+
+// texture mapping for the floor
+u_int32_t canvasTextureMapping (TextureMap &texture, CanvasTriangle triangle, float x, float y) {
+    CanvasPoint top = triangle.vertices[0];
+    CanvasPoint middle = triangle.vertices[1];
+    CanvasPoint bottom = triangle.vertices[2];
+
+    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
+    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
+    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
+    float c = 1.0f - a - b;
+
+    CanvasPoint texturePoint ((a * top.texturePoint.x + b * middle.texturePoint.x + c * bottom.texturePoint.x),
+                              (a * top.texturePoint.y + b * middle.texturePoint.y + c * bottom.texturePoint.y));
+    int index = int(texturePoint.x) + int(texturePoint.y) * texture.width;
+    return texture.pixels[index];
+}
+
+u_int32_t modelTextureMapping (TextureMap &texture, ModelTriangle triangle, float x, float y) {
+    glm::vec3 top = triangle.vertices[0];
+    glm::vec3 middle = triangle.vertices[1];
+    glm::vec3 bottom = triangle.vertices[2];
+
+    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
+    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
+    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
+    float c = 1.0f - a - b;
+
+    CanvasPoint texturePoint (round(a * triangle.texturePoints[0].x + b * triangle.texturePoints[1].x + c * triangle.texturePoints[2].x),
+                              round(a * triangle.texturePoints[0].y + b * triangle.texturePoints[1].y + c * triangle.texturePoints[2].y));
+    int index = int(texturePoint.x) + int(texturePoint.y) * texture.width;
+    return texture.pixels[index];
+}
+

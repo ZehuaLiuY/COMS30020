@@ -67,7 +67,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
 
         case RenderingMode::Logo: // logoCamPos 0.3 0.3 4.0
             resetDepthBuffer();
-            // renderLogoRasterised(window, cTriangles);
+            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition);
     }
 }
 
