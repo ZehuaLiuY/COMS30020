@@ -8,7 +8,9 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-bool orbitActivated = false;
+bool orbitClockwiseActivated = false;
+bool orbitUpActivated = false;
+bool orbitSelfActivated = false;
 
 enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, Logo };
 RenderingMode currentMode = RenderingMode::Rasterised;
@@ -25,12 +27,20 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
     // complete modelTriangles
     std::vector<std::pair<CanvasTriangle, Colour>> cTriangles = triangleTransformer(completeModel, cameraPosition, cameraOrientation);
+    // test processTriangles function
+    std::vector<triangleData> triangleDatas = processTriangles(modelTriangles, cameraPosition, cameraOrientation);
 
     glm::vec3 sphereCamPos = glm::vec3(0.0, 0.0, 4.0);
     glm::vec3 sphereLightPos = glm::vec3(0.5, 0.8, 1.6);
     // std::vector<std::pair<CanvasTriangle, Colour>> sTriangles = triangleTransformer(sphereTriangles, sphereCamPos, cameraOrientation);
-    if(orbitActivated){
-        orbitClockwise(cameraPosition, cameraOrientation, 0.001);
+    if(orbitClockwiseActivated){
+        orbitClockwise(cameraPosition, cameraOrientation, 0.01);
+    }
+    if (orbitUpActivated){
+        orbitUp(cameraPosition, cameraOrientation, 0.01);
+    }
+    if (orbitSelfActivated){
+        orbitSelf(cameraPosition, cameraOrientation, 0.01);
     }
 
     window.clearPixels();
@@ -42,7 +52,8 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::Rasterised:
             resetDepthBuffer();
-            renderRasterised(window,  triangles);
+            // renderRasterised(window,  triangles);
+            testProcess(window, triangleDatas);
             break;
         case RenderingMode::RayTraced:
             resetDepthBuffer();
@@ -196,9 +207,17 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
                 std::cout << "\n";
             }
         }
+        else if (event.key.keysym.sym == SDLK_i) {
+            window.clearPixels();
+            orbitSelfActivated = !orbitSelfActivated;
+        }
         else if (event.key.keysym.sym == SDLK_o) {
             window.clearPixels();
-            orbitActivated = !orbitActivated;
+            orbitClockwiseActivated = !orbitClockwiseActivated;
+        }
+        else if (event.key.keysym.sym == SDLK_p) {
+            window.clearPixels();
+            orbitUpActivated = !orbitUpActivated;
         }
         // model shifting
         else if (event.key.keysym.sym == SDLK_1) {

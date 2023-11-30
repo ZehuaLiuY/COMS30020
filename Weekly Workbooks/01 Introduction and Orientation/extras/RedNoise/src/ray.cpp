@@ -15,7 +15,9 @@ bool validation (const glm::vec3 possibleSolution) {
 std::vector <glm::vec3> multipleLightSources (glm::vec3 LightPosition) {
     // make the lightPosition as the central light source
     std::vector <glm::vec3> lightSources;
-    int range = 15;
+    // store the central light source
+    lightSources.push_back(LightPosition);
+    int range = 10;
     float spread = 0.05f;
     for (int i = -range; i <= range; i++) {
         for (int k = -range; k <= range; k++) {

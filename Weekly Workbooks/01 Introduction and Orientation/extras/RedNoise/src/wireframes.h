@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <CanvasTriangle.h>
@@ -19,6 +20,18 @@
 #include <TextureMap.h>
 #include <ModelTriangle.h>
 #include <map>
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
+
+struct triangleData {
+    CanvasTriangle triangle;
+    Colour colour;
+    int modelTriangleIndex;
+
+    triangleData(const CanvasTriangle &tri, const Colour &col, int index)
+            : triangle(tri), colour(col), modelTriangleIndex(index) {}
+};
 
 // Week 4 functions
 // Task 2 & 3 read obj and mtl files
@@ -53,5 +66,11 @@ void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
 void rotateUp(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle);
 void rotateClock(glm::vec3& cameraPos, glm::mat3& cameraOrMat, float angle);
 void orbitClockwise(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step);
+void orbitUp(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step);
+void orbitSelf (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle);
 
+// Texture Mapping
+std::vector<triangleData> processTriangles(const std::vector<ModelTriangle> &modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
+void testProcess(DrawingWindow &window, std::vector<triangleData> &triangles);
+void renderTexture(DrawingWindow &window, const std::vector<triangleData> &triangles, const std::vector<ModelTriangle> &modelTriangles);
 #endif // wireframes_h
