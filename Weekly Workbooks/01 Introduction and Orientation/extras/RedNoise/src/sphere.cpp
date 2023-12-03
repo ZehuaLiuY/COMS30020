@@ -6,25 +6,25 @@ float radius = 0.0f;
 
 // calculate the sphere center
 glm::vec3 calculateSphereCenter (const std::vector<ModelTriangle> &sphereTriangles) {
-    glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 c = glm::vec3(0.0f, 0.0f, 0.0f);
     for (const ModelTriangle &modelTriangle : sphereTriangles) {
-        center += modelTriangle.vertices[0];
-        center += modelTriangle.vertices[1];
-        center += modelTriangle.vertices[2];
+        c += modelTriangle.vertices[0];
+        c += modelTriangle.vertices[1];
+        c += modelTriangle.vertices[2];
     }
-    center = center / (sphereTriangles.size() * 3.0f);
-    return center;
+    c = c / (float(sphereTriangles.size()) * 3.0f);
+    return c;
 }
 
 // calculate the sphere radius
 float calculateSphereRadius (const std::vector<ModelTriangle> &sphereTriangles, const glm::vec3 &center) {
-    float radius = 0.0f;
+    float r = 0.0f;
     for (const ModelTriangle &modelTriangle : sphereTriangles) {
-        radius = std::max(radius, glm::length(modelTriangle.vertices[0] - center));
-        radius = std::max(radius, glm::length(modelTriangle.vertices[1] - center));
-        radius = std::max(radius, glm::length(modelTriangle.vertices[2] - center));
+        r = std::max(r, glm::length(modelTriangle.vertices[0] - center));
+        r = std::max(r, glm::length(modelTriangle.vertices[1] - center));
+        r = std::max(r, glm::length(modelTriangle.vertices[2] - center));
     }
-    return radius;
+    return r;
 }
 
 std::vector<ModelTriangle> readSphereFile (const std::string &filename, float scale) {
@@ -53,7 +53,7 @@ std::vector<ModelTriangle> readSphereFile (const std::string &filename, float sc
                 glm::vec3 vertex1 = vertices[std::stoi(values[1]) - 1];
                 glm::vec3 vertex2 = vertices[std::stoi(values[2]) - 1];
                 glm::vec3 vertex3 = vertices[std::stoi(values[3]) - 1];
-                Colour colour(255, 100, 0);
+                Colour colour(0, 255, 255);
                 ModelTriangle currentTriangle(vertex1, vertex2, vertex3, colour);
                 currentTriangle.normal = getTriangleNormal(currentTriangle);
                 currentTriangle.colour.name = "sphere";
@@ -272,8 +272,8 @@ u_int32_t modelTextureMapping (TextureMap &texture, ModelTriangle triangle, glm:
     float b = ((bottom.y - top.y) * (point.x - bottom.x) + (top.x - bottom.x) * (point.y - bottom.y)) / ratio;
     float c = 1.0f - a - b;
 
-    CanvasPoint texturePoint (round(a * triangle.texturePoints[0].x + b * triangle.texturePoints[1].x + c * triangle.texturePoints[2].x),
-                              round(a * triangle.texturePoints[0].y + b * triangle.texturePoints[1].y + c * triangle.texturePoints[2].y));
+    CanvasPoint texturePoint (round(a * triangle.texturePoints[0].x * float(texture.width) + b * triangle.texturePoints[1].x * float(texture.width) + c * triangle.texturePoints[2].x * float(texture.width)),
+                              round(a * triangle.texturePoints[0].y * float(texture.height) + b * triangle.texturePoints[1].y * float(texture.height) + c * triangle.texturePoints[2].y * float(texture.height)));
     int index = int(texturePoint.x) + int(texturePoint.y) * texture.width;
     return texture.pixels[index - 1];
 }
@@ -293,8 +293,8 @@ u_int32_t sphereTextureMapping(glm::vec3 point, TextureMap texture, float rotate
     // Map the texture
     float phi = atan2(normalizedPoint.y, normalizedPoint.x);
     float theta = acos(normalizedPoint.z);
-    int i = phi/(2*M_PI)*(texture.width);
-    int j = theta/(M_PI)*(texture.height);
+    int i = phi / (2 * M_PI) * (texture.width);
+    int j = theta / (M_PI) * (texture.height);
     int index = i + j * int(texture.width);
     return texture.pixels[index - 1];
 }
@@ -341,9 +341,9 @@ float getRefractiveIndex (glm::vec3 incidenceRayDirection, float air, float glas
     }
 }
 
-Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPosition, const std::vector<glm::vec3> &lightPositions,
-                               glm::vec3 &rayDirection, const std::vector<ModelTriangle> &modelTriangles, int loopCount, shading shadingType, shadow shadowType) {
-    if (loopCount > 6) {
+Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPosition, const std::vector<glm::vec3> &lightPositions,glm::vec3 &rayDirection,
+                               const std::vector<ModelTriangle> &modelTriangles, float rotateAngle, int loopCount, shading shadingType, shadow shadowType) {
+    if (loopCount > 10) {
         return {255, 255, 255};
     }
     // get the closest intersection with ray
@@ -361,7 +361,33 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
 
     std::string modelColour = closestIntersection.intersectedTriangle.colour.name;
 
-    if (modelColour == "Cobbles") {
+    // texture mapping & reflection
+    if(modelColour == "Blue"){
+        glm::vec3 reflectedRay = glm::normalize(rayDirection - (2.0f * triangleNormal * glm::dot(rayDirection, triangleNormal)));
+        Colour reflectionColour = getRayIntesectedColour(point, lightPosition, lightPositions, reflectedRay, modelTriangles, rotateAngle, loopCount + 1, shadingType, shadowType);
+
+        glm::vec3 refractionDirection = getRefractionDirection(rayDirection, triangleNormal, 1.0f, 1.3f);
+        // glm::vec3 newPoint = point + (triangleNormal * 0.001f);
+        glm::vec3 newPoint;
+        // if the ray is inside the glass, then the ray is exiting the glass else the ray is entering the glass
+        if(glm::dot(rayDirection, triangleNormal) < 0 ) {
+            newPoint = point - (triangleNormal * 0.0001f);
+            // std::cout << "Ray inside the material, exiting. Offset point: " << newPoint.x << newPoint.y << std::endl;
+        } else {
+            newPoint = point + (triangleNormal * 0.0001f);
+            // std::cout << "Ray outside the material, entering. Offset point: " << newPoint.x << newPoint.y << std::endl;
+        }
+
+        Colour refractionColour = getRayIntesectedColour(newPoint, lightPosition, lightPositions, refractionDirection, modelTriangles, rotateAngle, loopCount + 1, shadingType, shadowType);
+        float refractiveIndex = getRefractiveIndex(rayDirection, 1.0f, 1.3f, triangleNormal);
+        float reflectiveIndex = 1 - refractiveIndex;
+
+        colour.red = int ((refractiveIndex * float(refractionColour.red) + reflectiveIndex * float(reflectionColour.red)));
+        colour.green = int ((refractiveIndex * float(refractionColour.green) + reflectiveIndex * float(reflectionColour.green)));
+        colour.blue = int ((refractiveIndex * float(refractionColour.blue) + reflectiveIndex * float(reflectionColour.blue)));
+        return colour;
+    }
+    else if (modelColour == "Cobbles") {
         TextureMap texture = TextureMap("../src/files/texture.ppm");
         u_int32_t textureColour = modelTextureMapping(texture, closestIntersection.intersectedTriangle, point);
         // transfer u_int32_t to Colour
@@ -372,32 +398,10 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
     else if (modelColour == "Yellow"){
         // reflective material
         glm::vec3 reflectionRay = glm::normalize(rayDirection -(2.0f * triangleNormal * glm::dot(rayDirection, triangleNormal)));
-        return getRayIntesectedColour(point, lightPosition, lightPositions, reflectionRay, modelTriangles, loopCount + 1, shadingType, shadowType);
-    }
-    else if (modelColour == "Blue") {
-        glm::vec3 reflectionRay = glm::normalize(rayDirection -(2.0f * triangleNormal * glm::dot(rayDirection, triangleNormal)));
-        Colour reflectionColour = getRayIntesectedColour(point, lightPosition, lightPositions, reflectionRay, modelTriangles, loopCount + 1, shadingType, shadowType);
-
-        glm::vec3 refractionDirection = getRefractionDirection(rayDirection, triangleNormal, 1.0f, 1.3f);
-        glm::vec3 newPoint;
-        // if the ray is inside the glass, then the ray is exiting the glass else the ray is entering the glass
-        if(glm::dot(rayDirection, triangleNormal) < 0 ) {
-            newPoint = point - (triangleNormal * 0.0001f);
-        } else {
-            newPoint = point + (triangleNormal * 0.0001f);
-        }
-
-        Colour refractionColour = getRayIntesectedColour(newPoint, lightPosition, lightPositions, refractionDirection, modelTriangles, loopCount + 1, shadingType, shadowType);
-        float refractiveIndex = getRefractiveIndex(rayDirection, 1.0f, 1.3f, triangleNormal);
-        float reflectiveIndex = 1 - refractiveIndex;
-
-        colour.red = int (refractiveIndex * float(refractionColour.red) + reflectiveIndex * float(reflectionColour.red));
-        colour.green = int (refractiveIndex * float(refractionColour.green) + reflectiveIndex * float(reflectionColour.green));
-        colour.blue = int (refractiveIndex * float(refractionColour.blue) + reflectiveIndex * float(reflectionColour.blue));
-        return colour;
+        return getRayIntesectedColour(point, lightPosition, lightPositions, reflectionRay, modelTriangles, rotateAngle, loopCount + 1, shadingType, shadowType);
     }
     else if (modelColour == "logo") {
-        TextureMap texture = TextureMap("../src/files/texturelogo.ppm");
+        TextureMap texture = TextureMap("../src/files/textureLogo.ppm");
         u_int32_t logoColour = modelTextureMapping(texture, closestIntersection.intersectedTriangle, point);
         colour.red = int ((logoColour >> 16) & 0xFF);
         colour.green = int ((logoColour >> 8) & 0xFF);
@@ -406,21 +410,39 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
     }
     else if (modelColour == "sphere") {
         TextureMap sphereTexture = TextureMap("../src/files/Sandy.ppm");
-        u_int32_t sphereTextureColour = sphereTextureMapping(point, sphereTexture, 0.01f);
+        u_int32_t sphereTextureColour = sphereTextureMapping(point, sphereTexture, rotateAngle);
         colour.red = int ((sphereTextureColour >> 16) & 0xFF);
         colour.green = int ((sphereTextureColour >> 8) & 0xFF);
         colour.blue = int ((sphereTextureColour) & 0xFF);
    }
+
     // sphere shading
-    float brightness;
+    float brightness = 0.0f;
     if (modelColour == "sphere" || shadingType == Phong || shadingType == Gouraud) {
         glm::vec3 vertex0Normal = calculateVertexNormal(v0, modelTriangles);
         glm::vec3 vertex1Normal = calculateVertexNormal(v1, modelTriangles);
         glm::vec3 vertex2Normal = calculateVertexNormal(v2, modelTriangles);
         // find the weight of the triangle
         glm::vec3 normalWeight = getNormalWeight(point.x, point.y, closestIntersection.intersectedTriangle);
-        glm::vec3 interpolatedNormal = glm::vec3 (normalWeight.x * vertex0Normal + normalWeight.y * vertex1Normal + normalWeight.z * vertex2Normal);
-        brightness = processLighting(lightDistance, interpolatedNormal, view);
+
+        if (shadingType == Gouraud) {
+            glm::vec3 lightDistance0 = v0 - lightPosition;
+            glm::vec3 lightDistance1 = v1 - lightPosition;
+            glm::vec3 lightDistance2 = v2 - lightPosition;
+
+            glm::vec3 view0 = glm::normalize(v0 - cameraPosition);
+            glm::vec3 view1 = glm::normalize(v1 - cameraPosition);
+            glm::vec3 view2 = glm::normalize(v2 - cameraPosition);
+
+            float brightness0 = processLighting(lightDistance0, vertex0Normal, view0);
+            float brightness1 = processLighting(lightDistance1, vertex1Normal, view1);
+            float brightness2 = processLighting(lightDistance2, vertex2Normal, view2);
+            brightness = normalWeight.x * brightness0 + normalWeight.y * brightness1 + normalWeight.z * brightness2;
+        }
+        else if (modelColour == "sphere" ||shadingType == Phong) {
+            glm::vec3 interpolatedNormal = glm::vec3 (normalWeight.x * vertex0Normal + normalWeight.y * vertex1Normal + normalWeight.z * vertex2Normal);
+            brightness = processLighting(lightDistance, interpolatedNormal, view);
+        }
     }
     else {
         brightness = processLighting(lightDistance, triangleNormal, view);
@@ -433,16 +455,14 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
 
     if (shadowType == Hard) {
         RayTriangleIntersection shadowRay = getClosestValidIntersection(point + lightDirection * 0.001f, lightDirection, modelTriangles);
-        if (shadowRay.distanceFromCamera < glm::length(lightDistance) && shadowRay.triangleIndex != closestIntersection.triangleIndex) {
-            red = red * 0.2f;
-            green = green * 0.2f;
-            blue = blue * 0.2f;
+        if (shadowRay.distanceFromCamera < glm::length( lightPosition - point) && shadowRay.triangleIndex != closestIntersection.triangleIndex && modelColour != "sphere" && modelColour != "Blue" ) {
+            brightness = 0.2f;
         } else {
             brightness = processLighting(lightDistance, triangleNormal, view);
-            red = std::min(255.0f, float(colour.red) * brightness);
-            green = std::min(255.0f, float(colour.green) * brightness);
-            blue = std::min(255.0f, float(colour.blue) * brightness);
         }
+        red = std::min(255.0f, float(colour.red) * brightness);
+        green = std::min(255.0f, float(colour.green) * brightness);
+        blue = std::min(255.0f, float(colour.blue) * brightness);
 
     }
     else if (shadowType == Soft) {
@@ -453,7 +473,7 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
             glm::vec3 startPoint = point + softLightDirection * 0.001f;
             RayTriangleIntersection shadowRay = getClosestValidIntersection(startPoint, softLightDirection, modelTriangles);
 
-            if (shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex) {
+            if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
                 numUnblocked += 1.0f;
             }
         }
@@ -477,13 +497,15 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
 
 
 void rayTrace (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation, glm::vec3 lightPosition, const std::vector<ModelTriangle> &completeModel, shading shadingType, shadow shadowType) {
+    float rotateAngle = glm::radians(10.0f);
+    int loopCount = 0;
     std::vector<glm::vec3> lightPositions = multipleLightSources(lightPosition);
     for (float h = 0; h < HEIGHT; h++) {
         for (float w = 0; w < WIDTH; w++) {
             glm::vec3 rayToPixelDirection = getDirection(cameraPosition, cameraOrientation, w, h, 2.0f);
             RayTriangleIntersection closestIntersection = getClosestValidIntersection(cameraPosition, rayToPixelDirection, completeModel);
             if (closestIntersection.distanceFromCamera != std::numeric_limits<float>::infinity()) {
-                Colour colour = getRayIntesectedColour(cameraPosition, lightPosition, lightPositions, rayToPixelDirection, completeModel, 0, shadingType, shadowType);
+                Colour colour = getRayIntesectedColour(cameraPosition, lightPosition, lightPositions, rayToPixelDirection, completeModel, rotateAngle, loopCount, shadingType, shadowType);
                 window.setPixelColour(w, h, colourConverter(colour));
             } else {
                 window.setPixelColour(w, h, colourConverter(Colour(0, 0, 0)));

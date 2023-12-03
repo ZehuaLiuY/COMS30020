@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-std::vector<ModelTriangle> readLogoFile(const std::string &filename, float scale) {
+std::vector<ModelTriangle> readLogoFile(const std::string &filename, std::map<std::string, Colour> palette, float scale) {
     std::ifstream logoFile(filename);
     if (!logoFile.is_open()) {
         std::cerr << "Failed to open the OBJ file: " << filename << std::endl;
@@ -13,7 +13,6 @@ std::vector<ModelTriangle> readLogoFile(const std::string &filename, float scale
     std::string materialName;
     std::vector<TexturePoint> texturePoints;
 
-    // get each line of the file
     while (std::getline(logoFile, line)) {
         std::vector<std::string> values = split(line, ' ');
         if (values[0] == "usemtl") {
@@ -31,23 +30,28 @@ std::vector<ModelTriangle> readLogoFile(const std::string &filename, float scale
                 int j = 0;
                 while (std::getline(vertexStream, vertexValue, '/')) {
                     if (j == 0) vertex[i] = vertices[std::stoi(vertexValue) - 1];
-                    if (j == 1) texturePoint[i] = texturePoints[std::stoi(vertexValue) - 1];
+                    else if (j == 1 && !vertexValue.empty()) {
+                        texturePoint[i] = texturePoints[std::stoi(vertexValue) - 1];
+                    }
                     j++;
                 }
             }
-            Colour colour(255, 255, 255);
-            ModelTriangle currentTriangle(vertex[0], vertex[1], vertex[2], colour);
+            ModelTriangle currentTriangle(vertex[0], vertex[1], vertex[2], palette[materialName]);
             currentTriangle.texturePoints = {texturePoint[0], texturePoint[1], texturePoint[2]};
             currentTriangle.normal = getTriangleNormal(currentTriangle);
             currentTriangle.colour.name = "logo";
             modelTriangles.push_back(currentTriangle);
-//            for (int i = 0; i < 3; ++i) {
-//                std::cout << "Texture point " << i << ": " << texturePoint[i].x << ", " << texturePoint[i].y << std::endl;
-//            }
         }
     }
 
     logoFile.close();
+    return modelTriangles;
+}
+
+
+std::vector<ModelTriangle> readLogoFiles(const std::string& logoFilename, const std::string& mtlFilename, float scalingFactor) {
+    std::map<std::string, Colour> palette = loadMTL(mtlFilename);
+    std::vector<ModelTriangle> modelTriangles = readLogoFile(logoFilename, palette, scalingFactor);
     return modelTriangles;
 }
 

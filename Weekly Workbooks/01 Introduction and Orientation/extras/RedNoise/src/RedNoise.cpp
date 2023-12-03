@@ -12,10 +12,10 @@ bool orbitClockwiseActivated = false;
 bool orbitUpActivated = false;
 bool orbitSelfActivated = false;
 
-enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, Logo };
+enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, SoftShadow, Complete };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-shading shadingType = Phong;
+shading shadingType = Flat;
 shadow shadowType = None;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition,
@@ -27,8 +27,8 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     // test processTriangles function
     std::vector<triangleData> triangleDatas = processTriangles(modelTriangles, cameraPosition, cameraOrientation);
 
-    glm::vec3 sphereCamPos = glm::vec3(0.0, 0.0, 4.0);
-    glm::vec3 sphereLightPos = glm::vec3(0.5, 0.8, 1.6);
+    glm::vec3 sphereCamPos = glm::vec3(0.8, 1.2, 4.0);
+    glm::vec3 sphereLightPos = glm::vec3(0.0, 0.3, 1.5);
     // std::vector<std::pair<CanvasTriangle, Colour>> sTriangles = triangleTransformer(sphereTriangles, sphereCamPos, cameraOrientation);
     if(orbitClockwiseActivated){
         orbitClockwise(cameraPosition, cameraOrientation, 0.01);
@@ -49,16 +49,15 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::Rasterised:
             resetDepthBuffer();
-            // renderRasterised(window,  triangles);
-            testProcess(window, triangleDatas);
+            renderRasterised(window,  cTriangles);
             break;
         case RenderingMode::RayTraced:
             resetDepthBuffer();
-            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition);
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition);
             break;
         case RenderingMode::Flat:
             resetDepthBuffer();
-            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeModel, shadingType, shadowType);
+            flatShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, sphereTriangles);
             break;
         case RenderingMode::SphereGouraud:
             // cameraPos 0.0 0.7 4.0
@@ -69,13 +68,21 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             gouraudShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, sphereTriangles);
             break;
         case RenderingMode::SpherePhong:
+            // 0.8 1.2 4
+            // -0.1 -0.1 1.8
             resetDepthBuffer();
-            phongShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, completeModel);
+            phongShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, sphereTriangles);
             break;
 
-        case RenderingMode::Logo: // logoCamPos 0.3 0.3 4.0
+        case RenderingMode::SoftShadow:
             resetDepthBuffer();
             drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition);
+            break;
+
+        case RenderingMode::Complete:
+            resetDepthBuffer();
+            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeModel, shadingType, shadowType);
+            break;
     }
 }
 
@@ -236,7 +243,16 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             currentMode = RenderingMode::SpherePhong;
         }
         else if (event.key.keysym.sym == SDLK_7) {
-            currentMode = RenderingMode::Logo;
+            currentMode = RenderingMode::SoftShadow;
+        }
+        else if (event.key.keysym.sym == SDLK_8) {
+            currentMode = RenderingMode::Complete;
+        }
+
+        else if (event.key.keysym.sym == SDLK_z) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource = glm::vec3(0, 0.3, 0.3);
         }
         // light position shifting
         else if (event.key.keysym.sym == SDLK_x) {
@@ -308,7 +324,8 @@ int main(int argc, char *argv[]) {
     std::cout << "sphere center: " << sphereCenter.x << " " << sphereCenter.y << " " << sphereCenter.z << std::endl;
     std::cout << "sphere radius: " << sphereRadius << std::endl;
     // std::vector<std::pair<CanvasTriangle, Colour>> sphereCanvasTriangles = triangleTransformer(sphereTriangles, cameraPosition, cameraOrientation);
-    std::vector<ModelTriangle> logoTriangles = readLogoFile("../src/files/logo_updated.obj",0.0015);
+    // std::vector<ModelTriangle> logoTriangles = readLogoFile("../src/files/logo_updated.obj",0.0015);
+    std::vector<ModelTriangle> logoTriangles = readLogoFiles("../src/files/logo_updated.obj", "../src/files/materials.mtl", 0.0015);
     std::vector<ModelTriangle> mergedModel = mergeModelTriangles(modelTriangles, logoTriangles);
     std::vector<ModelTriangle> completeModel = mergeModelTriangles(mergedModel, sphereTriangles);
 
