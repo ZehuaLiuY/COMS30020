@@ -8,6 +8,8 @@
 #include "RayTriangleIntersection.h"
 #include "DrawingWindow.h"
 #include "triangle.h"
+#include "sphere.h"
+#include "logo.h"
 
 // Week 6
 RayTriangleIntersection getClosestValidIntersection(const glm::vec3 &cameraPosition, const glm::vec3 &rayDirection,
@@ -32,4 +34,6 @@ float getIncidenceAngle (glm::vec3 lightDistance, glm::vec3 normal);
 float specularLighting (glm::vec3 lightDistance, glm::vec3 normal, glm::vec3 rayDirection);
 
 float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, glm::vec3 view);
+
+std::vector <glm::vec3> multipleLightSources (glm::vec3 LightPosition);
 #endif //RAY_H

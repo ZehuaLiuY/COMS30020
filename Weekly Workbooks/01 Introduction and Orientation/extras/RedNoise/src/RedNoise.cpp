@@ -15,14 +15,11 @@ bool orbitSelfActivated = false;
 enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, Logo };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-std::vector<ModelTriangle> mergeModelTriangles(const std::vector<ModelTriangle>& model1, const std::vector<ModelTriangle>& model2) {
-    std::vector<ModelTriangle> mergedModel = model1;
-    mergedModel.insert(mergedModel.end(), model2.begin(), model2.end());
-    return mergedModel;
-}
+shading shadingType = Phong;
+shadow shadowType = None;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition,
-          std::vector<ModelTriangle> &modelTriangles, std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &mergedModel, std::vector<ModelTriangle> &completeModel) {
+          std::vector<ModelTriangle> &modelTriangles, std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &logoTriangle, std::vector<ModelTriangle> &completeModel) {
     // Cornell Box's modelTriangles
     std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
     // complete modelTriangles
@@ -61,7 +58,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::Flat:
             resetDepthBuffer();
-            flatShading(window, cameraPosition, cameraOrientation, sphereLightPos, 2.0, sphereTriangles);
+            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeModel, shadingType, shadowType);
             break;
         case RenderingMode::SphereGouraud:
             // cameraPos 0.0 0.7 4.0
@@ -78,7 +75,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
 
         case RenderingMode::Logo: // logoCamPos 0.3 0.3 4.0
             resetDepthBuffer();
-            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition);
+            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition);
     }
 }
 
@@ -284,6 +281,13 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
         window.saveBMP("output.bmp");
     }
 }
+std::vector<ModelTriangle> mergeModelTriangles(const std::vector<ModelTriangle>& model1, const std::vector<ModelTriangle>& model2) {
+    std::vector<ModelTriangle> mergedModel = model1;
+    mergedModel.insert(mergedModel.end(), model2.begin(), model2.end());
+    return mergedModel;
+}
+
+
 
 int main(int argc, char *argv[]) {
     glm::mat3 cameraOrientation = glm::mat3(
@@ -299,9 +303,12 @@ int main(int argc, char *argv[]) {
     // std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
     std::vector<ModelTriangle> sphereTriangles = readSphereFile("../src/files/sphere_updated.obj",0.35);
+    glm::vec3 sphereCenter = calculateSphereCenter(sphereTriangles);
+    float sphereRadius = calculateSphereRadius(sphereTriangles, sphereCenter);
+    std::cout << "sphere center: " << sphereCenter.x << " " << sphereCenter.y << " " << sphereCenter.z << std::endl;
+    std::cout << "sphere radius: " << sphereRadius << std::endl;
     // std::vector<std::pair<CanvasTriangle, Colour>> sphereCanvasTriangles = triangleTransformer(sphereTriangles, cameraPosition, cameraOrientation);
     std::vector<ModelTriangle> logoTriangles = readLogoFile("../src/files/logo_updated.obj",0.0015);
-
     std::vector<ModelTriangle> mergedModel = mergeModelTriangles(modelTriangles, logoTriangles);
     std::vector<ModelTriangle> completeModel = mergeModelTriangles(mergedModel, sphereTriangles);
 
@@ -313,7 +320,7 @@ int main(int argc, char *argv[]) {
 //        window.clearPixels();
         // We MUST poll for events - otherwise the window will freeze !
         if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightPosition);
-        draw(window, cameraPosition, cameraOrientation, lightPosition, modelTriangles, sphereTriangles, mergedModel, completeModel );
+        draw(window, cameraPosition, cameraOrientation, lightPosition, modelTriangles, sphereTriangles, logoTriangles, completeModel );
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
     }

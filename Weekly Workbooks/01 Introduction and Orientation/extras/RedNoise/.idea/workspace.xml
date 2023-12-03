@@ -21,23 +21,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assignment-brief.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/indicative-guide.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/files/Sandy.ppm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend 2.internal" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp 2.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o 2.d" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp 2.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/RedNoise 2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/logo.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sphere.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sphere.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/wireframes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/wireframes.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.h" afterDir="false" />
     </list>
@@ -81,32 +95,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "Extra",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Extra&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/files" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -193,6 +207,39 @@
       <workItem from="1701298969072" duration="159000" />
       <workItem from="1701299139364" duration="4808000" />
       <workItem from="1701305729958" duration="10278000" />
+      <workItem from="1701394660444" duration="3943000" />
+      <workItem from="1701400357724" duration="11225000" />
+      <workItem from="1701412713975" duration="2131000" />
+      <workItem from="1701414860678" duration="2401000" />
+      <workItem from="1701462251540" duration="724000" />
+      <workItem from="1701462995720" duration="9937000" />
+      <workItem from="1701482626087" duration="4621000" />
+      <workItem from="1701489281052" duration="768000" />
+      <workItem from="1701490066249" duration="620000" />
+      <workItem from="1701490702363" duration="1703000" />
+      <workItem from="1701492421419" duration="414000" />
+      <workItem from="1701492850250" duration="841000" />
+      <workItem from="1701493707837" duration="654000" />
+      <workItem from="1701494372883" duration="829000" />
+      <workItem from="1701527811299" duration="919000" />
+      <workItem from="1701531945676" duration="1311000" />
+      <workItem from="1701536330993" duration="197000" />
+      <workItem from="1701536543283" duration="868000" />
+      <workItem from="1701537429114" duration="106000" />
+      <workItem from="1701537550045" duration="563000" />
+      <workItem from="1701538130737" duration="2150000" />
+      <workItem from="1701547123084" duration="1563000" />
+      <workItem from="1701548700837" duration="1687000" />
+      <workItem from="1701550407605" duration="382000" />
+      <workItem from="1701550802939" duration="542000" />
+      <workItem from="1701551362166" duration="877000" />
+      <workItem from="1701552732015" duration="1202000" />
+      <workItem from="1701553953260" duration="778000" />
+      <workItem from="1701554747440" duration="1830000" />
+      <workItem from="1701556624107" duration="1899000" />
+      <workItem from="1701559281022" duration="672000" />
+      <workItem from="1701560022681" duration="1021000" />
+      <workItem from="1701562036860" duration="4000" />
     </task>
     <servers />
   </component>

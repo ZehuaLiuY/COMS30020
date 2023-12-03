@@ -1000,4 +1000,6 @@ CMakeFiles/RedNoise.dir/src/wireframes.cpp.o: \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/interpolation.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/ray.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/RayTriangleIntersection.h
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/RayTriangleIntersection.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/sphere.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/logo.h

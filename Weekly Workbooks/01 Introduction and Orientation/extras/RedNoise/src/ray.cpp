@@ -56,12 +56,12 @@ RayTriangleIntersection getClosestValidIntersection(const glm::vec3 &cameraPosit
 }
 
 glm::vec3 getDirection(glm::vec3 cameraPosition, glm::mat3 cameraOrientation, float x, float y, float focalLength) {
-    float scale_u =(x - WIDTH / 2) / (160*focalLength);
-    float scale_v =(y - HEIGHT / 2) / (160*focalLength);
+    float scale_u =(x - WIDTH / 2) / (54*focalLength);
+    float scale_v =(y - HEIGHT / 2) / (54*focalLength);
     float z = cameraPosition.z - focalLength;
     // Assuming the image plane is one unit away from the camera, i.e., at z = -1 in camera space
     glm::vec3 pixelPosition = glm::vec3(scale_u + cameraPosition.x, -scale_v + cameraPosition.y, z) - cameraPosition; // z is negative because the camera looks along -z in right-handed coordinate system
-    glm::vec3 rayDirection = glm::normalize(pixelPosition); // Normalize the direction vector
+    glm::vec3 rayDirection = glm::normalize(pixelPosition - cameraPosition); // Normalize the direction vector
     rayDirection = rayDirection * inverse(cameraOrientation);
     return rayDirection;
 }
@@ -177,7 +177,7 @@ void processPixelSoft(DrawingWindow &window, const glm::vec3 &cameraPosition, co
                 numUnblocked += 1.0f;
             }
         }
-        float shadowSoftness = glm::clamp<float>(numUnblocked / lightPositions.size(), 0.0f, 1.0f);
+        auto shadowSoftness = glm::clamp<float>(numUnblocked / lightPositions.size(), 0.0f, 1.0f);
 
         // lightDistance is the vector from the closestIntersection point to the light source
         glm::vec3 lightDistance = closestIntersection.intersectionPoint - lightPositions[0];

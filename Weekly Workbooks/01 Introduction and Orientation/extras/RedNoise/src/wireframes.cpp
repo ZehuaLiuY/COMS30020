@@ -17,41 +17,44 @@ std::vector<ModelTriangle> loadOBJ(const std::string &filename, std::map<std::st
     std::string materialName;
     std::vector<TexturePoint> texturePoints;
 
-    // get each line of the file
     while (std::getline(objFile, line)) {
         std::vector<std::string> values = split(line, ' ');
+        if (values.empty()) continue;
+
         if (values[0] == "usemtl") {
             materialName = values[1];
         } else if (values[0] == "vt") {
-            texturePoints.push_back(TexturePoint(std::stof(values[1]), std::stof(values[2])));
+            texturePoints.push_back(TexturePoint(std::stod(values[1]), std::stod(values[2])));
         } else if (values[0] == "v") {
-             vertices.push_back(scale * glm::vec3(std::stof(values[1]), std::stof(values[2]), std::stof(values[3])));
+            vertices.push_back(scale * glm::vec3(std::stod(values[1]), std::stod(values[2]), std::stod(values[3])));
         } else if (values[0] == "f") {
-            glm::vec3 vertex[3];
-            TexturePoint texturePoint[3];
-            for (int i = 0; i < 3; ++i) {
-                std::stringstream vertexStream(values[i + 1]);
-                std::string vertexValue;
-                int j = 0;
-                while (std::getline(vertexStream, vertexValue, '/')) {
-                    if (j == 0) vertex[i] = vertices[std::stoi(vertexValue) - 1];
-                    if (j == 1) texturePoint[i] = texturePoints[std::stoi(vertexValue) - 1];
-                    j++;
+            glm::vec3 vertex1 = vertices[std::stoi(split(values[1], '/')[0]) - 1];
+            glm::vec3 vertex2 = vertices[std::stoi(split(values[2], '/')[0]) - 1];
+            glm::vec3 vertex3 = vertices[std::stoi(split(values[3], '/')[0]) - 1];
+            ModelTriangle currentTriangle(vertex1, vertex2, vertex3, palette[materialName]);
+
+            if (materialName == "Cobbles" && values.size() >= 4) {
+                for (int i = 0; i < 3; ++i) {
+                    std::vector<std::string> vertexData = split(values[i + 1], '/');
+                    if (vertexData.size() > 1) {
+                        int textureIndex = std::stoi(vertexData[1]) - 1;
+                        if (textureIndex >= 0 && textureIndex < static_cast<int>(texturePoints.size())) {
+                            currentTriangle.texturePoints[i] = texturePoints[textureIndex];
+                        }
+                    }
                 }
             }
-            ModelTriangle currentTriangle(vertex[0], vertex[1], vertex[2], palette[materialName]);
-            currentTriangle.texturePoints = {texturePoint[0], texturePoint[1], texturePoint[2]};
+
             currentTriangle.normal = getTriangleNormal(currentTriangle);
+            currentTriangle.colour.name = materialName;
             modelTriangles.push_back(currentTriangle);
-//            for (int i = 0; i < 3; ++i) {
-//                std::cout << "Texture point " << i << ": " << texturePoint[i].x << ", " << texturePoint[i].y << std::endl;
-//            }
         }
     }
 
     objFile.close();
     return modelTriangles;
 }
+
 
 
 // Task 3: read mtl file
@@ -384,7 +387,7 @@ void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
 //}
 
 void orbitClockwise (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
-    glm::quat rotation = glm::angleAxis(angle, glm::vec3(0, 1, 0));
+    glm::quat rotation = glm::angleAxis(angle, glm::vec3(0, -1, 0));
     cameraPosition = rotation * cameraPosition;
     cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
 }
@@ -431,20 +434,3 @@ void testProcess(DrawingWindow &window, std::vector<triangleData> &triangles) {
         // std::cout << "Triangle " << triangle.modelTriangleIndex << " drawn" << std::endl;
     }
 }
-
-u_int32_t modelTextureMapping (TextureMap &texture, ModelTriangle triangle, float x, float y) {
-    glm::vec3 top = triangle.vertices[0];
-    glm::vec3 middle = triangle.vertices[1];
-    glm::vec3 bottom = triangle.vertices[2];
-
-    float ratio = (middle.y - bottom.y) * (top.x - bottom.x) + (bottom.x - middle.x) * (top.y - bottom.y);
-    float a = ((middle.y - bottom.y) * (x - bottom.x) + (bottom.x - middle.x) * (y - bottom.y)) / ratio;
-    float b = ((bottom.y - top.y) * (x - bottom.x) + (top.x - bottom.x) * (y - bottom.y)) / ratio;
-    float c = 1.0f - a - b;
-
-    CanvasPoint texturePoint (round(a * triangle.texturePoints[0].x + b * triangle.texturePoints[1].x + c * triangle.texturePoints[2].x),
-                              round(a * triangle.texturePoints[0].y + b * triangle.texturePoints[1].y + c * triangle.texturePoints[2].y));
-    int index = int(texturePoint.x) + int(texturePoint.y) * texture.width;
-    return texture.pixels[index];
-}
-

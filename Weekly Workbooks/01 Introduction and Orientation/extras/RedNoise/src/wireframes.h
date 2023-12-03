@@ -72,5 +72,4 @@ void orbitSelf (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float a
 // Texture Mapping
 std::vector<triangleData> processTriangles(const std::vector<ModelTriangle> &modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation);
 void testProcess(DrawingWindow &window, std::vector<triangleData> &triangles);
-void renderTexture(DrawingWindow &window, const std::vector<triangleData> &triangles, const std::vector<ModelTriangle> &modelTriangles);
 #endif // wireframes_h

@@ -999,4 +999,6 @@ CMakeFiles/RedNoise.dir/src/ray.cpp.o: \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/gtx/norm.inl \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/glm-0.9.7.2/glm/gtx/quaternion.inl \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/RayTriangleIntersection.h \
-  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/sphere.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/logo.h

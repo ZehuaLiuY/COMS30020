@@ -10290,6 +10290,7 @@ CMakeFiles/RedNoise.dir/src/logo.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Week
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TextureMap.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/logo.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/ray.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/sphere.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
@@ -11293,7 +11294,9 @@ CMakeFiles/RedNoise.dir/src/ray.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekl
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TextureMap.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/logo.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/ray.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/sphere.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/wireframes.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
@@ -12295,6 +12298,7 @@ CMakeFiles/RedNoise.dir/src/sphere.cpp.o: /Users/liuzehua/Documents/GitHub/CG/We
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TextureMap.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/logo.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/ray.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/sphere.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
@@ -14299,7 +14303,9 @@ CMakeFiles/RedNoise.dir/src/wireframes.cpp.o: /Users/liuzehua/Documents/GitHub/C
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/TexturePoint.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/libs/sdw/Utils.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/interpolation.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/logo.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/ray.h \
+  /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/sphere.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.h \
   /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/wireframes.h \
   /opt/homebrew/Cellar/sdl2/2.28.3/include/SDL2/SDL.h \
