@@ -15,21 +15,22 @@ bool orbitSelfActivated = false;
 enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, SoftShadow, Complete };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-shading shadingType = Flat;
+shading shadingType = Phong;
 shadow shadowType = None;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition,
-          std::vector<ModelTriangle> &modelTriangles, std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &logoTriangle, std::vector<ModelTriangle> &completeModel) {
-    // Cornell Box's modelTriangles
-    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
-    // complete modelTriangles
-    std::vector<std::pair<CanvasTriangle, Colour>> cTriangles = triangleTransformer(completeModel, cameraPosition, cameraOrientation);
+          std::vector<ModelTriangle> &modelTriangles,  std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &completeModel, std::vector<ModelTriangle> &completeTextModel) {
+    // complete model triangles without texture
+    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(completeModel, cameraPosition, cameraOrientation);
+    // complete model with texture
+    std::vector<std::pair<CanvasTriangle, Colour>> cTriangles = triangleTransformer(completeTextModel, cameraPosition, cameraOrientation);
     // test processTriangles function
     std::vector<triangleData> triangleDatas = processTriangles(modelTriangles, cameraPosition, cameraOrientation);
 
     glm::vec3 sphereCamPos = glm::vec3(0.8, 1.2, 4.0);
     glm::vec3 sphereLightPos = glm::vec3(0.0, 0.3, 1.5);
     // std::vector<std::pair<CanvasTriangle, Colour>> sTriangles = triangleTransformer(sphereTriangles, sphereCamPos, cameraOrientation);
+
     if(orbitClockwiseActivated){
         orbitClockwise(cameraPosition, cameraOrientation, 0.01);
     }
@@ -45,13 +46,13 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     switch (currentMode) {
         case RenderingMode::Wireframe:
             resetDepthBuffer();
-            renderWireframe(window, cTriangles);
+            renderWireframe(window, triangles);
             break;
         case RenderingMode::Rasterised:
             resetDepthBuffer();
-            renderRasterised(window,  cTriangles);
+            renderRasterised(window,  triangles);
             break;
-        case RenderingMode::RayTraced:
+        case RenderingMode::RayTraced: // Hard shadow
             resetDepthBuffer();
             drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition);
             break;
@@ -76,12 +77,12 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
 
         case RenderingMode::SoftShadow:
             resetDepthBuffer();
-            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition);
+            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition);
             break;
 
         case RenderingMode::Complete:
             resetDepthBuffer();
-            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeModel, shadingType, shadowType);
+            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeTextModel, shadingType, shadowType);
             break;
     }
 }
@@ -315,29 +316,28 @@ int main(int argc, char *argv[]) {
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
     glm::vec3 lightPosition = glm::vec3(0.0, 0.3, 0.3);
-    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/textured-cornell-box.obj", "../src/files/textured-cornell-box.mtl", 0.35);
-    // std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
+    // without texture
+    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
     std::vector<ModelTriangle> sphereTriangles = readSphereFile("../src/files/sphere_updated.obj",0.35);
-    glm::vec3 sphereCenter = calculateSphereCenter(sphereTriangles);
-    float sphereRadius = calculateSphereRadius(sphereTriangles, sphereCenter);
-    std::cout << "sphere center: " << sphereCenter.x << " " << sphereCenter.y << " " << sphereCenter.z << std::endl;
-    std::cout << "sphere radius: " << sphereRadius << std::endl;
-    // std::vector<std::pair<CanvasTriangle, Colour>> sphereCanvasTriangles = triangleTransformer(sphereTriangles, cameraPosition, cameraOrientation);
-    // std::vector<ModelTriangle> logoTriangles = readLogoFile("../src/files/logo_updated.obj",0.0015);
     std::vector<ModelTriangle> logoTriangles = readLogoFiles("../src/files/logo_updated.obj", "../src/files/materials.mtl", 0.0015);
+
     std::vector<ModelTriangle> mergedModel = mergeModelTriangles(modelTriangles, logoTriangles);
     std::vector<ModelTriangle> completeModel = mergeModelTriangles(mergedModel, sphereTriangles);
+
+    // texture
+    std::vector<ModelTriangle> textModelTriangles = readFiles("../src/files/textured-cornell-box.obj", "../src/files/textured-cornell-box.mtl", 0.35);
+    std::vector<ModelTriangle> mergedTextModel = mergeModelTriangles(textModelTriangles, logoTriangles);
+    std::vector<ModelTriangle> completeTextModel = mergeModelTriangles(mergedTextModel, sphereTriangles);
 
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
 
     while (true) {
-//        resetDepthBuffer();
-//        window.clearPixels();
         // We MUST poll for events - otherwise the window will freeze !
         if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightPosition);
-        draw(window, cameraPosition, cameraOrientation, lightPosition, modelTriangles, sphereTriangles, logoTriangles, completeModel );
+        draw(window, cameraPosition, cameraOrientation, lightPosition,
+             modelTriangles, sphereTriangles, completeModel, completeTextModel);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
     }

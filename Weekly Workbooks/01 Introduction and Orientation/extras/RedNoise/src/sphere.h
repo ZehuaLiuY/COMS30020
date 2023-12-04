@@ -36,5 +36,5 @@ enum shadow {
 };
 
 void rayTrace (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation, glm::vec3 lightPosition,
-               const std::vector<ModelTriangle> &completeModel, shading shadingType, shadow shadowType);
+               const std::vector<ModelTriangle> &completeTextModel, shading shadingType, shadow shadowType);
 #endif //SPHERE_H

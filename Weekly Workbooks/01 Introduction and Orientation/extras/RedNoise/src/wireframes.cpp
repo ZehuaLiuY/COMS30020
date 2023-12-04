@@ -45,9 +45,9 @@ std::vector<ModelTriangle> loadOBJ(const std::string &filename, std::map<std::st
                 }
             }
 
-            std::cout << "Texture Point 1: " << currentTriangle.texturePoints[0].x << ", " << currentTriangle.texturePoints[0].y << std::endl;
-            std::cout << "Texture Point 2: " << currentTriangle.texturePoints[1].x << ", " << currentTriangle.texturePoints[1].y << std::endl;
-            std::cout << "Texture Point 3: " << currentTriangle.texturePoints[2].x << ", " << currentTriangle.texturePoints[2].y << std::endl;
+//            std::cout << "Texture Point 1: " << currentTriangle.texturePoints[0].x << ", " << currentTriangle.texturePoints[0].y << std::endl;
+//            std::cout << "Texture Point 2: " << currentTriangle.texturePoints[1].x << ", " << currentTriangle.texturePoints[1].y << std::endl;
+//            std::cout << "Texture Point 3: " << currentTriangle.texturePoints[2].x << ", " << currentTriangle.texturePoints[2].y << std::endl;
 
             currentTriangle.normal = getTriangleNormal(currentTriangle);
             currentTriangle.colour.name = materialName;

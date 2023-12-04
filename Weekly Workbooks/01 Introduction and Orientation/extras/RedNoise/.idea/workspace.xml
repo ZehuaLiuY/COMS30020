@@ -23,7 +23,6 @@
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
@@ -31,11 +30,9 @@
       <change beforePath="$PROJECT_DIR$/build/output.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.ppm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/materials.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/materials.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/texturelogo.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/textureLogo.ppm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/logo.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/logo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sphere.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sphere.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/wireframes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -250,7 +247,35 @@
       <workItem from="1701637736166" duration="96000" />
       <workItem from="1701637847843" duration="438000" />
       <workItem from="1701638300382" duration="686000" />
-      <workItem from="1701640228323" duration="406000" />
+      <workItem from="1701640228323" duration="1237000" />
+      <workItem from="1701641679182" duration="496000" />
+      <workItem from="1701642188207" duration="608000" />
+      <workItem from="1701642901154" duration="1536000" />
+      <workItem from="1701644872582" duration="1984000" />
+      <workItem from="1701648069985" duration="617000" />
+      <workItem from="1701648704872" duration="835000" />
+      <workItem from="1701649558903" duration="688000" />
+      <workItem from="1701650261042" duration="269000" />
+      <workItem from="1701650545540" duration="557000" />
+      <workItem from="1701651119321" duration="693000" />
+      <workItem from="1701651828204" duration="481000" />
+      <workItem from="1701652324623" duration="513000" />
+      <workItem from="1701652852641" duration="485000" />
+      <workItem from="1701653350377" duration="1241000" />
+      <workItem from="1701697791156" duration="198000" />
+      <workItem from="1701697999548" duration="583000" />
+      <workItem from="1701698594277" duration="106000" />
+      <workItem from="1701698708475" duration="149000" />
+      <workItem from="1701698866184" duration="177000" />
+      <workItem from="1701699053647" duration="466000" />
+      <workItem from="1701699531205" duration="1725000" />
+      <workItem from="1701701631126" duration="26000" />
+      <workItem from="1701701939362" duration="2466000" />
+      <workItem from="1701704494525" duration="426000" />
+      <workItem from="1701704931012" duration="343000" />
+      <workItem from="1701705395808" duration="319000" />
+      <workItem from="1701705724655" duration="605000" />
+      <workItem from="1701706341833" duration="809000" />
     </task>
     <servers />
   </component>
