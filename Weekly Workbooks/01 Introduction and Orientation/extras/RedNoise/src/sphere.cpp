@@ -372,7 +372,35 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
         glm::vec3 reflectedRay = glm::normalize(rayDirection - (2.0f * triangleNormal * glm::dot(rayDirection, triangleNormal)));
 
         float angle = glm::dot(rayDirection, triangleNormal);
-        float bias = 0.01f * glm::clamp((1 - glm::abs(angle)), 0.0f, 1.0f); // 可能需要调整clamp中的参数
+        float bias = 0.01f * glm::clamp((1 - glm::abs(angle)), 0.0f, 1.0f);
+
+
+        glm::vec3 reflectedPoint = point + (triangleNormal * bias);
+        Colour reflectionColour = getRayIntesectedColour(reflectedPoint, lightPosition, lightPositions, reflectedRay, modelTriangles, rotateAngle, loopCount + 1, shadingType, shadowType);
+
+
+        glm::vec3 refractionDirection = getRefractionDirection(rayDirection, triangleNormal, 1.0f, 1.3f);
+        glm::vec3 newPoint = (glm::dot(rayDirection, triangleNormal) < 0) ?
+                             point - (triangleNormal * bias) : // inside
+                             point + (triangleNormal * bias);  // outside
+
+        Colour refractionColour = getRayIntesectedColour(newPoint, lightPosition, lightPositions, refractionDirection, modelTriangles, rotateAngle, loopCount + 1, shadingType, shadowType);
+
+        float refractiveIndex = getRefractiveIndex(rayDirection, 1.0f, 1.3f, triangleNormal);
+        float reflectiveIndex = 1 - refractiveIndex;
+
+        colour.red = glm::clamp(int ((refractiveIndex * float(refractionColour.red) + reflectiveIndex * float(reflectionColour.red))), 0, 255);
+        colour.green = glm::clamp(int ((refractiveIndex * float(refractionColour.green) + reflectiveIndex * float(reflectionColour.green))), 0, 255);
+        colour.blue = glm::clamp(int ((refractiveIndex * float(refractionColour.blue) + reflectiveIndex * float(reflectionColour.blue))), 0, 255);
+        return colour;
+    }
+
+    if(modelColour == "Red"){
+
+        glm::vec3 reflectedRay = glm::normalize(rayDirection - (2.0f * triangleNormal * glm::dot(rayDirection, triangleNormal)));
+
+        float angle = glm::dot(rayDirection, triangleNormal);
+        float bias = 0.01f * glm::clamp((1 - glm::abs(angle)), 0.0f, 1.0f);
 
 
         glm::vec3 reflectedPoint = point + (triangleNormal * bias);

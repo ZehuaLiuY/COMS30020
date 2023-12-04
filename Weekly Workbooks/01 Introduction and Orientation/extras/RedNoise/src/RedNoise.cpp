@@ -15,8 +15,8 @@ bool orbitSelfActivated = false;
 enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, SoftShadow, Complete };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-shading shadingType = Phong;
-shadow shadowType = None;
+shading shadingType = Flat;
+shadow shadowType = Hard;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition,
           std::vector<ModelTriangle> &modelTriangles,  std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &completeModel, std::vector<ModelTriangle> &completeTextModel) {
