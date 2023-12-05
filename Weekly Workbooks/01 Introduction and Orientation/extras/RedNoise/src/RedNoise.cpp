@@ -16,9 +16,10 @@ enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud
 RenderingMode currentMode = RenderingMode::Rasterised;
 
 shading shadingType = Flat;
-shadow shadowType = Hard;
+shadow shadowType = None;
+float rotateAngle = 0.0f;
 
-void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition,
+void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition, float &intensity,
           std::vector<ModelTriangle> &modelTriangles,  std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &completeModel, std::vector<ModelTriangle> &completeTextModel) {
     // complete model triangles without texture
     std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(completeModel, cameraPosition, cameraOrientation);
@@ -41,6 +42,12 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
         orbitSelf(cameraPosition, cameraOrientation, 0.01);
     }
 
+    if (currentMode == RenderingMode::Complete) {
+        rotateAngle += glm::radians(100.0f);
+        if (rotateAngle >= 2 * M_PI) rotateAngle -= 2 * M_PI;
+        std::cout << "rotateAngle in draw: " << rotateAngle << std::endl;
+    }
+
     window.clearPixels();
 
     switch (currentMode) {
@@ -54,11 +61,11 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::RayTraced: // Hard shadow
             resetDepthBuffer();
-            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition);
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition, intensity);
             break;
         case RenderingMode::Flat:
             resetDepthBuffer();
-            flatShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, sphereTriangles);
+            flatShading(window, cameraPosition, cameraOrientation, intensity, lightPosition, 2.0, sphereTriangles);
             break;
         case RenderingMode::SphereGouraud:
             // cameraPos 0.0 0.7 4.0
@@ -66,29 +73,29 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             resetDepthBuffer();
             // renderSphereRasterised(window, sTriangles);
             // renderSphereWireframe(window, sTriangles);
-            gouraudShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, sphereTriangles);
+            gouraudShading(window, cameraPosition, cameraOrientation, intensity, lightPosition, 2.0, sphereTriangles);
             break;
         case RenderingMode::SpherePhong:
             // 0.8 1.2 4
             // -0.1 -0.1 1.8
             resetDepthBuffer();
-            phongShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, sphereTriangles);
+            phongShading(window, cameraPosition, cameraOrientation,intensity, lightPosition, 2.0, sphereTriangles);
             break;
 
         case RenderingMode::SoftShadow:
             resetDepthBuffer();
-            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition);
+            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition, intensity);
             break;
 
         case RenderingMode::Complete:
             resetDepthBuffer();
-            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeTextModel, shadingType, shadowType);
+            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeTextModel, rotateAngle, intensity, shadingType, shadowType);
             break;
     }
 }
 
 
-void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightSource) {
+void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightSource, float &intensity) {
 
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_LEFT) {
@@ -249,7 +256,12 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
         else if (event.key.keysym.sym == SDLK_8) {
             currentMode = RenderingMode::Complete;
         }
-
+        else if (event.key.keysym.sym == SDLK_d) {
+            intensity += 1.0f;
+        }
+        else if (event.key.keysym.sym == SDLK_g) {
+            intensity -= 1.0f;
+        }
         else if (event.key.keysym.sym == SDLK_z) {
             window.clearPixels();
             resetDepthBuffer();
@@ -313,7 +325,7 @@ int main(int argc, char *argv[]) {
             glm::vec3(0, 0, 1)  // forward
     );
 
-    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
+    glm::vec3 cameraPosition = glm::vec3 (0.0, -0.4, 3.4);
 
     glm::vec3 lightPosition = glm::vec3(0.0, 0.3, 0.3);
 
@@ -330,13 +342,15 @@ int main(int argc, char *argv[]) {
     std::vector<ModelTriangle> mergedTextModel = mergeModelTriangles(textModelTriangles, logoTriangles);
     std::vector<ModelTriangle> completeTextModel = mergeModelTriangles(mergedTextModel, sphereTriangles);
 
+    float intensity = 12.0f;
+
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
 
     while (true) {
         // We MUST poll for events - otherwise the window will freeze !
-        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightPosition);
-        draw(window, cameraPosition, cameraOrientation, lightPosition,
+        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightPosition, intensity);
+        draw(window, cameraPosition, cameraOrientation, lightPosition, intensity,
              modelTriangles, sphereTriangles, completeModel, completeTextModel);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();

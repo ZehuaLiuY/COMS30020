@@ -74,12 +74,12 @@ glm::vec3 getTriangleNormal (const ModelTriangle &modelTriangle) {
     return normal;
 }
 
-float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, glm::vec3 view) {
+float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, glm::vec3 view, float intensity) {
     // Normalize the light position vector
     glm::vec3 lightDirection = glm::normalize(lightDistance);
 
     // Proximity Lighting Calculation
-    float pL = 12.0f / (4.0f * M_PI * glm::length(lightDistance) * glm::length(lightDistance));
+    float pL = intensity / (4.0f * M_PI * glm::length(lightDistance) * glm::length(lightDistance));
     float proximity = std::min(std::max(pL, 0.00001f), 1.0f);
 
     // Angle-of-Incidence Lighting Calculation
@@ -108,7 +108,7 @@ float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, g
 }
 // process pixels with hard shadow
 void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
-                  float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightPosition) {
+                  float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const glm::vec3 &lightPosition, float intensity) {
     // from the camera to the pixel
     glm::vec3 rayToPixelDirection = getDirection(cameraPosition, cameraOrientation, x, y, focalLength);
     // get the closest triangle Intersection with the ray
@@ -131,7 +131,7 @@ void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const 
             glm::vec3 lightDistance = closestIntersection.intersectionPoint - lightPosition;
             // surface triangleNormal
             glm::vec3 triangleNormal = closestIntersection.intersectedTriangle.normal;
-            brightness = processLighting(lightDistance, triangleNormal, view);
+            brightness = processLighting(lightDistance, triangleNormal, view, intensity);
         }
 
         Colour colour = closestIntersection.intersectedTriangle.colour;
@@ -145,18 +145,18 @@ void processPixel(DrawingWindow &window, const glm::vec3 &cameraPosition, const 
 
 // Task 4: draw the ray tracing
 void drawRayTracedScene (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
-                          float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource) {
+                          float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource, float intensity) {
     // from top to bottom
     for (float y = 0; y < HEIGHT; y++) {
         // from left to right
         for (float x = 0; x < WIDTH; x++) {
-            processPixel(window, cameraPosition, cameraOrientation, x, y, focalLength, modelTriangles, lightSource);
+            processPixel(window, cameraPosition, cameraOrientation, x, y, focalLength, modelTriangles, lightSource, intensity);
         }
     }
 }
 // process pixels with soft shadow
 void processPixelSoft(DrawingWindow &window, const glm::vec3 &cameraPosition, const glm::mat3 &cameraOrientation,
-                      float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const std::vector<glm::vec3> &lightPositions) {
+                      float x, float y, float focalLength, const std::vector<ModelTriangle> &modelTriangles, const std::vector<glm::vec3> &lightPositions, float intensity) {
     // from the camera to the pixel
     glm::vec3 rayToPixelDirection = getDirection(cameraPosition, cameraOrientation, x, y, focalLength);
     // get the closest triangle Intersection with the ray
@@ -183,7 +183,7 @@ void processPixelSoft(DrawingWindow &window, const glm::vec3 &cameraPosition, co
         glm::vec3 lightDistance = closestIntersection.intersectionPoint - lightPositions[0];
         // surface triangleNormal
         glm::vec3 triangleNormal = getTriangleNormal(closestIntersection.intersectedTriangle);
-        float brightness = processLighting(lightDistance, triangleNormal, view) * shadowSoftness;
+        float brightness = processLighting(lightDistance, triangleNormal, view, intensity) * shadowSoftness;
 
         Colour colour = closestIntersection.intersectedTriangle.colour;
         uint32_t adjustedColour = colourConverter(Colour(colour.red * brightness, colour.green * brightness, colour.blue * brightness));
@@ -195,14 +195,14 @@ void processPixelSoft(DrawingWindow &window, const glm::vec3 &cameraPosition, co
 
 
 void drawRayTracedSceneSoft (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 cameraOrientation,
-                         float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource) {
+                         float focalLength, const std::vector<ModelTriangle> &modelTriangles, glm::vec3 lightSource, float intensity) {
     std::vector<glm::vec3> lightPositions = multipleLightSources(lightSource);
 
     // from top to bottom
     for (float y = 0; y < HEIGHT; y++) {
         // from left to right
         for (float x = 0; x < WIDTH; x++) {
-            processPixelSoft(window, cameraPosition, cameraOrientation, x, y, focalLength, modelTriangles, lightPositions);
+            processPixelSoft(window, cameraPosition, cameraOrientation, x, y, focalLength, modelTriangles, lightPositions, intensity);
         }
     }
 }

@@ -21,13 +21,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/output.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/output.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.ppm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ray.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sphere.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sphere.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +59,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -273,7 +283,36 @@
       <workItem from="1701707311982" duration="714000" />
       <workItem from="1701708037645" duration="831000" />
       <workItem from="1701708917558" duration="590000" />
-      <workItem from="1701709517770" duration="598000" />
+      <workItem from="1701709517770" duration="2343000" />
+      <workItem from="1701728868141" duration="504000" />
+      <workItem from="1701729383708" duration="781000" />
+      <workItem from="1701730183556" duration="1028000" />
+      <workItem from="1701732762773" duration="709000" />
+      <workItem from="1701733590450" duration="609000" />
+      <workItem from="1701734612033" duration="718000" />
+      <workItem from="1701735860154" duration="1755000" />
+      <workItem from="1701737658765" duration="668000" />
+      <workItem from="1701738434358" duration="2369000" />
+      <workItem from="1701740851024" duration="1068000" />
+      <workItem from="1701742174247" duration="2024000" />
+      <workItem from="1701756584898" duration="875000" />
+      <workItem from="1701758051066" duration="1008000" />
+      <workItem from="1701759754491" duration="598000" />
+      <workItem from="1701764332917" duration="1015000" />
+      <workItem from="1701765505253" duration="639000" />
+      <workItem from="1701766217517" duration="1702000" />
+      <workItem from="1701768213086" duration="250000" />
+      <workItem from="1701768473367" duration="59000" />
+      <workItem from="1701768544229" duration="703000" />
+      <workItem from="1701769433549" duration="833000" />
+      <workItem from="1701770552663" duration="895000" />
+      <workItem from="1701793101839" duration="3414000" />
+      <workItem from="1701797312743" duration="1694000" />
+      <workItem from="1701799839048" duration="993000" />
+      <workItem from="1701802656078" duration="615000" />
+      <workItem from="1701804080783" duration="495000" />
+      <workItem from="1701804585407" duration="603000" />
+      <workItem from="1701805199296" duration="447000" />
     </task>
     <servers />
   </component>
