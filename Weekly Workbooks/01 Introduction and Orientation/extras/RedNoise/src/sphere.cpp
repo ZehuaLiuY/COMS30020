@@ -349,6 +349,38 @@ float getRefractiveIndex (glm::vec3 incidenceRayDirection, float air, float glas
     }
 }
 
+
+glm::vec3 normalMapping (ModelTriangle triangle, const Colour &colour) {
+    // https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/lighting-and-material/normal-mapping.html
+    glm::vec3 faceNormal = triangle.normal;
+    TexturePoint uv0 = triangle.texturePoints[0];
+    TexturePoint uv1 = triangle.texturePoints[1];
+    TexturePoint uv2 = triangle.texturePoints[2];
+
+    glm::vec3 edge1 = triangle.vertices[1] - triangle.vertices[0];
+    glm::vec3 edge2 = triangle.vertices[2] - triangle.vertices[0];
+    glm::vec2 deltaUV1 = {uv1.x - uv0.x, uv1.y - uv0.y};
+    glm::vec2 deltaUV2 = {uv2.x - uv0.x, uv2.y - uv0.y};
+
+    // Calculate TBN (Tangent, Bitangent, Normal) matrix
+    float determinant = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+    glm::vec3 tangent = (edge1 * deltaUV2.y - edge2 * deltaUV1.y) * determinant;
+    tangent = glm::normalize(tangent - (glm::dot(tangent, faceNormal) * faceNormal));
+    glm::vec3 bitangent = (edge2 * deltaUV1.x - edge1 * deltaUV2.x) * determinant;
+    bitangent = glm::normalize(bitangent - (glm::dot(bitangent, faceNormal) * faceNormal) - (glm::dot(bitangent, tangent) * tangent));
+    faceNormal = glm::normalize(faceNormal);
+    glm::mat3 tbnMatrix = {tangent.x, tangent.y, tangent.z,
+                           bitangent.x, bitangent.y, bitangent.z,
+                           faceNormal.x, faceNormal.y, faceNormal.z};
+
+    // Calculate texture normal
+    glm::vec3 textureNormal = glm::vec3(float(colour.red)/255.0f, float(colour.green)/255.0f, float(colour.blue)/255.0f);
+    textureNormal = 2.0f * textureNormal - 1.0f;
+    // Transform to world normal
+    glm::vec3 worldNormal = textureNormal * tbnMatrix;
+    return worldNormal;
+}
+
 Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPosition, const std::vector<glm::vec3> &lightPositions,glm::vec3 &rayDirection,
                                const std::vector<ModelTriangle> &modelTriangles, float &rotateAngle, float &intensity, int loopCount, shading shadingType, shadow shadowType) {
     if (loopCount > 6) {
@@ -485,7 +517,12 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
         }
     }
     else {
-        brightness = processLighting(lightDistance, triangleNormal, view, intensity);
+        if (modelColour == "logo") {
+            triangleNormal = normalMapping(closestIntersection.intersectedTriangle, colour);
+            brightness = processLighting(lightDistance, triangleNormal, view, intensity);
+        } else {
+            brightness = processLighting(lightDistance, triangleNormal, view, intensity);
+        }
     }
 //    colour.red = std::min(255.0f, float(colour.red) * brightness);
 //    colour.green = std::min(255.0f, float(colour.green) * brightness);

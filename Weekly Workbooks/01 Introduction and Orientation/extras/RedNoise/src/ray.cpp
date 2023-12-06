@@ -90,8 +90,8 @@ float processLighting(const glm::vec3 &lightDistance, const glm::vec3 &normal, g
     // get the reflection vector, reference https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel
     // R=L−2⋅(L⋅N)⋅N
     glm::vec3 reflectionVector = lightDirection - (2.0f * glm::dot(lightDirection, normal) * normal);
-    float VR = glm::max (0.0f, glm::dot(reflectionVector, view));
-    float specular = pow(VR, 256);
+    float VR = glm::dot(reflectionVector, view);
+    float specular = pow(VR, 512);
 
     float brightness = proximity * incidence + specular;
 

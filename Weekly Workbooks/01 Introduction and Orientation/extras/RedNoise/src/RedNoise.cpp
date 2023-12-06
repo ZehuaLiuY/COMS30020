@@ -43,7 +43,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     }
 
     if (currentMode == RenderingMode::Complete) {
-        rotateAngle += glm::radians(100.0f);
+        rotateAngle += glm::radians(10.0f);
         if (rotateAngle >= 2 * M_PI) rotateAngle -= 2 * M_PI;
         std::cout << "rotateAngle in draw: " << rotateAngle << std::endl;
     }
@@ -61,7 +61,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::RayTraced: // Hard shadow
             resetDepthBuffer();
-            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition, intensity);
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition, intensity);
             break;
         case RenderingMode::Flat:
             resetDepthBuffer();
@@ -305,7 +305,7 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
         }
 
-    } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+    } else if (event.type == SDLK_h) {
         window.savePPM("output.ppm");
         window.saveBMP("output.bmp");
     }
@@ -325,7 +325,7 @@ int main(int argc, char *argv[]) {
             glm::vec3(0, 0, 1)  // forward
     );
 
-    glm::vec3 cameraPosition = glm::vec3 (0.0, -0.4, 3.4);
+    glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
     glm::vec3 lightPosition = glm::vec3(0.0, 0.3, 0.3);
 
