@@ -462,7 +462,7 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
     }
 
     // sphere shading
-    float brightness;
+    float brightness = 0;
     if (modelColour == "sphere" || shadingType == Phong || shadingType == Gouraud) {
         glm::vec3 vertex0Normal = calculateVertexNormal(v0, modelTriangles);
         glm::vec3 vertex1Normal = calculateVertexNormal(v1, modelTriangles);
@@ -471,7 +471,7 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
         glm::vec3 normalWeight = getNormalWeight(point.x, point.y, closestIntersection.intersectedTriangle);
 
         if (shadingType == Gouraud) {
-            
+
             glm::vec3 lightDistance0 = v0 - lightPosition;
             glm::vec3 lightDistance1 = v1 - lightPosition;
             glm::vec3 lightDistance2 = v2 - lightPosition;
@@ -485,7 +485,7 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
             float brightness2 = processLighting(lightDistance2, vertex2Normal, view2, intensity);
             brightness = normalWeight.x * brightness0 + normalWeight.y * brightness1 + normalWeight.z * brightness2;
         }
-        else {
+        else if (shadingType == Phong) {
             glm::vec3 interpolatedNormal = glm::vec3 (normalWeight.x * vertex0Normal + normalWeight.y * vertex1Normal + normalWeight.z * vertex2Normal);
             brightness = processLighting(lightDistance, interpolatedNormal, view, intensity);
         }
@@ -499,58 +499,61 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
 //    colour.red = std::min(255.0f, float(colour.red) * brightness);
 //    colour.green = std::min(255.0f, float(colour.green) * brightness);
 //    colour.blue = std::min(255.0f, float(colour.blue) * brightness);
-    float red = std::min(255.0f, float(colour.red) * brightness);
-    float green = std::min(255.0f, float(colour.green) * brightness);
-    float blue = std::min(255.0f, float(colour.blue) * brightness);
+    float red = std::min(255.0f, (float(colour.red) * brightness));
+    float green = std::min(255.0f, (float(colour.green) * brightness));
+    float blue = std::min(255.0f, (float(colour.blue) * brightness));
 
     // shadow
-    float shadowBrightness;
+    float shadowBrightness = 0;
     if (shadowType == Hard) {
         RayTriangleIntersection shadowRay = getClosestValidIntersection(lightPosition, lightDirection, modelTriangles);
-        if (modelColour != "Red" && modelColour != "sphere" && shadowRay.triangleIndex != closestIntersection.triangleIndex) {
-            shadowBrightness = 0.2f;  // Shadowed areas
+        if (shadowRay.triangleIndex != closestIntersection.triangleIndex && modelColour != "sphere") {
+            shadowBrightness = 0.3f;  // Shadowed areas
             if (shadowRay.intersectedTriangle.colour.name == "Red") {
                 shadowBrightness = 0.5f;
             }
         } else {
-            shadowBrightness = processLighting(lightDistance, triangleNormal, view, intensity);
+//            shadowBrightness = processLighting(lightDistance, triangleNormal, view, intensity);
+            shadowBrightness = 1.0f;
         }
-        red = std::min(255.0f, float(colour.red) * shadowBrightness);
-        green = std::min(255.0f, float(colour.green) * shadowBrightness);
-        blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
+//        red = std::min(255.0f, red * shadowBrightness);
+//        green = std::min(255.0f, green * shadowBrightness);
+//        blue = std::min(255.0f, blue * shadowBrightness);
     }
 
-    else if (shadowType == Soft) {
-        if (modelColour != "sphere") {
-            float numUnblocked = 0;
+    else if (shadowType == Soft)  {
+        float numUnblocked = 0;
 
-            for (const glm::vec3 &light : lightPositions) {
-                glm::vec3 softLightDirection = glm::normalize(light - point);
-                glm::vec3 startPoint = point + softLightDirection * 0.001f;
-                RayTriangleIntersection shadowRay = getClosestValidIntersection(startPoint, softLightDirection, modelTriangles);
+        for (const glm::vec3 &light : lightPositions) {
+            glm::vec3 softLightDirection = glm::normalize(light - point);
+            glm::vec3 startPoint = point + softLightDirection * 0.001f;
+            RayTriangleIntersection shadowRay = getClosestValidIntersection(startPoint, softLightDirection, modelTriangles);
 
-                if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
-                    numUnblocked += 1.0f;
-                }
-                if (shadowRay.intersectedTriangle.colour.name == "Red") {
-                    numUnblocked += 0.2f;
-                }
+            if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
+                numUnblocked += 1.0f;
             }
-
-            auto shadowSoftness = glm::clamp(numUnblocked / float(lightPositions.size()), 0.0f, 1.0f);
-
-            shadowBrightness = processLighting(lightDistance, triangleNormal, view, intensity) * shadowSoftness;
-            red = std::min(255.0f, float(colour.red) * shadowBrightness);
-            green = std::min(255.0f, float(colour.green) * shadowBrightness);
-            blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
-
-
-        } else {
-            return {int(red), int(green), int(blue)};
+            if (shadowRay.intersectedTriangle.colour.name == "Red") {
+                numUnblocked += 0.2f;
+            }
         }
+
+        auto shadowSoftness = glm::clamp(numUnblocked / float(lightPositions.size()), 0.0f, 1.0f);
+
+        shadowBrightness = processLighting(lightDistance, triangleNormal, view, intensity) * shadowSoftness;
+//        red = std::min(255.0f, float(colour.red) * shadowBrightness);
+//        green = std::min(255.0f, float(colour.green) * shadowBrightness);
+//        blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
+
     }else if (shadowType == None) {
         return {int(red), int(green), int(blue)};
     }
+    red = red * shadowBrightness;
+    green = green * shadowBrightness;
+    blue = blue * shadowBrightness;
+
+//    red = std::min(255.0f, float(colour.red) * shadowBrightness);
+//    green = std::min(255.0f, float(colour.green) * shadowBrightness);
+//    blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
     return {int(red), int(green), int(blue)};
 }
 
