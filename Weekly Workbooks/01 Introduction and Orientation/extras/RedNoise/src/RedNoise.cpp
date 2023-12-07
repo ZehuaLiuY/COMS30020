@@ -15,7 +15,7 @@ bool orbitSelfActivated = false;
 enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, SoftShadow, Complete };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-shading shadingType = Phong;
+shading shadingType = none;
 shadow shadowType = Hard;
 float rotateAngle = 0.0f;
 
@@ -258,9 +258,11 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
         }
         else if (event.key.keysym.sym == SDLK_d) {
             intensity += 1.0f;
+            std::cout << "intensity: " << intensity << std::endl;
         }
         else if (event.key.keysym.sym == SDLK_g) {
             intensity -= 1.0f;
+            std::cout << "intensity: " << intensity << std::endl;
         }
         else if (event.key.keysym.sym == SDLK_z) {
             window.clearPixels();

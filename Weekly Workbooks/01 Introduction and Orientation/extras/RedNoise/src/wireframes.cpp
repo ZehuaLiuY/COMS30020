@@ -378,29 +378,29 @@ void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     cameraOrientation[2] = forward;
 }
 
-//void orbitClockwise (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
-//    rotateClock(cameraPosition, cameraOrientation, step);
-//}
+void orbitClockwise (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
+    rotateClock(cameraPosition, cameraOrientation, step);
+}
 
-//void orbitUp (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
-//    rotateUp(cameraPosition, cameraOrientation, step);
-//}
+void orbitUp (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
+    rotateUp(cameraPosition, cameraOrientation, step);
+}
 
 //void orbitSelf (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
 //    rotateSelf(cameraPosition, cameraOrientation, step);
 //}
 
-void orbitClockwise (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
-    glm::quat rotation = glm::angleAxis(angle, glm::vec3(0, -1, 0));
-    cameraPosition = rotation * cameraPosition;
-    cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
-}
-
-void orbitUp (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
-    glm::quat rotation = glm::angleAxis(angle, glm::vec3(-1, 0, 0));
-    cameraPosition = rotation * cameraPosition;
-    cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
-}
+//void orbitClockwise (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
+//    glm::quat rotation = glm::angleAxis(angle, glm::vec3(0, -1, 0));
+//    cameraPosition = rotation * cameraPosition;
+//    cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
+//}
+//
+//void orbitUp (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
+//    glm::quat rotation = glm::angleAxis(angle, glm::vec3(-1, 0, 0));
+//    cameraPosition = rotation * cameraPosition;
+//    cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
+//}
 
 void orbitSelf (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
     glm::quat rotation = glm::angleAxis(angle, glm::vec3(0, 0, -1));

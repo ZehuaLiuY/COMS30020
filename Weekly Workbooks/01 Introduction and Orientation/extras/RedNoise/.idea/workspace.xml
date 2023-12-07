@@ -22,9 +22,17 @@
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/src/sphere.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -346,6 +354,7 @@
       <workItem from="1701927362936" duration="385000" />
       <workItem from="1701927759348" duration="540000" />
       <workItem from="1701928312015" duration="595000" />
+<<<<<<< Updated upstream
       <workItem from="1701928920564" duration="655000" />
       <workItem from="1701929586687" duration="406000" />
       <workItem from="1701930003007" duration="754000" />
@@ -366,6 +375,25 @@
       <workItem from="1701939132917" duration="660000" />
       <workItem from="1701939808724" duration="524000" />
       <workItem from="1701940350445" duration="450000" />
+=======
+      <workItem from="1701928920564" duration="3000" />
+      <workItem from="1701944906031" duration="896000" />
+      <workItem from="1701945826962" duration="470000" />
+      <workItem from="1701946309728" duration="713000" />
+      <workItem from="1701964573277" duration="466000" />
+      <workItem from="1701965050906" duration="358000" />
+      <workItem from="1701965420827" duration="538000" />
+      <workItem from="1701965973456" duration="604000" />
+      <workItem from="1701969675864" duration="903000" />
+      <workItem from="1701971215807" duration="116000" />
+      <workItem from="1701971353150" duration="1187000" />
+      <workItem from="1701972553397" duration="766000" />
+      <workItem from="1701973384362" duration="299000" />
+      <workItem from="1701973718374" duration="793000" />
+      <workItem from="1701980369677" duration="649000" />
+      <workItem from="1701981227985" duration="1225000" />
+      <workItem from="1701986977840" duration="1000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
