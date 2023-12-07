@@ -529,17 +529,16 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
             glm::vec3 startPoint = point + softLightDirection * 0.001f;
             RayTriangleIntersection shadowRay = getClosestValidIntersection(startPoint, softLightDirection, modelTriangles);
 
-<<<<<<< Updated upstream
+
             if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
                 numUnblocked += 1.0f;
             }
             if (shadowRay.intersectedTriangle.colour.name == "Red") {
                 numUnblocked += 0.2f;
             }
-=======
-                if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
+
+            if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
                     numUnblocked += 1.0f;
-                }
             }
 
             auto shadowSoftness = glm::clamp(numUnblocked / float(lightPositions.size()), 0.0f, 1.0f);
@@ -553,10 +552,6 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
             green = std::min(255.0f, float(colour.green) * shadowBrightness);
             blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
 
-
-        } else {
-            return {int(red), int(green), int(blue)};
->>>>>>> Stashed changes
         }
 
         auto shadowSoftness = glm::clamp(numUnblocked / float(lightPositions.size()), 0.0f, 1.0f);
