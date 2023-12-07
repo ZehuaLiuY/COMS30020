@@ -26,7 +26,8 @@ void phongShading (DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &
 enum shading {
     Flat,
     Gouraud,
-    Phong
+    Phong,
+    none
 };
 
 enum shadow {

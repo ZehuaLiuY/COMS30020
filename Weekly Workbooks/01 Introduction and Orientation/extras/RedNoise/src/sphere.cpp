@@ -402,34 +402,7 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
     std::string modelColour = closestIntersection.intersectedTriangle.colour.name;
 
     // texture mapping & reflection
-    if(modelColour == "Blue"){
-
-        glm::vec3 reflectedRay = glm::normalize(rayDirection - (2.0f * triangleNormal * glm::dot(rayDirection, triangleNormal)));
-
-        float angle = glm::dot(rayDirection, triangleNormal);
-        float bias = 0.0001f * glm::clamp((1 - glm::abs(angle)), 0.0f, 1.0f);
-
-
-        glm::vec3 reflectedPoint = point + (triangleNormal * bias);
-        Colour reflectionColour = getRayIntesectedColour(reflectedPoint, lightPosition, lightPositions, reflectedRay, modelTriangles, rotateAngle, intensity, loopCount + 1, shadingType, shadowType);
-
-
-        glm::vec3 refractionDirection = getRefractionDirection(rayDirection, triangleNormal, 1.0f, 1.3f);
-        glm::vec3 newPoint = (glm::dot(rayDirection, triangleNormal) < 0) ?
-                             point - (triangleNormal * bias) : // inside
-                             point + (triangleNormal * bias);  // outside
-
-        Colour refractionColour = getRayIntesectedColour(newPoint, lightPosition, lightPositions, refractionDirection, modelTriangles, rotateAngle, intensity, loopCount + 1, shadingType, shadowType);
-
-        float refractiveIndex = getRefractiveIndex(rayDirection, 1.0f, 1.3f, triangleNormal);
-        float reflectiveIndex = 1 - refractiveIndex;
-
-        colour.red = glm::clamp(int ((refractiveIndex * float(refractionColour.red) + reflectiveIndex * float(reflectionColour.red))), 0, 255);
-        colour.green = glm::clamp(int ((refractiveIndex * float(refractionColour.green) + reflectiveIndex * float(reflectionColour.green))), 0, 255);
-        colour.blue = glm::clamp(int ((refractiveIndex * float(refractionColour.blue) + reflectiveIndex * float(reflectionColour.blue))), 0, 255);
-        return colour;
-    }
-    else if(modelColour == "Red"){
+    if(modelColour == "Red"){
 
         glm::vec3 reflectedRay = glm::normalize(rayDirection - (2.0f * triangleNormal * glm::dot(rayDirection, triangleNormal)));
 
@@ -498,6 +471,7 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
         glm::vec3 normalWeight = getNormalWeight(point.x, point.y, closestIntersection.intersectedTriangle);
 
         if (shadingType == Gouraud) {
+            
             glm::vec3 lightDistance0 = v0 - lightPosition;
             glm::vec3 lightDistance1 = v1 - lightPosition;
             glm::vec3 lightDistance2 = v2 - lightPosition;
@@ -519,10 +493,8 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
     else {
         if (modelColour == "logo") {
             triangleNormal = normalMapping(closestIntersection.intersectedTriangle, colour);
-            brightness = processLighting(lightDistance, triangleNormal, view, intensity);
-        } else {
-            brightness = processLighting(lightDistance, triangleNormal, view, intensity);
         }
+        brightness = processLighting(lightDistance, triangleNormal, view, intensity);
     }
 //    colour.red = std::min(255.0f, float(colour.red) * brightness);
 //    colour.green = std::min(255.0f, float(colour.green) * brightness);
@@ -534,40 +506,51 @@ Colour getRayIntesectedColour (glm::vec3 &cameraPosition, glm::vec3 &lightPositi
     // shadow
     float shadowBrightness;
     if (shadowType == Hard) {
-        RayTriangleIntersection shadowRay = getClosestValidIntersection(point + lightDirection * 0.001f, lightDirection, modelTriangles);
-        if (shadowRay.distanceFromCamera < glm::length( lightPosition - point) && shadowRay.triangleIndex != closestIntersection.triangleIndex && modelColour != "sphere" && modelColour != "Blue" ) {
-            shadowBrightness = 0.2f;
+        RayTriangleIntersection shadowRay = getClosestValidIntersection(lightPosition, lightDirection, modelTriangles);
+        if (modelColour != "Red" && modelColour != "sphere" && shadowRay.triangleIndex != closestIntersection.triangleIndex) {
+            shadowBrightness = 0.2f;  // Shadowed areas
+            if (shadowRay.intersectedTriangle.colour.name == "Red") {
+                shadowBrightness = 0.5f;
+            }
         } else {
             shadowBrightness = processLighting(lightDistance, triangleNormal, view, intensity);
         }
         red = std::min(255.0f, float(colour.red) * shadowBrightness);
         green = std::min(255.0f, float(colour.green) * shadowBrightness);
         blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
-
     }
+
     else if (shadowType == Soft) {
-        float numUnblocked = 0;
+        if (modelColour != "sphere") {
+            float numUnblocked = 0;
 
-        for (const glm::vec3 &light : lightPositions) {
-            glm::vec3 softLightDirection = glm::normalize(light - point);
-            glm::vec3 startPoint = point + softLightDirection * 0.001f;
-            RayTriangleIntersection shadowRay = getClosestValidIntersection(startPoint, softLightDirection, modelTriangles);
+            for (const glm::vec3 &light : lightPositions) {
+                glm::vec3 softLightDirection = glm::normalize(light - point);
+                glm::vec3 startPoint = point + softLightDirection * 0.001f;
+                RayTriangleIntersection shadowRay = getClosestValidIntersection(startPoint, softLightDirection, modelTriangles);
 
-            if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
-                numUnblocked += 1.0f;
+                if ((shadowRay.distanceFromCamera >= glm::length(light - closestIntersection.intersectionPoint) || shadowRay.triangleIndex == closestIntersection.triangleIndex)) {
+                    numUnblocked += 1.0f;
+                }
+                if (shadowRay.intersectedTriangle.colour.name == "Red") {
+                    numUnblocked += 0.2f;
+                }
             }
+
+            auto shadowSoftness = glm::clamp(numUnblocked / float(lightPositions.size()), 0.0f, 1.0f);
+
+            shadowBrightness = processLighting(lightDistance, triangleNormal, view, intensity) * shadowSoftness;
+            red = std::min(255.0f, float(colour.red) * shadowBrightness);
+            green = std::min(255.0f, float(colour.green) * shadowBrightness);
+            blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
+
+
+        } else {
+            return {int(red), int(green), int(blue)};
         }
-
-        auto shadowSoftness = glm::clamp(numUnblocked / float(lightPositions.size()), 0.0f, 1.0f);
-        shadowBrightness = processLighting(lightDistance, triangleNormal, view, intensity) * shadowSoftness;
-        red = std::min(255.0f, float(colour.red) * shadowBrightness);
-        green = std::min(255.0f, float(colour.green) * shadowBrightness);
-        blue = std::min(255.0f, float(colour.blue) * shadowBrightness);
-
     }else if (shadowType == None) {
         return {int(red), int(green), int(blue)};
     }
-
     return {int(red), int(green), int(blue)};
 }
 

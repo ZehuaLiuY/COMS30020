@@ -15,8 +15,8 @@ bool orbitSelfActivated = false;
 enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, SoftShadow, Complete };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-shading shadingType = Flat;
-shadow shadowType = None;
+shading shadingType = Phong;
+shadow shadowType = Hard;
 float rotateAngle = 0.0f;
 
 void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition, float &intensity,
@@ -33,13 +33,13 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     // std::vector<std::pair<CanvasTriangle, Colour>> sTriangles = triangleTransformer(sphereTriangles, sphereCamPos, cameraOrientation);
 
     if(orbitClockwiseActivated){
-        orbitClockwise(cameraPosition, cameraOrientation, 0.01);
+        orbitClockwise(cameraPosition, cameraOrientation, 0.05);
     }
     if (orbitUpActivated){
-        orbitUp(cameraPosition, cameraOrientation, 0.01);
+        orbitUp(cameraPosition, cameraOrientation, 0.05);
     }
     if (orbitSelfActivated){
-        orbitSelf(cameraPosition, cameraOrientation, 0.01);
+        orbitSelf(cameraPosition, cameraOrientation, 0.05);
     }
 
     if (currentMode == RenderingMode::Complete) {
@@ -61,7 +61,7 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             break;
         case RenderingMode::RayTraced: // Hard shadow
             resetDepthBuffer();
-            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition, intensity);
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition, intensity);
             break;
         case RenderingMode::Flat:
             resetDepthBuffer();

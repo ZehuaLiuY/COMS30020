@@ -22,23 +22,15 @@
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/3.27.6/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/output.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.bmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/output.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/build/output.ppm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-11-28T23-52-31-0738.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sphere.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sphere.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,6 +318,40 @@
       <workItem from="1701826743110" duration="1371000" />
       <workItem from="1701833840954" duration="2369000" />
       <workItem from="1701890083422" duration="1098000" />
+      <workItem from="1701891222847" duration="1039000" />
+      <workItem from="1701892276275" duration="631000" />
+      <workItem from="1701909950126" duration="1768000" />
+      <workItem from="1701911734328" duration="390000" />
+      <workItem from="1701912141187" duration="532000" />
+      <workItem from="1701912684862" duration="617000" />
+      <workItem from="1701913313180" duration="532000" />
+      <workItem from="1701913859011" duration="604000" />
+      <workItem from="1701914614266" duration="1021000" />
+      <workItem from="1701915792697" duration="421000" />
+      <workItem from="1701916229303" duration="489000" />
+      <workItem from="1701916730272" duration="203000" />
+      <workItem from="1701916945222" duration="523000" />
+      <workItem from="1701917482982" duration="403000" />
+      <workItem from="1701917898227" duration="1155000" />
+      <workItem from="1701919261107" duration="480000" />
+      <workItem from="1701919754810" duration="551000" />
+      <workItem from="1701920325822" duration="516000" />
+      <workItem from="1701920854894" duration="633000" />
+      <workItem from="1701921535457" duration="590000" />
+      <workItem from="1701922140393" duration="498000" />
+      <workItem from="1701922653251" duration="408000" />
+      <workItem from="1701923072753" duration="489000" />
+      <workItem from="1701923576092" duration="724000" />
+      <workItem from="1701924312922" duration="465000" />
+      <workItem from="1701924790550" duration="547000" />
+      <workItem from="1701925349631" duration="617000" />
+      <workItem from="1701925978199" duration="435000" />
+      <workItem from="1701926423656" duration="445000" />
+      <workItem from="1701926882179" duration="469000" />
+      <workItem from="1701927362936" duration="385000" />
+      <workItem from="1701927759348" duration="540000" />
+      <workItem from="1701928312015" duration="595000" />
+      <workItem from="1701928920564" duration="3000" />
     </task>
     <servers />
   </component>
