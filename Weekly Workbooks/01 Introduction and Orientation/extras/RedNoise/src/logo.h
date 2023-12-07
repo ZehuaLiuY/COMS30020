@@ -19,7 +19,7 @@
 #include "wireframes.h"
 
 std::vector<ModelTriangle> readLogoFile(const std::string &filename, float scale);
-
+std::vector<ModelTriangle> readLogoFiles(const std::string& logoFilename, const std::string& mtlFilename, float scalingFactor);
 void renderLogoWireframe(DrawingWindow &window, std::vector<std::pair<CanvasTriangle, Colour>> &sTriangles);
 void renderLogoRasterised(DrawingWindow &window, std::vector<std::pair<CanvasTriangle, Colour>> &sTriangles);
 #endif //LOGO_H

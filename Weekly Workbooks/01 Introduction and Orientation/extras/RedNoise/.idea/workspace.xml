@@ -21,46 +21,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36945e4a-4243-4786-b367-c6da91df8d7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/logo.cpp.o.d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/adjuster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/files/logo_centered.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/files/sphere_centered.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logo.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logo.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/compiler_depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/ray.cpp.o" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/triangle.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/build/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-3fac1d7f4aef626c531b.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-11-15T18-33-30-0022.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-RedNoise-Debug-adfb6076d268391205f0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RedNoise.dir/libs/sdw/ModelTriangle.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/RedNoise.dir/src/sphere.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/RedNoise" beforeDir="false" afterPath="$PROJECT_DIR$/build/RedNoise" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RedNoise.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/RedNoise.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ray.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ray.cpp" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/src/sphere.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sphere.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/triangle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/triangle.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/wireframes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/wireframes.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +58,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -113,7 +89,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;week-7&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Extra&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -126,17 +102,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/files" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.adjuster">
+  <component name="RunManager" selected="CMake Application.RedNoise">
     <configuration name="RedNoise" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RedNoise" TARGET_NAME="RedNoise" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RedNoise" RUN_TARGET_NAME="RedNoise">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -214,6 +186,214 @@
       <workItem from="1701208200929" duration="185000" />
       <workItem from="1701208410681" duration="8694000" />
       <workItem from="1701262053470" duration="2122000" />
+      <workItem from="1701264809112" duration="20499000" />
+      <workItem from="1701298969072" duration="159000" />
+      <workItem from="1701299139364" duration="4808000" />
+      <workItem from="1701305729958" duration="10278000" />
+      <workItem from="1701394660444" duration="3943000" />
+      <workItem from="1701400357724" duration="11225000" />
+      <workItem from="1701412713975" duration="2131000" />
+      <workItem from="1701414860678" duration="2401000" />
+      <workItem from="1701462251540" duration="724000" />
+      <workItem from="1701462995720" duration="9937000" />
+      <workItem from="1701482626087" duration="4621000" />
+      <workItem from="1701489281052" duration="768000" />
+      <workItem from="1701490066249" duration="620000" />
+      <workItem from="1701490702363" duration="1703000" />
+      <workItem from="1701492421419" duration="414000" />
+      <workItem from="1701492850250" duration="841000" />
+      <workItem from="1701493707837" duration="654000" />
+      <workItem from="1701494372883" duration="829000" />
+      <workItem from="1701527811299" duration="919000" />
+      <workItem from="1701531945676" duration="1311000" />
+      <workItem from="1701536330993" duration="197000" />
+      <workItem from="1701536543283" duration="868000" />
+      <workItem from="1701537429114" duration="106000" />
+      <workItem from="1701537550045" duration="563000" />
+      <workItem from="1701538130737" duration="2150000" />
+      <workItem from="1701547123084" duration="1563000" />
+      <workItem from="1701548700837" duration="1687000" />
+      <workItem from="1701550407605" duration="382000" />
+      <workItem from="1701550802939" duration="542000" />
+      <workItem from="1701551362166" duration="877000" />
+      <workItem from="1701552732015" duration="1202000" />
+      <workItem from="1701553953260" duration="778000" />
+      <workItem from="1701554747440" duration="1830000" />
+      <workItem from="1701556624107" duration="1899000" />
+      <workItem from="1701559281022" duration="672000" />
+      <workItem from="1701560022681" duration="1021000" />
+      <workItem from="1701562036860" duration="1108000" />
+      <workItem from="1701563166043" duration="616000" />
+      <workItem from="1701597195474" duration="600000" />
+      <workItem from="1701597808143" duration="333000" />
+      <workItem from="1701598153441" duration="1096000" />
+      <workItem from="1701599266084" duration="613000" />
+      <workItem from="1701599898935" duration="775000" />
+      <workItem from="1701600693680" duration="358000" />
+      <workItem from="1701603107860" duration="1707000" />
+      <workItem from="1701616574968" duration="3491000" />
+      <workItem from="1701620275596" duration="377000" />
+      <workItem from="1701620667938" duration="1970000" />
+      <workItem from="1701622656926" duration="542000" />
+      <workItem from="1701623210786" duration="1603000" />
+      <workItem from="1701624829609" duration="1083000" />
+      <workItem from="1701626559661" duration="402000" />
+      <workItem from="1701626973501" duration="1889000" />
+      <workItem from="1701631665040" duration="754000" />
+      <workItem from="1701633020859" duration="1186000" />
+      <workItem from="1701634220919" duration="266000" />
+      <workItem from="1701634497760" duration="400000" />
+      <workItem from="1701634913071" duration="299000" />
+      <workItem from="1701635226360" duration="1239000" />
+      <workItem from="1701636539686" duration="690000" />
+      <workItem from="1701637247783" duration="475000" />
+      <workItem from="1701637736166" duration="96000" />
+      <workItem from="1701637847843" duration="438000" />
+      <workItem from="1701638300382" duration="686000" />
+      <workItem from="1701640228323" duration="1237000" />
+      <workItem from="1701641679182" duration="496000" />
+      <workItem from="1701642188207" duration="608000" />
+      <workItem from="1701642901154" duration="1536000" />
+      <workItem from="1701644872582" duration="1984000" />
+      <workItem from="1701648069985" duration="617000" />
+      <workItem from="1701648704872" duration="835000" />
+      <workItem from="1701649558903" duration="688000" />
+      <workItem from="1701650261042" duration="269000" />
+      <workItem from="1701650545540" duration="557000" />
+      <workItem from="1701651119321" duration="693000" />
+      <workItem from="1701651828204" duration="481000" />
+      <workItem from="1701652324623" duration="513000" />
+      <workItem from="1701652852641" duration="485000" />
+      <workItem from="1701653350377" duration="1241000" />
+      <workItem from="1701697791156" duration="198000" />
+      <workItem from="1701697999548" duration="583000" />
+      <workItem from="1701698594277" duration="106000" />
+      <workItem from="1701698708475" duration="149000" />
+      <workItem from="1701698866184" duration="177000" />
+      <workItem from="1701699053647" duration="466000" />
+      <workItem from="1701699531205" duration="1725000" />
+      <workItem from="1701701631126" duration="26000" />
+      <workItem from="1701701939362" duration="2466000" />
+      <workItem from="1701704494525" duration="426000" />
+      <workItem from="1701704931012" duration="343000" />
+      <workItem from="1701705395808" duration="319000" />
+      <workItem from="1701705724655" duration="605000" />
+      <workItem from="1701706341833" duration="958000" />
+      <workItem from="1701707311982" duration="714000" />
+      <workItem from="1701708037645" duration="831000" />
+      <workItem from="1701708917558" duration="590000" />
+      <workItem from="1701709517770" duration="2343000" />
+      <workItem from="1701728868141" duration="504000" />
+      <workItem from="1701729383708" duration="781000" />
+      <workItem from="1701730183556" duration="1028000" />
+      <workItem from="1701732762773" duration="709000" />
+      <workItem from="1701733590450" duration="609000" />
+      <workItem from="1701734612033" duration="718000" />
+      <workItem from="1701735860154" duration="1755000" />
+      <workItem from="1701737658765" duration="668000" />
+      <workItem from="1701738434358" duration="2369000" />
+      <workItem from="1701740851024" duration="1068000" />
+      <workItem from="1701742174247" duration="2024000" />
+      <workItem from="1701756584898" duration="875000" />
+      <workItem from="1701758051066" duration="1008000" />
+      <workItem from="1701759754491" duration="598000" />
+      <workItem from="1701764332917" duration="1015000" />
+      <workItem from="1701765505253" duration="639000" />
+      <workItem from="1701766217517" duration="1702000" />
+      <workItem from="1701768213086" duration="250000" />
+      <workItem from="1701768473367" duration="59000" />
+      <workItem from="1701768544229" duration="703000" />
+      <workItem from="1701769433549" duration="833000" />
+      <workItem from="1701770552663" duration="895000" />
+      <workItem from="1701793101839" duration="3414000" />
+      <workItem from="1701797312743" duration="1694000" />
+      <workItem from="1701799839048" duration="993000" />
+      <workItem from="1701802656078" duration="615000" />
+      <workItem from="1701804080783" duration="495000" />
+      <workItem from="1701804585407" duration="603000" />
+      <workItem from="1701805199296" duration="4280000" />
+      <workItem from="1701812207779" duration="613000" />
+      <workItem from="1701813639850" duration="668000" />
+      <workItem from="1701821739131" duration="556000" />
+      <workItem from="1701822307281" duration="1119000" />
+      <workItem from="1701823793730" duration="1351000" />
+      <workItem from="1701825165486" duration="1200000" />
+      <workItem from="1701826743110" duration="1371000" />
+      <workItem from="1701833840954" duration="2369000" />
+      <workItem from="1701890083422" duration="1098000" />
+      <workItem from="1701891222847" duration="1039000" />
+      <workItem from="1701892276275" duration="631000" />
+      <workItem from="1701909950126" duration="1768000" />
+      <workItem from="1701911734328" duration="390000" />
+      <workItem from="1701912141187" duration="532000" />
+      <workItem from="1701912684862" duration="617000" />
+      <workItem from="1701913313180" duration="532000" />
+      <workItem from="1701913859011" duration="604000" />
+      <workItem from="1701914614266" duration="1021000" />
+      <workItem from="1701915792697" duration="421000" />
+      <workItem from="1701916229303" duration="489000" />
+      <workItem from="1701916730272" duration="203000" />
+      <workItem from="1701916945222" duration="523000" />
+      <workItem from="1701917482982" duration="403000" />
+      <workItem from="1701917898227" duration="1155000" />
+      <workItem from="1701919261107" duration="480000" />
+      <workItem from="1701919754810" duration="551000" />
+      <workItem from="1701920325822" duration="516000" />
+      <workItem from="1701920854894" duration="633000" />
+      <workItem from="1701921535457" duration="590000" />
+      <workItem from="1701922140393" duration="498000" />
+      <workItem from="1701922653251" duration="408000" />
+      <workItem from="1701923072753" duration="489000" />
+      <workItem from="1701923576092" duration="724000" />
+      <workItem from="1701924312922" duration="465000" />
+      <workItem from="1701924790550" duration="547000" />
+      <workItem from="1701925349631" duration="617000" />
+      <workItem from="1701925978199" duration="435000" />
+      <workItem from="1701926423656" duration="445000" />
+      <workItem from="1701926882179" duration="469000" />
+      <workItem from="1701927362936" duration="385000" />
+      <workItem from="1701927759348" duration="540000" />
+      <workItem from="1701928312015" duration="595000" />
+<<<<<<< Updated upstream
+      <workItem from="1701928920564" duration="655000" />
+      <workItem from="1701929586687" duration="406000" />
+      <workItem from="1701930003007" duration="754000" />
+      <workItem from="1701930769362" duration="392000" />
+      <workItem from="1701931171275" duration="734000" />
+      <workItem from="1701931916785" duration="525000" />
+      <workItem from="1701932452652" duration="852000" />
+      <workItem from="1701933317672" duration="579000" />
+      <workItem from="1701933908788" duration="428000" />
+      <workItem from="1701934347906" duration="404000" />
+      <workItem from="1701934762997" duration="991000" />
+      <workItem from="1701935768585" duration="738000" />
+      <workItem from="1701936524414" duration="587000" />
+      <workItem from="1701937123777" duration="370000" />
+      <workItem from="1701937506014" duration="545000" />
+      <workItem from="1701938062354" duration="618000" />
+      <workItem from="1701938729430" duration="393000" />
+      <workItem from="1701939132917" duration="660000" />
+      <workItem from="1701939808724" duration="524000" />
+      <workItem from="1701940350445" duration="450000" />
+=======
+      <workItem from="1701928920564" duration="3000" />
+      <workItem from="1701944906031" duration="896000" />
+      <workItem from="1701945826962" duration="470000" />
+      <workItem from="1701946309728" duration="713000" />
+      <workItem from="1701964573277" duration="466000" />
+      <workItem from="1701965050906" duration="358000" />
+      <workItem from="1701965420827" duration="538000" />
+      <workItem from="1701965973456" duration="604000" />
+      <workItem from="1701969675864" duration="903000" />
+      <workItem from="1701971215807" duration="116000" />
+      <workItem from="1701971353150" duration="1187000" />
+      <workItem from="1701972553397" duration="766000" />
+      <workItem from="1701973384362" duration="299000" />
+      <workItem from="1701973718374" duration="793000" />
+      <workItem from="1701980369677" duration="649000" />
+      <workItem from="1701981227985" duration="1225000" />
+      <workItem from="1701986977840" duration="1000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

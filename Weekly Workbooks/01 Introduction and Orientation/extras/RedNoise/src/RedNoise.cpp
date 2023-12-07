@@ -8,29 +8,44 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-bool orbitActivated = false;
+bool orbitClockwiseActivated = false;
+bool orbitUpActivated = false;
+bool orbitSelfActivated = false;
 
-enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, Logo };
+enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, SoftShadow, Complete };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-std::vector<ModelTriangle> mergeModelTriangles(const std::vector<ModelTriangle>& model1, const std::vector<ModelTriangle>& model2) {
-    std::vector<ModelTriangle> mergedModel = model1;
-    mergedModel.insert(mergedModel.end(), model2.begin(), model2.end());
-    return mergedModel;
-}
+shading shadingType = none;
+shadow shadowType = Hard;
+float rotateAngle = 0.0f;
 
-void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition,
-          std::vector<ModelTriangle> &modelTriangles, std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &mergedModel, std::vector<ModelTriangle> &completeModel) {
-    // Cornell Box's modelTriangles
-    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
-    // complete modelTriangles
-    std::vector<std::pair<CanvasTriangle, Colour>> cTriangles = triangleTransformer(completeModel, cameraPosition, cameraOrientation);
+void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightPosition, float &intensity,
+          std::vector<ModelTriangle> &modelTriangles,  std::vector<ModelTriangle> &sphereTriangles, std::vector<ModelTriangle> &completeModel, std::vector<ModelTriangle> &completeTextModel) {
+    // complete model triangles without texture
+    std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(completeModel, cameraPosition, cameraOrientation);
+    // complete model with texture
+    std::vector<std::pair<CanvasTriangle, Colour>> cTriangles = triangleTransformer(completeTextModel, cameraPosition, cameraOrientation);
+    // test processTriangles function
+    std::vector<triangleData> triangleDatas = processTriangles(modelTriangles, cameraPosition, cameraOrientation);
 
-    glm::vec3 sphereCamPos = glm::vec3(0.0, 0.0, 4.0);
-    glm::vec3 sphereLightPos = glm::vec3(0.5, 0.8, 1.6);
+    glm::vec3 sphereCamPos = glm::vec3(0.8, 1.2, 4.0);
+    glm::vec3 sphereLightPos = glm::vec3(0.0, 0.3, 1.5);
     // std::vector<std::pair<CanvasTriangle, Colour>> sTriangles = triangleTransformer(sphereTriangles, sphereCamPos, cameraOrientation);
-    if(orbitActivated){
-        orbitClockwise(cameraPosition, cameraOrientation, 0.001);
+
+    if(orbitClockwiseActivated){
+        orbitClockwise(cameraPosition, cameraOrientation, 0.05);
+    }
+    if (orbitUpActivated){
+        orbitUp(cameraPosition, cameraOrientation, 0.05);
+    }
+    if (orbitSelfActivated){
+        orbitSelf(cameraPosition, cameraOrientation, 0.05);
+    }
+
+    if (currentMode == RenderingMode::Complete) {
+        rotateAngle += glm::radians(10.0f);
+        if (rotateAngle >= 2 * M_PI) rotateAngle -= 2 * M_PI;
+        std::cout << "rotateAngle in draw: " << rotateAngle << std::endl;
     }
 
     window.clearPixels();
@@ -38,19 +53,19 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
     switch (currentMode) {
         case RenderingMode::Wireframe:
             resetDepthBuffer();
-            renderWireframe(window, cTriangles);
+            renderWireframe(window, triangles);
             break;
         case RenderingMode::Rasterised:
             resetDepthBuffer();
             renderRasterised(window,  triangles);
             break;
-        case RenderingMode::RayTraced:
+        case RenderingMode::RayTraced: // Hard shadow
             resetDepthBuffer();
-            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition);
+            drawRayTracedScene(window, cameraPosition, cameraOrientation, 2.0, completeModel, lightPosition, intensity);
             break;
         case RenderingMode::Flat:
             resetDepthBuffer();
-            flatShading(window, cameraPosition, cameraOrientation, sphereLightPos, 2.0, sphereTriangles);
+            flatShading(window, cameraPosition, cameraOrientation, intensity, lightPosition, 2.0, sphereTriangles);
             break;
         case RenderingMode::SphereGouraud:
             // cameraPos 0.0 0.7 4.0
@@ -58,21 +73,29 @@ void draw(DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOri
             resetDepthBuffer();
             // renderSphereRasterised(window, sTriangles);
             // renderSphereWireframe(window, sTriangles);
-            gouraudShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, sphereTriangles);
+            gouraudShading(window, cameraPosition, cameraOrientation, intensity, lightPosition, 2.0, sphereTriangles);
             break;
         case RenderingMode::SpherePhong:
+            // 0.8 1.2 4
+            // -0.1 -0.1 1.8
             resetDepthBuffer();
-            phongShading(window, cameraPosition, cameraOrientation, lightPosition, 2.0, completeModel);
+            phongShading(window, cameraPosition, cameraOrientation,intensity, lightPosition, 2.0, sphereTriangles);
             break;
 
-        case RenderingMode::Logo: // logoCamPos 0.3 0.3 4.0
+        case RenderingMode::SoftShadow:
             resetDepthBuffer();
-            // renderLogoRasterised(window, cTriangles);
+            drawRayTracedSceneSoft(window, cameraPosition, cameraOrientation, 2.0, modelTriangles, lightPosition, intensity);
+            break;
+
+        case RenderingMode::Complete:
+            resetDepthBuffer();
+            rayTrace(window, cameraPosition, cameraOrientation, lightPosition, completeTextModel, rotateAngle, intensity, shadingType, shadowType);
+            break;
     }
 }
 
 
-void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightSource) {
+void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, glm::vec3 &lightSource, float &intensity) {
 
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_LEFT) {
@@ -196,9 +219,17 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
                 std::cout << "\n";
             }
         }
+        else if (event.key.keysym.sym == SDLK_i) {
+            window.clearPixels();
+            orbitSelfActivated = !orbitSelfActivated;
+        }
         else if (event.key.keysym.sym == SDLK_o) {
             window.clearPixels();
-            orbitActivated = !orbitActivated;
+            orbitClockwiseActivated = !orbitClockwiseActivated;
+        }
+        else if (event.key.keysym.sym == SDLK_p) {
+            window.clearPixels();
+            orbitUpActivated = !orbitUpActivated;
         }
         // model shifting
         else if (event.key.keysym.sym == SDLK_1) {
@@ -220,7 +251,23 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             currentMode = RenderingMode::SpherePhong;
         }
         else if (event.key.keysym.sym == SDLK_7) {
-            currentMode = RenderingMode::Logo;
+            currentMode = RenderingMode::SoftShadow;
+        }
+        else if (event.key.keysym.sym == SDLK_8) {
+            currentMode = RenderingMode::Complete;
+        }
+        else if (event.key.keysym.sym == SDLK_d) {
+            intensity += 1.0f;
+            std::cout << "intensity: " << intensity << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_g) {
+            intensity -= 1.0f;
+            std::cout << "intensity: " << intensity << std::endl;
+        }
+        else if (event.key.keysym.sym == SDLK_z) {
+            window.clearPixels();
+            resetDepthBuffer();
+            lightSource = glm::vec3(0, 0.3, 0.3);
         }
         // light position shifting
         else if (event.key.keysym.sym == SDLK_x) {
@@ -260,11 +307,18 @@ void handleEvent(SDL_Event event, DrawingWindow &window, glm::vec3 &cameraPositi
             std::cout << lightSource.x << " " << lightSource.y << " " << lightSource.z << std::endl;
         }
 
-    } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+    } else if (event.type == SDLK_h) {
         window.savePPM("output.ppm");
         window.saveBMP("output.bmp");
     }
 }
+std::vector<ModelTriangle> mergeModelTriangles(const std::vector<ModelTriangle>& model1, const std::vector<ModelTriangle>& model2) {
+    std::vector<ModelTriangle> mergedModel = model1;
+    mergedModel.insert(mergedModel.end(), model2.begin(), model2.end());
+    return mergedModel;
+}
+
+
 
 int main(int argc, char *argv[]) {
     glm::mat3 cameraOrientation = glm::mat3(
@@ -276,25 +330,30 @@ int main(int argc, char *argv[]) {
     glm::vec3 cameraPosition = glm::vec3 (0.0, 0.0, 4.0);
 
     glm::vec3 lightPosition = glm::vec3(0.0, 0.3, 0.3);
-    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/textured-cornell-box.obj", "../src/files/textured-cornell-box.mtl", 0.35);
-    // std::vector<std::pair<CanvasTriangle, Colour>> triangles = triangleTransformer(modelTriangles, cameraPosition, cameraOrientation);
 
+    // without texture
+    std::vector<ModelTriangle> modelTriangles = readFiles("../src/files/cornell-box.obj", "../src/files/cornell-box.mtl", 0.35);
     std::vector<ModelTriangle> sphereTriangles = readSphereFile("../src/files/sphere_updated.obj",0.35);
-    // std::vector<std::pair<CanvasTriangle, Colour>> sphereCanvasTriangles = triangleTransformer(sphereTriangles, cameraPosition, cameraOrientation);
-    std::vector<ModelTriangle> logoTriangles = readLogoFile("../src/files/logo_updated.obj",0.0015);
+    std::vector<ModelTriangle> logoTriangles = readLogoFiles("../src/files/logo_updated.obj", "../src/files/materials.mtl", 0.0015);
 
     std::vector<ModelTriangle> mergedModel = mergeModelTriangles(modelTriangles, logoTriangles);
     std::vector<ModelTriangle> completeModel = mergeModelTriangles(mergedModel, sphereTriangles);
+
+    // texture
+    std::vector<ModelTriangle> textModelTriangles = readFiles("../src/files/textured-cornell-box.obj", "../src/files/textured-cornell-box.mtl", 0.35);
+    std::vector<ModelTriangle> mergedTextModel = mergeModelTriangles(textModelTriangles, logoTriangles);
+    std::vector<ModelTriangle> completeTextModel = mergeModelTriangles(mergedTextModel, sphereTriangles);
+
+    float intensity = 12.0f;
 
     DrawingWindow window = DrawingWindow(WIDTH, HEIGHT, false);
     SDL_Event event;
 
     while (true) {
-//        resetDepthBuffer();
-//        window.clearPixels();
         // We MUST poll for events - otherwise the window will freeze !
-        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightPosition);
-        draw(window, cameraPosition, cameraOrientation, lightPosition, modelTriangles, sphereTriangles, mergedModel, completeModel );
+        if (window.pollForInputEvents(event)) handleEvent(event, window, cameraPosition, cameraOrientation, lightPosition, intensity);
+        draw(window, cameraPosition, cameraOrientation, lightPosition, intensity,
+             modelTriangles, sphereTriangles, completeModel, completeTextModel);
         // Need to render the frame at the end, or nothing actually gets shown on the screen !
         window.renderFrame();
     }

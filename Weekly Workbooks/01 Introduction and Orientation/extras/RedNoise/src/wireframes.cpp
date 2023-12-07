@@ -14,31 +14,52 @@ std::vector<ModelTriangle> loadOBJ(const std::string &filename, std::map<std::st
     std::string line;
     std::vector<glm::vec3> vertices;
     std::vector<ModelTriangle> modelTriangles;
-    std::string index;
+    std::string materialName;
+    std::vector<TexturePoint> texturePoints;
 
-    // get each line of the file
     while (std::getline(objFile, line)) {
         std::vector<std::string> values = split(line, ' ');
-        // if the line is a new vertex, add it to the vertices, if it's a new triangle, add it to the modelTriangles
-        if (values[0] == "usemtl") {
-            index = values[1];
-        } else if (values[0] == "v") {
-            vertices.push_back(scale * glm::vec3 (std::stof(values[1]), std::stof(values[2]), std::stof(values[3])));
-        } else if (values[0] == "f") {
-            glm::vec3 vertex1 = vertices[std::stoi(values[1].substr(0, values[1].find('/'))) - 1];
-            glm::vec3 vertex2 = vertices[std::stoi(values[2].substr(0, values[2].find('/'))) - 1];
-            glm::vec3 vertex3 = vertices[std::stoi(values[3].substr(0, values[3].find('/'))) - 1];
-            ModelTriangle currentTriangle = ModelTriangle(vertex1, vertex2, vertex3, palette[index]);
-            currentTriangle.normal = getTriangleNormal(currentTriangle);
-            modelTriangles.push_back(currentTriangle);
-            // std::cout << "Assigned color for triangle: " << palette[index] << std::endl;
+        if (values.empty()) continue;
 
+        if (values[0] == "usemtl") {
+            materialName = values[1];
+        } else if (values[0] == "vt") {
+            texturePoints.emplace_back(std::stof(values[1]), std::stof(values[2]));
+        } else if (values[0] == "v") {
+            vertices.push_back(scale * glm::vec3(std::stod(values[1]), std::stod(values[2]), std::stod(values[3])));
+        } else if (values[0] == "f") {
+            glm::vec3 vertex1 = vertices[std::stoi(split(values[1], '/')[0]) - 1];
+            glm::vec3 vertex2 = vertices[std::stoi(split(values[2], '/')[0]) - 1];
+            glm::vec3 vertex3 = vertices[std::stoi(split(values[3], '/')[0]) - 1];
+            ModelTriangle currentTriangle(vertex1, vertex2, vertex3, palette[materialName]);
+
+            if (materialName == "Cobbles" && values.size() >= 4) {
+                for (int i = 0; i < 3; ++i) {
+                    std::vector<std::string> vertexData = split(values[i + 1], '/');
+                    if (vertexData.size() > 1) {
+                        int textureIndex = std::stoi(vertexData[1]) - 1;
+                        if (textureIndex >= 0 && textureIndex < static_cast<int>(texturePoints.size())) {
+                            currentTriangle.texturePoints[i] = texturePoints[textureIndex];
+                        }
+                    }
+                }
+            }
+
+//            std::cout << "Texture Point 1: " << currentTriangle.texturePoints[0].x << ", " << currentTriangle.texturePoints[0].y << std::endl;
+//            std::cout << "Texture Point 2: " << currentTriangle.texturePoints[1].x << ", " << currentTriangle.texturePoints[1].y << std::endl;
+//            std::cout << "Texture Point 3: " << currentTriangle.texturePoints[2].x << ", " << currentTriangle.texturePoints[2].y << std::endl;
+
+            currentTriangle.normal = getTriangleNormal(currentTriangle);
+            currentTriangle.colour.name = materialName;
+            modelTriangles.push_back(currentTriangle);
         }
     }
 
     objFile.close();
     return modelTriangles;
 }
+
+
 
 // Task 3: read mtl file
 std::map<std::string, Colour> loadMTL(const std::string &filename) {
@@ -337,6 +358,15 @@ void rotateClock(glm::vec3& cameraPosition, glm::mat3& cameraOrientation, float 
     lookAt(cameraPosition, cameraOrientation);
 }
 
+//void rotateSelf(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
+//    glm::mat3 rotationMatrix(
+//            std::cos(angle), -1 * std::sin(angle), 0,
+//            std::sin(angle), std::cos(angle), 0,
+//            0, 0, 1);
+//    cameraPosition = rotationMatrix * cameraPosition;
+//    lookAt(cameraPosition, cameraOrientation);
+//}
+
 void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     // (0,0,0) is the centre of the scene
     glm::vec3 forward = glm::normalize(cameraPosition - glm::vec3(0, 0, 0));
@@ -348,6 +378,63 @@ void lookAt(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
     cameraOrientation[2] = forward;
 }
 
-void orbitClockwise(glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
+void orbitClockwise (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
     rotateClock(cameraPosition, cameraOrientation, step);
+}
+
+void orbitUp (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
+    rotateUp(cameraPosition, cameraOrientation, step);
+}
+
+//void orbitSelf (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float step) {
+//    rotateSelf(cameraPosition, cameraOrientation, step);
+//}
+
+//void orbitClockwise (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
+//    glm::quat rotation = glm::angleAxis(angle, glm::vec3(0, -1, 0));
+//    cameraPosition = rotation * cameraPosition;
+//    cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
+//}
+//
+//void orbitUp (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
+//    glm::quat rotation = glm::angleAxis(angle, glm::vec3(-1, 0, 0));
+//    cameraPosition = rotation * cameraPosition;
+//    cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
+//}
+
+void orbitSelf (glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation, float angle) {
+    glm::quat rotation = glm::angleAxis(angle, glm::vec3(0, 0, -1));
+    cameraPosition = rotation * cameraPosition;
+    cameraOrientation = glm::mat3_cast(rotation) * cameraOrientation;
+}
+
+std::vector<triangleData> processTriangles(const std::vector<ModelTriangle> &modelTriangles, glm::vec3 &cameraPosition, glm::mat3 &cameraOrientation) {
+    std::vector<triangleData> canvasTriangles;
+
+    float focalLength = 2.0;
+
+    for (size_t i = 0; i < modelTriangles.size(); i++) {
+        const ModelTriangle &modelTriangle = modelTriangles[i];
+        std::vector<CanvasPoint> canvasPoints;
+
+        for (const glm::vec3 &point3d : modelTriangle.vertices) {
+            CanvasPoint canvasPoint = getCanvasIntersectionPoint(cameraPosition, cameraOrientation, point3d, focalLength);
+            canvasPoints.push_back(canvasPoint);
+        }
+
+        CanvasTriangle canvasTriangle = CanvasTriangle(canvasPoints[0], canvasPoints[1], canvasPoints[2]);
+        Colour colour = modelTriangle.colour;
+        canvasTriangles.emplace_back(canvasTriangle, colour, i);  // 存储 CanvasTriangle、颜色和索引
+    }
+
+    return canvasTriangles;
+}
+
+void testProcess(DrawingWindow &window, std::vector<triangleData> &triangles) {
+    for (const auto& triangle : triangles) {
+        CanvasTriangle canvasTriangle = triangle.triangle;
+        Colour fillColour = triangle.colour;
+        drawFilledTriangles(window, canvasTriangle, fillColour);
+        // std::cout << "Triangle " << triangle.modelTriangleIndex << " drawn" << std::endl;
+    }
 }

@@ -1,42 +1,57 @@
 #include "sphere.h"
 
-std::vector<ModelTriangle> readLogoFile(const std::string &filename, float scale) {
-    std::ifstream objFile(filename);
-    if (!objFile.is_open()) {
+std::vector<ModelTriangle> readLogoFile(const std::string &filename, std::map<std::string, Colour> palette, float scale) {
+    std::ifstream logoFile(filename);
+    if (!logoFile.is_open()) {
         std::cerr << "Failed to open the OBJ file: " << filename << std::endl;
         return {};
     }
 
-    std::vector<ModelTriangle> modelTriangles;
-    std::vector<glm::vec3> vertices;
     std::string line;
+    std::vector<glm::vec3> vertices;
+    std::vector<ModelTriangle> modelTriangles;
+    std::string materialName;
+    std::vector<TexturePoint> texturePoints;
 
-    while (std::getline(objFile, line)) {
+    while (std::getline(logoFile, line)) {
         std::vector<std::string> values = split(line, ' ');
-        if (values.empty()) continue;
-
-        if (values[0] == "v") {
-            try {
-                vertices.push_back(scale * glm::vec3(std::stof(values[1]), std::stof(values[2]), std::stof(values[3])));
-            } catch (const std::exception& e) {
-                std::cerr << "Error parsing vertex: " << line << std::endl;
-            }
+        if (values[0] == "usemtl") {
+            materialName = values[1];
+        } else if (values[0] == "vt") {
+            texturePoints.push_back(TexturePoint(std::stof(values[1]), std::stof(values[2])));
+        } else if (values[0] == "v") {
+            vertices.push_back(scale * glm::vec3(std::stof(values[1]), std::stof(values[2]), std::stof(values[3])));
         } else if (values[0] == "f") {
-            try {
-                glm::vec3 vertex1 = vertices[std::stoi(values[1]) - 1];
-                glm::vec3 vertex2 = vertices[std::stoi(values[2]) - 1];
-                glm::vec3 vertex3 = vertices[std::stoi(values[3]) - 1];
-                Colour colour(255, 255, 255);
-                ModelTriangle currentTriangle(vertex1, vertex2, vertex3, colour);
-                currentTriangle.normal = getTriangleNormal(currentTriangle);
-                modelTriangles.push_back(currentTriangle);
-            } catch (const std::exception& e) {
-                std::cerr << "Error parsing face: " << line << std::endl;
+            glm::vec3 vertex[3];
+            TexturePoint texturePoint[3];
+            for (int i = 0; i < 3; ++i) {
+                std::stringstream vertexStream(values[i + 1]);
+                std::string vertexValue;
+                int j = 0;
+                while (std::getline(vertexStream, vertexValue, '/')) {
+                    if (j == 0) vertex[i] = vertices[std::stoi(vertexValue) - 1];
+                    else if (j == 1 && !vertexValue.empty()) {
+                        texturePoint[i] = texturePoints[std::stoi(vertexValue) - 1];
+                    }
+                    j++;
+                }
             }
+            ModelTriangle currentTriangle(vertex[0], vertex[1], vertex[2], palette[materialName]);
+            currentTriangle.texturePoints = {texturePoint[0], texturePoint[1], texturePoint[2]};
+            currentTriangle.normal = getTriangleNormal(currentTriangle);
+            currentTriangle.colour.name = "logo";
+            modelTriangles.push_back(currentTriangle);
         }
     }
 
-    objFile.close();
+    logoFile.close();
+    return modelTriangles;
+}
+
+
+std::vector<ModelTriangle> readLogoFiles(const std::string& logoFilename, const std::string& mtlFilename, float scalingFactor) {
+    std::map<std::string, Colour> palette = loadMTL(mtlFilename);
+    std::vector<ModelTriangle> modelTriangles = readLogoFile(logoFilename, palette, scalingFactor);
     return modelTriangles;
 }
 
