@@ -15,7 +15,7 @@ bool orbitSelfActivated = false;
 enum class RenderingMode { Wireframe, Rasterised, RayTraced, Flat, SphereGouraud, SpherePhong, SoftShadow, Complete };
 RenderingMode currentMode = RenderingMode::Rasterised;
 
-shading shadingType = none;
+shading shadingType = Flat;
 shadow shadowType = Hard;
 float rotateAngle = 0.0f;
 
