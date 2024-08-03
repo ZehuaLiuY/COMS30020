@@ -1,36 +1,45 @@
-# Prerequisites
-*.d
+# CMake build files
+/RedNoise/build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
 
-# Compiled Object files
-*.slo
-*.lo
+# IDE-specific files
+.idea/
+*.swp
+*.user
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Compiled binary files
+*.out
+*.exe
 *.o
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
 *.lib
+*.a
 
-# Executables
-*.exe
-*.out
-*.app
-
-*.json
-*.lock
+# Logs and databases
 *.log
+*.sql
+*.sqlite
+
+# MacOS-specific files
+.DS_Store
+
+# Other system files
+Thumbs.db
+
+# Resource files
+/Debugging/
+/resources/
+/Weekly Briefings/
+/Weekly Workbooks/
+
+# vscode
+.vscode/
