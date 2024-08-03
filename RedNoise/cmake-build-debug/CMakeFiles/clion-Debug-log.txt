@@ -1,1 +1,4 @@
-CMakeLists.txt not found in /Users/liuzehua/Documents/GitHub/CG/RedNoise Select CMakeLists.txt
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise" -B "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug"
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug
