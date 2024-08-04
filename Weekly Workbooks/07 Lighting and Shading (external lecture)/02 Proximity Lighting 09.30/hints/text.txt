@@ -1,0 +1,3 @@
+To find the distance between the light and a point on a triangle, you might like to make use of the GLM `length` function - this will give your the magnitude of a `vec3` variable. Don't normalise your `vec3` otherwise you'll always get a length of 1 (remember in this situation, we _need_ the distance !).
+
+To help you test this form of lighting and debug your code, you may wish to add some additional key event handlers that allow you to shift the position of your light source around the model.

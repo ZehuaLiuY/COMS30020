@@ -209,90 +209,6 @@ CMakeFiles/RedNoise.dir/src/RedNoise.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/RedNoise.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/RedNoise.cpp" -o CMakeFiles/RedNoise.dir/src/RedNoise.cpp.s
 
-CMakeFiles/RedNoise.dir/src/triangle.cpp.o: CMakeFiles/RedNoise.dir/flags.make
-CMakeFiles/RedNoise.dir/src/triangle.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/triangle.cpp
-CMakeFiles/RedNoise.dir/src/triangle.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/RedNoise.dir/src/triangle.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/triangle.cpp.o -MF CMakeFiles/RedNoise.dir/src/triangle.cpp.o.d -o CMakeFiles/RedNoise.dir/src/triangle.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/triangle.cpp"
-
-CMakeFiles/RedNoise.dir/src/triangle.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/triangle.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/triangle.cpp" > CMakeFiles/RedNoise.dir/src/triangle.cpp.i
-
-CMakeFiles/RedNoise.dir/src/triangle.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/triangle.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/triangle.cpp" -o CMakeFiles/RedNoise.dir/src/triangle.cpp.s
-
-CMakeFiles/RedNoise.dir/src/interpolation.cpp.o: CMakeFiles/RedNoise.dir/flags.make
-CMakeFiles/RedNoise.dir/src/interpolation.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/interpolation.cpp
-CMakeFiles/RedNoise.dir/src/interpolation.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/RedNoise.dir/src/interpolation.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/interpolation.cpp.o -MF CMakeFiles/RedNoise.dir/src/interpolation.cpp.o.d -o CMakeFiles/RedNoise.dir/src/interpolation.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/interpolation.cpp"
-
-CMakeFiles/RedNoise.dir/src/interpolation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/interpolation.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/interpolation.cpp" > CMakeFiles/RedNoise.dir/src/interpolation.cpp.i
-
-CMakeFiles/RedNoise.dir/src/interpolation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/interpolation.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/interpolation.cpp" -o CMakeFiles/RedNoise.dir/src/interpolation.cpp.s
-
-CMakeFiles/RedNoise.dir/src/wireframes.cpp.o: CMakeFiles/RedNoise.dir/flags.make
-CMakeFiles/RedNoise.dir/src/wireframes.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/wireframes.cpp
-CMakeFiles/RedNoise.dir/src/wireframes.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/RedNoise.dir/src/wireframes.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/wireframes.cpp.o -MF CMakeFiles/RedNoise.dir/src/wireframes.cpp.o.d -o CMakeFiles/RedNoise.dir/src/wireframes.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/wireframes.cpp"
-
-CMakeFiles/RedNoise.dir/src/wireframes.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/wireframes.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/wireframes.cpp" > CMakeFiles/RedNoise.dir/src/wireframes.cpp.i
-
-CMakeFiles/RedNoise.dir/src/wireframes.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/wireframes.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/wireframes.cpp" -o CMakeFiles/RedNoise.dir/src/wireframes.cpp.s
-
-CMakeFiles/RedNoise.dir/src/ray.cpp.o: CMakeFiles/RedNoise.dir/flags.make
-CMakeFiles/RedNoise.dir/src/ray.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/ray.cpp
-CMakeFiles/RedNoise.dir/src/ray.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/RedNoise.dir/src/ray.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/ray.cpp.o -MF CMakeFiles/RedNoise.dir/src/ray.cpp.o.d -o CMakeFiles/RedNoise.dir/src/ray.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/ray.cpp"
-
-CMakeFiles/RedNoise.dir/src/ray.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/ray.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/ray.cpp" > CMakeFiles/RedNoise.dir/src/ray.cpp.i
-
-CMakeFiles/RedNoise.dir/src/ray.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/ray.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/ray.cpp" -o CMakeFiles/RedNoise.dir/src/ray.cpp.s
-
-CMakeFiles/RedNoise.dir/src/sphere.cpp.o: CMakeFiles/RedNoise.dir/flags.make
-CMakeFiles/RedNoise.dir/src/sphere.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/sphere.cpp
-CMakeFiles/RedNoise.dir/src/sphere.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/RedNoise.dir/src/sphere.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/sphere.cpp.o -MF CMakeFiles/RedNoise.dir/src/sphere.cpp.o.d -o CMakeFiles/RedNoise.dir/src/sphere.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/sphere.cpp"
-
-CMakeFiles/RedNoise.dir/src/sphere.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/sphere.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/sphere.cpp" > CMakeFiles/RedNoise.dir/src/sphere.cpp.i
-
-CMakeFiles/RedNoise.dir/src/sphere.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/sphere.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/sphere.cpp" -o CMakeFiles/RedNoise.dir/src/sphere.cpp.s
-
-CMakeFiles/RedNoise.dir/src/logo.cpp.o: CMakeFiles/RedNoise.dir/flags.make
-CMakeFiles/RedNoise.dir/src/logo.cpp.o: /Users/liuzehua/Documents/GitHub/CG/Weekly\ Workbooks/01\ Introduction\ and\ Orientation/extras/RedNoise/src/logo.cpp
-CMakeFiles/RedNoise.dir/src/logo.cpp.o: CMakeFiles/RedNoise.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/RedNoise.dir/src/logo.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RedNoise.dir/src/logo.cpp.o -MF CMakeFiles/RedNoise.dir/src/logo.cpp.o.d -o CMakeFiles/RedNoise.dir/src/logo.cpp.o -c "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/logo.cpp"
-
-CMakeFiles/RedNoise.dir/src/logo.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RedNoise.dir/src/logo.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/logo.cpp" > CMakeFiles/RedNoise.dir/src/logo.cpp.i
-
-CMakeFiles/RedNoise.dir/src/logo.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RedNoise.dir/src/logo.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/logo.cpp" -o CMakeFiles/RedNoise.dir/src/logo.cpp.s
-
 # Object files for target RedNoise
 RedNoise_OBJECTS = \
 "CMakeFiles/RedNoise.dir/libs/sdw/CanvasPoint.cpp.o" \
@@ -304,13 +220,7 @@ RedNoise_OBJECTS = \
 "CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o" \
 "CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o" \
 "CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/triangle.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/interpolation.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/wireframes.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/ray.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/sphere.cpp.o" \
-"CMakeFiles/RedNoise.dir/src/logo.cpp.o"
+"CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o"
 
 # External object files for target RedNoise
 RedNoise_EXTERNAL_OBJECTS =
@@ -325,16 +235,10 @@ RedNoise: CMakeFiles/RedNoise.dir/libs/sdw/TextureMap.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/libs/sdw/TexturePoint.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/libs/sdw/Utils.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/src/RedNoise.cpp.o
-RedNoise: CMakeFiles/RedNoise.dir/src/triangle.cpp.o
-RedNoise: CMakeFiles/RedNoise.dir/src/interpolation.cpp.o
-RedNoise: CMakeFiles/RedNoise.dir/src/wireframes.cpp.o
-RedNoise: CMakeFiles/RedNoise.dir/src/ray.cpp.o
-RedNoise: CMakeFiles/RedNoise.dir/src/sphere.cpp.o
-RedNoise: CMakeFiles/RedNoise.dir/src/logo.cpp.o
 RedNoise: CMakeFiles/RedNoise.dir/build.make
 RedNoise: /opt/homebrew/Cellar/sdl2/2.28.3/lib/libSDL2.dylib
 RedNoise: CMakeFiles/RedNoise.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable RedNoise"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable RedNoise"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RedNoise.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

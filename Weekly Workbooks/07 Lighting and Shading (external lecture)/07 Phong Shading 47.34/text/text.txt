@@ -1,0 +1,5 @@
+Gouraud shading in fine, but it only goes so far in creating smoothly rendered model surfaces. _Phong shading_ is an even more sophisticated approach that takes shading one step further (although it can only achieve this at the cost of additional computation !). Review the lecture recording in order to ensure you have a good understanding of Phong Shading, then adapt your renderer to make use of this more sophisticated approach. 
+
+You should calculate both Angle of Incidence and Specular lighting effects when implementing Phong shading. Once this is working correctly, you can then also add in the effect of proximity and ambient lighting.
+
+The diagram below illustrates the different results of flat, Gouraud and Phong shading. Again, all three spheres have exactly the same geometry and number of triangles. It is just the alternative rendering approaches that make them appear different.

@@ -1,0 +1,3 @@
+Finding the closest intersection between a ray and a set of triangles is a costly activity. This is especially true for complex models where each ray being cast must be checked against a potentially very large number of model triangles. 
+
+What if there was a way for our model to consist of fewer triangles, but we could "fake" more complex geometry using "light & shadows". This may sounds like magic, but normal maps allow us to do just that. Take a look at the slides, narration and animation linked to above to find out how this is achieved.

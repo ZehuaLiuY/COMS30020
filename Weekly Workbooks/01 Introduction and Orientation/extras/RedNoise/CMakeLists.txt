@@ -1,10 +1,10 @@
 # Invoking the CMake build from the command line is a two step process, first, *generate* a build by running the following:
 #
 #   cmake -Bbuild -H. -DCMAKE_BUILD_TYPE=Release
-#
+# 
 # Where `Release` can be replaced with `Debug`, which contains gdb and address sanitiser definitions already written for you.
 # Once a build is created, proceed with *compilation*:
-#
+# 
 #   cmake --build build --target RedNoise --config Release # optionally, for parallel build, append -j $(nproc)
 #
 # This creates the executable in the build directory. You only need to *generate* a build if you modify the CMakeList.txt file.
@@ -35,25 +35,14 @@ add_executable(RedNoise
         libs/sdw/TextureMap.cpp
         libs/sdw/TexturePoint.cpp
         libs/sdw/Utils.cpp
-        src/RedNoise.cpp
-        src/triangle.cpp
-        src/interpolation.cpp
-        src/wireframes.h
-        src/wireframes.cpp
-        src/ray.cpp
-        src/ray.h
-        src/sphere.cpp
-        src/sphere.h
-        src/logo.cpp
-        src/logo.h
-)
+        src/RedNoise.cpp)
 
 if (MSVC)
     target_compile_options(RedNoise
             PUBLIC
             /W3
             /Zc:wchar_t
-    )
+            )
     set(DEBUG_OPTIONS /MTd)
     set(RELEASE_OPTIONS /MT /GF /Gy /O2 /fp:fast)
     if (NOT DEFINED SDL2_LIBRARIES)
@@ -61,16 +50,15 @@ if (MSVC)
     endif()
 else ()
     target_compile_options(RedNoise
-            PUBLIC
-            -Wall
-            -Wextra
-            -Wcast-align
-            -Wfatal-errors
-            -Werror=return-type
-            -Wno-unused-parameter
-            -Wno-unused-variable
-            -Wno-ignored-attributes
-            -Ofast -funsafe-math-optimizations)
+        PUBLIC
+        -Wall
+        -Wextra
+        -Wcast-align
+        -Wfatal-errors
+        -Werror=return-type
+        -Wno-unused-parameter
+        -Wno-unused-variable
+        -Wno-ignored-attributes)
 
     set(DEBUG_OPTIONS -O2 -fno-omit-frame-pointer -g)
     set(RELEASE_OPTIONS -O3 -march=native -mtune=native)
@@ -82,5 +70,5 @@ endif()
 target_compile_options(RedNoise PUBLIC "$<$<CONFIG:RelWithDebInfo>:${RELEASE_OPTIONS}>")
 target_compile_options(RedNoise PUBLIC "$<$<CONFIG:Release>:${RELEASE_OPTIONS}>")
 target_compile_options(RedNoise PUBLIC "$<$<CONFIG:Debug>:${DEBUG_OPTIONS}>")
-
+ 
 target_link_libraries(RedNoise PRIVATE ${SDL2_LIBRARIES})

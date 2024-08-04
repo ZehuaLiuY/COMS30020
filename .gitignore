@@ -1,10 +1,8 @@
 # CMake build files
 /RedNoise/build/
-/RedNoise/libs/glm-0.9.7.2/
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
-Makefile
 
 # IDE-specific files
 .idea/
@@ -35,12 +33,6 @@ Makefile
 
 # Other system files
 Thumbs.db
-
-# Resource files
-/Debugging/
-/resources/
-/Weekly Briefings/
-/Weekly Workbooks/
 
 # vscode
 .vscode/

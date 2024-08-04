@@ -1,0 +1,7 @@
+Your next task is to implement a "Specular" lighting effect. Review the video of the lecture to make sure you have a full grasp of the theory of this lighting technique. As with the previous tasks, you should again make use of the GLM `dot` function, as well as the surfaces normals that you calculated previously. 
+
+You should use a relatively large exponent in the calculation of specular spread (for example 256). This will ensure that you get a tightly focused spot of light, which will be easier to see than a specular highlight with a wider spread. It can be difficult to distinguish between the various different lighting effects if the parameters used are too subtle (for example, proximity lighting can look a lot like a specular spot with a wide spread !). You might even like to switch off the other forms of lighting in your code so that you can clearly see the specular effect.
+
+You may need to move the light and/or camera to an appropriate location in the scene in order to be able to see the specular highlight effect. Remember that specular lighting represents the reflection of the light source, so the camera needs to be in a position where the reflection should be visible.
+
+The image below provides some examples of the kinds of specular highlighting effect you might expect to see for different exponent values:

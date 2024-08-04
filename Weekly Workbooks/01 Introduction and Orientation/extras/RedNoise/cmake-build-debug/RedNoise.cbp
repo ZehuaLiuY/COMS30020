@@ -145,42 +145,6 @@
 		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/RedNoise.cpp">
 			<Option target="RedNoise"/>
 		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/interpolation.cpp">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/interpolation.h">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/logo.cpp">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/logo.h">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/ray.cpp">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/ray.h">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/sphere.cpp">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/sphere.h">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/triangle.cpp">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/triangle.h">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/wireframes.cpp">
-			<Option target="RedNoise"/>
-		</Unit>
-		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/src/wireframes.h">
-			<Option target="RedNoise"/>
-		</Unit>
 		<Unit filename="/Users/liuzehua/Documents/GitHub/CG/Weekly Workbooks/01 Introduction and Orientation/extras/RedNoise/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

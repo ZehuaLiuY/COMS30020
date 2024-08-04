@@ -1,0 +1,1 @@
+Rather than rendering just opaque, matt surfaces, it would be nice if we could simulate more complex materials. The slides, audio narration and animation above provide details of how to render triangles as reflective surfaces - in order to represent materials such as mirrors and metals.
